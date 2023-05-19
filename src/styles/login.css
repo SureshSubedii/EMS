@@ -4,14 +4,13 @@
     position: absolute;
     width: 35vw;
     height: 28vh;
-    box-shadow: 1px 1px 8px 2px rgb(96, 93, 93);
-    background-color: rgb(227, 223, 223);
-    /* margin-top: 10%;
-    margin-left:35%; */
-    opacity: 0.8;
+    box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
+    background-color: rgb(109, 109, 109);
+    opacity: 0.9;
     top:30%;
     left:35%;
     padding-bottom: 10px;
+    border-radius: 20px;
 
 
 
@@ -25,11 +24,13 @@
     padding-bottom:1%;
 
 }
-form>.form_buttons{
+.form_buttons{
     display: flex;
     justify-content: space-around;
     padding-top:1%;
     padding-bottom:1%;
+    color: white;
+
 
 }
 .form_buttons>input{
@@ -39,6 +40,11 @@ form>.form_buttons{
     color:white;
     padding:8px
     
+}
+.form_buttons>input:hover{
+    cursor:pointer;
+    background-color: rgb(141, 6, 148);
+
 }
 form> .credential{
     width:80%;
@@ -55,19 +61,21 @@ form> .credential{
     font-size: larger;
 
 }
-@media (min-width:320px) and (max-width:900px) {
+@media (min-width:280px) and (max-width:1400px) {
     .login{
     height:max-content;
+    /* height: 20vh; */
+
     width:50%;
 
     }
-    form> input{
-    }
+  
     form> .credential{
-        font-size: 12px;
+        font-size: 1em;
     }
     .form_buttons>h2{
-        font-size: 12px;
+        font-size: 1em;
+        padding-left:5px ;
 
     }
     .form_buttons>input{

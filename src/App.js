@@ -26,7 +26,7 @@ function App() {
   },[])
   return (
     <div className="app">
-      <div className="app_header">
+      <div title="Ecommerce Management System" className="app_header">
 
      <h1> EMS</h1>
      <h2> {timeReal}:{timeRealMinutes<=10?"0":""}{timeRealMinutes} {(timeReal>=0 && timeReal<12)?"AM":"PM"}</h2>

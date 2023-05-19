@@ -10,7 +10,7 @@ function LogIn() {
         <input className="credential" placeholder="Enter Password" type='password'/>
         <div className="form_buttons">
            <input type="submit" value="Login"/>
-           <h2 for="signUp">Not a member? Click on SignUp</h2>
+           <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
            <input id="signUp" type="submit" value="SignUp"/>
 
 
