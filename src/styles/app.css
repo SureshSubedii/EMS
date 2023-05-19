@@ -1,0 +1,36 @@
+.app_header{
+    background-color: rgb(107, 0, 113);
+    color:white;
+    width:100vw;
+    display: flex;
+    /* justify-content: space-between; */
+    padding: 10px;
+}
+.app_header>h2{
+    display: block;
+    margin: auto;
+    
+   
+
+
+}
+.app_header>h1{
+    margin-left: 10px;
+}
+.app_body{
+    position: relative;
+    height:90vh;
+
+    
+}
+body{
+    overflow: hidden !important;
+    background-image:url("./back.jpg");
+    background-size:cover;
+
+ 
+}
+@media (min-width:320px) and (max-width:800px) {
+ 
+
+}

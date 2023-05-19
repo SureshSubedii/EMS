@@ -1,0 +1,80 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width: 35vw;
+    height: 28vh;
+    box-shadow: 1px 1px 8px 2px rgb(96, 93, 93);
+    background-color: rgb(227, 223, 223);
+    /* margin-top: 10%;
+    margin-left:35%; */
+    opacity: 0.8;
+    top:30%;
+    left:35%;
+    padding-bottom: 10px;
+
+
+
+}
+.login>h2{
+    width: 55%;
+    background-color: rgb(107, 0, 113);
+    color: white;
+    padding-left: 45%;
+    padding-top:1%;
+    padding-bottom:1%;
+
+}
+form>.form_buttons{
+    display: flex;
+    justify-content: space-around;
+    padding-top:1%;
+    padding-bottom:1%;
+
+}
+.form_buttons>input{
+    border:none;
+    border-radius: 7px;
+    background-color: rgb(107, 0, 113);
+    color:white;
+    padding:8px
+    
+}
+form> .credential{
+    width:80%;
+    height:30%;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left:6%;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding-left: 5%;
+    margin-bottom:3% ;
+    margin-top: 4%;
+    font-size: larger;
+
+}
+@media (min-width:320px) and (max-width:900px) {
+    .login{
+    height:max-content;
+    width:50%;
+
+    }
+    form> input{
+    }
+    form> .credential{
+        font-size: 12px;
+    }
+    .form_buttons>h2{
+        font-size: 12px;
+
+    }
+    .form_buttons>input{
+        padding:1%;
+    }
+    .login>h2{
+        font-size: 14px;
+    }
+    
+}
