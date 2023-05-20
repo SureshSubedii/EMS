@@ -29,7 +29,7 @@ function App() {
       <div title="Ecommerce Management System" className="app_header">
 
      <h1> EMS</h1>
-     <h2> {timeReal}:{timeRealMinutes<=10?"0":""}{timeRealMinutes} {(timeReal>=0 && timeReal<12)?"AM":"PM"}</h2>
+     <h2> {timeReal>=12?timeReal-12:timeReal}:{timeRealMinutes<=10?"0":""}{timeRealMinutes} {(timeReal>=0 && timeReal<12)?"AM":"PM"}</h2>
 
       </div>
       <div className="app_body">
