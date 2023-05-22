@@ -1,18 +1,38 @@
 .login{
+
     display: flex;
     flex-direction: column;
     position: absolute;
     width: 35vw;
+    /* height:max-content; */
+
     height: 28vh;
     box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
     background-color: rgb(109, 109, 109);
     opacity: 0.9;
     top:30%;
     left:35%;
-    padding-bottom: 10px;
+    padding-bottom: 30px;
     border-radius: 20px;
 
 
+
+}
+.login>form>p{
+    position: absolute;
+    top:45%;
+    left:7%;
+    font-size:1.5em;
+    color:rgba(245, 21, 9, 0.976);
+    font-weight: bolder;
+}
+.login>form>span{
+    position: absolute;
+    top:78%;
+    left:7%;
+    font-size:1.5em;
+    color:rgba(245, 21, 9, 0.976);
+    font-weight: bolder;
 
 }
 .login>h2{
@@ -40,7 +60,9 @@
     border-radius: 7px;
     background-color: rgb(107, 0, 113);
     color:white;
-    padding:8px
+    padding:6px;
+    font-size: 1em;
+    font-weight: 700;
     
 }
 .form_buttons>input:hover{
@@ -69,11 +91,13 @@ form> .credential{
     /* height: 20vh; */
 
     width:50%;
+   
 
     }
   
     form> .credential{
         font-size: 1em;
+
     }
     .form_buttons>h2{
         font-size: 1em;
@@ -81,9 +105,20 @@ form> .credential{
         
 
     }
+    .login>form>p{
+        top:45%;
+        left:7%;
+        font-size: small;
+
+    }
+    .login>form>span{
+        top:78%;
+        left:7%;
+        font-size: small;
+    }
     .form_buttons>input{
-        padding:2px;
-        height: 5vh;
+        padding:0.7vh;
+        height: max-content;
 
     }
     .login>h2{

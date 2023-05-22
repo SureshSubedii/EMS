@@ -1,26 +1,43 @@
-import React from 'react'
-import '../styles/login.css'
+import React from "react";
+import "../styles/login.css";
+import { useForm } from "react-hook-form";
 
 function LogIn() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+  const onSubmit = () => {};
   return (
     <div className="login">
-        <h2>Login</h2>
-        <form>
-        <input  className="credential" placeholder="Enter Email" type="email"/>
-        <input className="credential" placeholder="Enter Password" type='password'/>
+      <h2>Login</h2>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <input
+          name="email"
+          className="credential"
+          placeholder="Enter Email"
+          type="email"
+          {...register("email", { required: "Email  is required!" })}
+        />
+        {errors.email && <p> {errors.email.message}</p>}
+        <input
+          name="password"
+          className="credential"
+          placeholder="Enter Password"
+          type="password"
+          {...register("password", { required: "password  is required!" })}
+        />
+        <span>{errors.password && <p> {errors.password.message}</p>}</span>
         <div className="form_buttons">
-           <input type="submit" value="Login"/>
-           <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
-           <input id="signUp" type="submit" value="SignUp"/>
-
-
-
+          <input type="submit" value="Login" />
+          <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
+          <input id="signUp" type="submit" value="SignUp" />
         </div>
-
-        </form>
-        
+        ``
+      </form>
     </div>
-  )
+  );
 }
 
-export default LogIn
+export default LogIn;

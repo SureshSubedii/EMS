@@ -34,7 +34,6 @@ function App() {
       </div>
       <div className="app_body">
         <LogIn/>
-
       </div>
 
      {/* <PhotoUpload/> */}
