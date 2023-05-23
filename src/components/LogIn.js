@@ -8,7 +8,7 @@ function LogIn() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = () => {};
+  const onSubmit = () => { };
   return (
     <div className="login">
       <h2>Login</h2>
@@ -18,17 +18,17 @@ function LogIn() {
           className="credential"
           placeholder="Enter Email"
           type="email"
-          {...register("email", { required: "Email  is required!" })}
+          {...register("email", { required: "Email is required!" })}
         />
         {errors.email && <p> {errors.email.message}</p>}
         <input
           name="password"
-          className="credential"
+          className="credential2"
           placeholder="Enter Password"
           type="password"
-          {...register("password", { required: "password  is required!" })}
+          {...register("password", { required: "Password is required!" })}
         />
-        <span>{errors.password && <p> {errors.password.message}</p>}</span>
+        {errors.password && <p> {errors.password.message}</p>}
         <div className="form_buttons">
           <input type="submit" value="Login" />
           <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>

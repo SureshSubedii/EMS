@@ -29,7 +29,10 @@ body{
 
  
 }
-@media (min-width:320px) and (max-width:800px) {
+/* @media (min-width:240px) and (max-width:800px) {
+    .app_header{
+        width: 100vw;
+    }
  
 
-}
+} */
