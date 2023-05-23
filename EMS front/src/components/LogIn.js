@@ -8,7 +8,9 @@ function LogIn() {
     handleSubmit,
     formState: { errors },
   } = useForm();
-  const onSubmit = () => { };
+  const onSubmit = (data) => { 
+    console.log(data.email,data.password)
+  };
   return (
     <div className="login">
       <h2>Login</h2>
