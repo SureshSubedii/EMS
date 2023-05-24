@@ -5,6 +5,7 @@ import User from './schemas/UserSchema.js'
 import mongoose from 'mongoose';
 import {config} from 'dotenv'
 import bodyParser from 'body-parser';
+import jwt from 'jsonwebtoken';
 config();
 
 //app configuration
@@ -24,17 +25,23 @@ mongoose.connect(URL).then(()=>console.log("Done"))
 
 //routes
 app.post('/userLogin',async(req,res)=>{
+   
+   
+    
+
+})
+app.post('./userSignUp',async(req,res)=>{
     const userCredentials=req.body
    
     const checkUser= await User.findOne({email:userCredentials.email})
     if(checkUser){
-        return res.status(201).send("User Found")
-    }
-    else{
-        return res.status(404).send("user not found");
+        return res.status(201).send("User Already Exists")
     }
     
-    
+    User.create({
+        email:userCredentials.email,
+        name:userCredentials.name
+    })
 
 })
 

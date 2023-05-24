@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 // import PhotoUpload from "./components/PhotoUpload.js"
 import './styles/app.css'
 import LogIn from "./components/LogIn";
+import SignUp from "./components/SignUp";
 
 function App() {
   const [timeReal, settimeReal] = useState([]);
@@ -33,7 +34,8 @@ function App() {
 
       </div>
       <div className="app_body">
-        <LogIn/>
+        {/* <LogIn/> */}
+        <SignUp/>
       </div>
 
      {/* <PhotoUpload/> */}

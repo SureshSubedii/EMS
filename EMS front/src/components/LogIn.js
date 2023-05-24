@@ -11,7 +11,6 @@ function LogIn() {
   } = useForm();
 
   const onLogin =  async(data) => { 
-    // console.log(data.email,data.password)
     const result=await fetch("http://localhost:5000/userLogin", {
     method: 'POST', 
     headers: {
@@ -21,9 +20,7 @@ function LogIn() {
   })
   console.log(result.text())
 }
-  const onSignUp=()=>{
-    
-  }
+
   // useEffect(() => {
 
   
@@ -44,7 +41,7 @@ function LogIn() {
         {errors.email && <p> {errors.email.message}</p>}
         <input
           name="password"
-          className="credential2"
+          className="credential"
           placeholder="Enter Password"
           type="password"
           {...register("password", { required: "Password is required!" })}

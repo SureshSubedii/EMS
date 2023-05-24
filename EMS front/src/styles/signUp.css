@@ -1,4 +1,4 @@
-.login{
+.signUp{
     display: flex;
     flex-direction: column;
     position: absolute;
@@ -6,18 +6,17 @@
     box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
     background-color: rgb(41, 40, 40);
     opacity: 0.79;
-    top:28%;
-    left:37%;
+    top:10%;
+    left:32%;
     padding-bottom: 10px;
     border-radius: 20px;
-    /* height: fit-content; */
-    height:max-content;
+    height:fit-content;
 
 
 
 }
 
-.login>form>p{
+.signUp>form>p{
   
     font-size:1.5em;
     color:rgb(254, 13, 0);
@@ -27,7 +26,7 @@
  
 }
 
-.login>h2{
+.signUp>h2{
     /* width: 60%; */
     background-color: rgb(107, 0, 113);
     color: white;
@@ -62,10 +61,6 @@
     background-color: rgb(141, 6, 148);
 
 }
-.form_buttons{
-    display: flex;
-    align-items: center;
-}
 form> .credential{
     width:83%;
     font-weight: 500;
@@ -80,15 +75,15 @@ form> .credential{
     font-size: 2em;
 
 }
-.form_buttons>h2{
-    font-weight: 900;
-
+form>input{
+    padding: 3%;
 }
 @media (min-width:220px) and (max-width:1450px) {
-    .login{
+    .signUp{
     height:max-content;
-    left:26%;
-    width:50vw;
+    width:45vw;
+    left:28%
+   
 
     }
   
@@ -96,17 +91,7 @@ form> .credential{
         font-size: 1.05em;
 
     }
-    .form_buttons>h2{
-        font-size: 1em;
-        padding-left:5px ;
-        
 
-    }
-    .login>form>p{
-        
-        font-size: small;
-
-    }
    
     .form_buttons>input{
         padding:0.7vh;
@@ -114,40 +99,48 @@ form> .credential{
         font-size:1em;
 
     }
-    .login>h2{
-    font-size: 20px;
-    padding-left: 35%;
+    .signUp>h2{
+    font-size: 15px;
+    padding-left: 30%;
 
     }
    
 }
-@media (min-width:950px)and (max-width:1650px){
-   .login{
-    height:max-content;
-    font-size: 1.5em;
+@media (min-width:950px) and (max-width:1630px){
+   .signUp{
+    height:fit-content;
+    font-size: 1em;
+    top:15%;
+    width:45vw;
+    left:28%;
+
+
     
 
    } 
-   .login>h2{
+   .signUp>h2{
     font-size: 25px;
-    padding-left: 45%;
+    padding-left: 35%;
 
+    }
+    .signUp>form>p{
+        font-size: 1.5em;
     }
 
 
 }
 @media (min-width:220px) and (max-width:599px) {
-    .login{
+    .signUp{
         width: 70vw;
-        left:22%;
+        left:26%;
         top:20%;
 
 
         
 }
-.login>h2{
-    font-size: 15px;
-    padding-left: 35%;
+.signUp>h2{
+    font-size: 12px;
+    padding-left: 30%;
 
     }
     form> .credential{
@@ -155,15 +148,14 @@ form> .credential{
 
     }
     form>input{
-        padding: 5%;
+        padding: 3%;
     }
     .form_buttons>input{
+        font-size: 0.8em;
+    }
+    .signUp>form>p{
         font-size: 1em;
     }
-    .form_buttons>h2{
-        font-size: 0.9em;
-        padding-left:5px;
-        
 
-    }
+   
 }
