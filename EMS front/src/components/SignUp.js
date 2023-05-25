@@ -5,10 +5,10 @@ import '../styles/signUp.css'
 function SignUp() {
   const {handleSubmit,register,formState:{errors}}=useForm();
   const onSignUp= async(data)=>{
-    const result=await fetch("http://localhost:5000/userSignUp", {
+    const result=await fetch("http://localhost:5000/userSignUp/", {
       method: 'POST', 
       headers: {
-        'Content-Type': 'application/json',
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data), // Send form data as JSON
     })

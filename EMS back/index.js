@@ -1,17 +1,17 @@
-import mongoos from 'mongoose'
+import mongoose from 'mongoose'
 import cors from 'cors'
 import express from 'express'
 import User from './schemas/UserSchema.js'
-import mongoose from 'mongoose';
 import {config} from 'dotenv'
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
-config();
+import bcrypt from 'bcrypt';
+config(); 
 
 //app configuration
 const app=express();
-const PORT=5000 || process.env;
-const URL=process.env.REACT_APP_MONGO_URI; 
+const port=5000 || process.env.PORT;
+const URL=process.env.MONGO_URI; 
 
 //MiddleWares
 app.use(express.json());
@@ -25,23 +25,36 @@ mongoose.connect(URL).then(()=>console.log("Done"))
 
 //routes
 app.post('/userLogin',async(req,res)=>{
-   
-   
-    
+
 
 })
-app.post('./userSignUp',async(req,res)=>{
+
+app.post('/userSignUp',async(req,res)=>{
     const userCredentials=req.body
-   
+
+    try{
     const checkUser= await User.findOne({email:userCredentials.email})
     if(checkUser){
-        return res.status(201).send("User Already Exists")
+        return res.status(409).send("User Already Exists")
     }
-    
-    User.create({
+    const salt= await bcrypt.genSalt(10);
+    const protectedPass= await bcrypt.hash(userCredentials.password,salt);
+
+    const createUSer=await User.create({
         email:userCredentials.email,
-        name:userCredentials.name
+        name:userCredentials.name,
+        password:protectedPass,
+        contact:userCredentials.contact,
+        address:userCredentials.address
     })
+   
+    const token=jwt.sign({id:createUSer._id},"s4589454988@asd&^%asd1asd2##");
+    console.log(token);
+    res.status(201).json({token})
+    }
+    catch(err){
+        res.status(500).send(err);
+    } 
 
 })
 
@@ -50,6 +63,6 @@ app.post('./userSignUp',async(req,res)=>{
 
 
 //listening
-app.listen(PORT,()=>{
-    console.log(`Listening on port ${PORT}`)
+app.listen(port,()=>{
+    console.log(`Listening on port ${port}`)
 })
