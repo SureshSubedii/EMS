@@ -1,9 +1,14 @@
 import React from "react";
 import "../styles/login.css";
 import { useForm } from "react-hook-form";
-import { useEffect } from "react";
+import {  RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
+
+
 
 function LogIn() {
+  const [clicked,setClicked]=useState(false);
+
   const {
     register,
     handleSubmit,
@@ -43,9 +48,12 @@ function LogIn() {
           name="password"
           className="credential"
           placeholder="Enter Password"
-          type="password"
+          type={clicked?"text":"password"}
           {...register("password", { required: "Password is required!" })}
         />
+        {!clicked?(<RemoveRedEyeRounded onClick={()=>setClicked(!clicked)} className='showHideIcon'/>)
+        :(<VisibilityOff className='showHideIcon' onClick={()=>setClicked(!clicked)}/>)}
+
         {errors.password && <p> {errors.password.message}</p>}
         <div className="form_buttons">
           <input type="submit" value="Login" />

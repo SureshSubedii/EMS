@@ -4,7 +4,7 @@
     width:100vw;
     display: flex;
     /* justify-content: space-between; */
-    padding: 10px;
+    /* padding: 10px; */
 }
 .app_header>h2{
     display: block;
@@ -32,6 +32,11 @@ body{
 /* @media (min-width:240px) and (max-width:800px) {
     .app_header{
         width: 100vw;
+    }
+    .app_body{
+    width: 90vw;
+
+
     }
  
 

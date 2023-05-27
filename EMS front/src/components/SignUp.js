@@ -1,19 +1,22 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import '../styles/signUp.css'
+import {  RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
+import { useState } from 'react';
 
 function SignUp() {
+  const [clicked,setClicked]=useState(false);
   const {handleSubmit,register,formState:{errors}}=useForm();
   const onSignUp= async(data)=>{
     const result=await fetch("http://localhost:5000/userSignUp/", {
-      method: 'POST', 
+      method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data), // Send form data as JSON
     })
   console.log(result.text())
-    
+
   }
   return (
     <div className='signUp'>
@@ -35,16 +38,17 @@ function SignUp() {
           {...register("name", { required: "Name is required!" })}
         />
         {errors.name && <p> {errors.name.message}</p>}
-
+      
         <input
           name="password"
           className="credential"
           placeholder="Enter Password"
-          type="password"
+          type={clicked?"text":"password"}
           {...register("password", { required: "Password is required!" })}
         />
+          {!clicked?(<RemoveRedEyeRounded onClick={()=>setClicked(!clicked)} className='showHideIcon'/>)
+        :(<VisibilityOff className='showHideIcon' onClick={()=>setClicked(!clicked)}/>)}
         {errors.password && <p> {errors.password.message}</p>}
-
         <input
           name="contact"
           className="credential"

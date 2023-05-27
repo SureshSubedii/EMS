@@ -26,6 +26,12 @@
     /* height: fit-content; */
  
 }
+.login>form>.showHideIcon{
+    margin-top: -15%;
+    margin-left: 75%;
+    margin-bottom:8%;
+    font-size: 2em !important;
+}
 
 .login>h2{
     /* width: 60%; */
@@ -164,6 +170,14 @@ form> .credential{
         font-size: 0.9em;
         padding-left:5px;
         
+
+    }
+}
+@media  (max-width:400px){
+    .login>form>.showHideIcon{
+     
+        font-size: 1.2em !important;
+    margin-bottom:11%;
 
     }
 }

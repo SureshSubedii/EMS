@@ -15,6 +15,12 @@
 
 
 }
+.signUp>form>.showHideIcon{
+    margin-top: -15%;
+    margin-left: 80%;
+    margin-bottom:8%;
+    font-size: 2em !important;
+}
 
 .signUp>form>p{
   
@@ -158,4 +164,11 @@ form>input{
     }
 
    
+}
+@media (max-width:350px){
+    .signUp>form>.showHideIcon{
+      
+        font-size: 1.4em !important;
+        margin-bottom: 10%;
+    }
 }
