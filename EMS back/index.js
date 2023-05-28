@@ -25,12 +25,38 @@ mongoose.connect(URL).then(()=>console.log("Done"))
 
 //routes
 app.post('/userLogin',async(req,res)=>{
+    const userCredentials=req.body;
+
+    try{
+        const checkUser= await User.findOne({email:userCredentials.email})
+        if(!checkUser){
+            res.status(404).send("Login with the correct credentials");
+        }
+        
+        const pass= await bcrypt.compare(userCredentials.password,checkUser.password);
+        if(pass){
+            console.log("Correct");
+            // res.status(200).send("Successful")
+            const token=jwt.sign({id:checkUser._id},"s4589454988@asd&^%asd1asd2##");
+            console.log(token);
+            res.status(200).json({token})
+
+        }
+        else{
+            res.status(404).send("Login with the correct credentials");
+
+        }
+    }
+    catch(err){
+        res.status(500).send(err);
+
+    }
 
 
 })
 
 app.post('/userSignUp',async(req,res)=>{
-    const userCredentials=req.body
+    const userCredentials=req.body;
 
     try{
     const checkUser= await User.findOne({email:userCredentials.email})
