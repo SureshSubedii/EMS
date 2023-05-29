@@ -3,11 +3,16 @@ import "../styles/login.css";
 import { useForm } from "react-hook-form";
 import {  RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
+import { useDispatch } from "react-redux";
+import { login } from "../stateManagement/userSlice";
+import { useEffect } from "react";
+import SignUp from "./SignUp";
 
 
 
 function LogIn() {
   const [clicked,setClicked]=useState(false);
+  const dispatch=useDispatch();
 
   const {
     register,
@@ -16,21 +21,30 @@ function LogIn() {
   } = useForm();
 
   const onLogin =  async(data) => { 
-    const result=await fetch("http://localhost:5000/userLogin", {
+    const result=await fetch("http://192.168.18.177:5000/userLogin", {
     method: 'POST', 
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify(data), // Send form data as JSON
   })
-  console.log(result.text())
+  const responseText= await result.text();
+const fetchedResults=  await JSON.parse(responseText);
+ {fetchedResults.error && alert(fetchedResults.error)}
+// {fetchedResults.token && alert("successful")}
+// sessionStorage.setItem('authToken',fetchedResults?.token);
+sessionStorage.setItem('authToken',true);
+dispatch(login(sessionStorage.getItem('authToken')))
+
+
+
+
 }
 
   // useEffect(() => {
 
-  
-  
-  // }, [third])
+
+  // }, [])
   
   return (
     <div className="login">
@@ -51,14 +65,14 @@ function LogIn() {
           type={clicked?"text":"password"}
           {...register("password", { required: "Password is required!" })}
         />
-        {!clicked?(<RemoveRedEyeRounded onClick={()=>setClicked(!clicked)} className='showHideIcon'/>)
-        :(<VisibilityOff className='showHideIcon' onClick={()=>setClicked(!clicked)}/>)}
+        {!clicked?(<VisibilityOff onClick={()=>setClicked(!clicked)} className='showHideIcon'/>)
+        :(<RemoveRedEyeRounded className='showHideIcon' onClick={()=>setClicked(!clicked)}/>)}
 
         {errors.password && <p> {errors.password.message}</p>}
         <div className="form_buttons">
           <input type="submit" value="Login" />
           <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
-          <input id="signUp" type="button" value="SignUp" />
+          <input id="signUp" onClick={} type="button" value="SignUp" />
         </div>
         ``
       </form>

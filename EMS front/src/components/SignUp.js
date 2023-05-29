@@ -7,15 +7,16 @@ import { useState } from 'react';
 function SignUp() {
   const [clicked,setClicked]=useState(false);
   const {handleSubmit,register,formState:{errors}}=useForm();
+  
   const onSignUp= async(data)=>{
-    const result=await fetch("http://localhost:5000/userSignUp/", {
+    const result=await fetch("http://192.168.18.177:5000/userSignUp", {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data), // Send form data as JSON
     })
-  console.log(result.text())
+  // console.log(result.text())
 
   }
   return (
@@ -46,8 +47,8 @@ function SignUp() {
           type={clicked?"text":"password"}
           {...register("password", { required: "Password is required!" })}
         />
-          {!clicked?(<RemoveRedEyeRounded onClick={()=>setClicked(!clicked)} className='showHideIcon'/>)
-        :(<VisibilityOff className='showHideIcon' onClick={()=>setClicked(!clicked)}/>)}
+          {!clicked?(<VisibilityOff onClick={()=>setClicked(!clicked)} className='showHideIcon'/>)
+        :(<RemoveRedEyeRounded className='showHideIcon' onClick={()=>setClicked(!clicked)}/>)}
         {errors.password && <p> {errors.password.message}</p>}
         <input
           name="contact"

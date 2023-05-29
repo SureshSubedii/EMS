@@ -20,39 +20,36 @@ app.use(bodyParser.json())
 
 //Database config
 mongoose.connect(URL).then(()=>console.log("Done"))
-.catch(error=>console.log(error));
+.catch((error)=>console.log(error));
  
 
 //routes
 app.post('/userLogin',async(req,res)=>{
-    const userCredentials=req.body;
 
     try{
+       const userCredentials=req.body;
         const checkUser= await User.findOne({email:userCredentials.email})
         if(!checkUser){
-            res.status(404).send("Login with the correct credentials");
+            res.status(404).json({"error":"Login with the correct credentials"});
         }
         
-        const pass= await bcrypt.compare(userCredentials.password,checkUser.password);
-        if(pass){
-            console.log("Correct");
-            // res.status(200).send("Successful")
-            const token=jwt.sign({id:checkUser._id},"s4589454988@asd&^%asd1asd2##");
-            console.log(token);
-            res.status(200).json({token})
-
-        }
         else{
-            res.status(404).send("Login with the correct credentials");
+            const pass= await bcrypt.compare(userCredentials.password,checkUser.password);
+            if(pass){
+                    // res.status(200).send("Successful")
+                    const token=jwt.sign({id:checkUser._id},"s4589454988@asd&^%asd1asd2##");
+                    // console.log(token);
+                    res.status(200).json({token})
 
-        }
-    }
-    catch(err){
-        res.status(500).send(err);
+                }
+                else{
+                    res.status(404).json({"error":"Login with the correct credentials"});
 
-    }
-
-
+                }
+            }}
+            catch(err){
+                res.status(500).send(err);
+               }
 })
 
 app.post('/userSignUp',async(req,res)=>{
@@ -61,7 +58,7 @@ app.post('/userSignUp',async(req,res)=>{
     try{
     const checkUser= await User.findOne({email:userCredentials.email})
     if(checkUser){
-        return res.status(409).send("User Already Exists")
+        return res.status(409).json({"error":"User Already Exists"})
     }
     const salt= await bcrypt.genSalt(10);
     const protectedPass= await bcrypt.hash(userCredentials.password,salt);
@@ -75,7 +72,7 @@ app.post('/userSignUp',async(req,res)=>{
     })
    
     const token=jwt.sign({id:createUSer._id},"s4589454988@asd&^%asd1asd2##");
-    console.log(token);
+    // console.log(token);
     res.status(201).json({token})
     }
     catch(err){
