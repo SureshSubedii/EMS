@@ -5,15 +5,15 @@ import {createSlice } from '@reduxjs/toolkit';
 export const userSlice = createSlice({
   name: 'user',
   initialState:{
-  value: false,
+  value:null
 
   },
   reducers: {
-    login: (state,action) => {
-      state.value =action.payload ;
+    login: (state,actions) => {
+      state.value =actions.payload ;
     },
     logout: (state) => {
-      state.value =false;
+      state.value =null;
     },
   }})
 

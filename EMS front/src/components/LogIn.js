@@ -30,11 +30,16 @@ function LogIn() {
   })
   const responseText= await result.text();
 const fetchedResults=  await JSON.parse(responseText);
- {fetchedResults.error && alert(fetchedResults.error)}
-// {fetchedResults.token && alert("successful")}
-// sessionStorage.setItem('authToken',fetchedResults?.token);
-sessionStorage.setItem('authToken',true);
-dispatch(login(sessionStorage.getItem('authToken')))
+if(fetchedResults.error){
+  alert(fetchedResults.error);
+}
+else{
+  sessionStorage.setItem('authToken',fetchedResults.token);
+  dispatch(login(sessionStorage.getItem('authToken')))
+
+}
+
+
 
 
 
@@ -72,7 +77,7 @@ dispatch(login(sessionStorage.getItem('authToken')))
         <div className="form_buttons">
           <input type="submit" value="Login" />
           <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
-          <input id="signUp" onClick={} type="button" value="SignUp" />
+          <input id="signUp" onClick={()=>1} type="button" value="SignUp" />
         </div>
         ``
       </form>
