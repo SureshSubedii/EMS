@@ -5,8 +5,6 @@ import {  RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
 import { useDispatch } from "react-redux";
 import { login } from "../stateManagement/userSlice";
-import { useEffect } from "react";
-import SignUp from "./SignUp";
 
 
 
@@ -46,10 +44,7 @@ else{
 
 }
 
-  // useEffect(() => {
 
-
-  // }, [])
   
   return (
     <div className="login">
