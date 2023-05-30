@@ -19,6 +19,7 @@ function LogIn() {
   } = useForm();
 
   const onLogin =  async(data) => { 
+    try{
     const result=await fetch("http://192.168.18.177:5000/userLogin", {
     method: 'POST', 
     headers: {
@@ -28,20 +29,18 @@ function LogIn() {
   })
   const responseText= await result.text();
 const fetchedResults=  await JSON.parse(responseText);
-if(fetchedResults.error){
+if(fetchedResults?.error){
   alert(fetchedResults.error);
 }
-else{
+else if(fetchedResults?.token){
   sessionStorage.setItem('authToken',fetchedResults.token);
   dispatch(login(sessionStorage.getItem('authToken')))
 
+}}
+catch(error){
+  alert('Network error. Please check your internet connection.');
+
 }
-
-
-
-
-
-
 }
 
 

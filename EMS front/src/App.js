@@ -38,12 +38,12 @@ function App() {
      <h1> EMS</h1>
      <h2> {timeReal>=12?timeReal-12:timeReal}:{timeRealMinutes<=10?"0":""}{timeRealMinutes} {(timeReal>=0 && timeReal<12)?"AM":"PM"}</h2>
      <button>Admin Login</button>
-     {user?
+     {(user )?
      ( <button onClick={()=>{dispatch(logout()); sessionStorage.removeItem("authToken")}}>LogOut</button> ):''}
 
       </div>
       <div className="app_body">
-       {user?(<Home/>):(<LogIn/>)}
+       {(user )?(<Home/>):(<LogIn/>)}
         {/* <SignUp/> */}
       </div>
 

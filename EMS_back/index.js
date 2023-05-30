@@ -6,11 +6,11 @@ import {config} from 'dotenv'
 import bodyParser from 'body-parser';
 import jwt from 'jsonwebtoken';
 import bcrypt from 'bcrypt';
-config(); 
+config({path:'./.env'}); 
 
 //app configuration
 const app=express();
-const port= process.env.PORT ||  5000;
+const port= process.env.PORT ||  4000;
 const URL=process.env.MONGO_URI; 
 
 //MiddleWares
@@ -47,8 +47,8 @@ app.post('/userLogin',async(req,res)=>{
 
                 }
             }}
-            catch(err){
-                res.status(500).send(err);
+            catch(error){
+                res.status(500).json({"error":"Internal Server Error"});
                }
 })
 
