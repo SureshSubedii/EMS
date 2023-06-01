@@ -10,7 +10,7 @@ config({path:'./.env'});
 
 //app configuration
 const app=express();
-const port= process.env.PORT ||  4000;
+const port= process.env.PORT ||  5000;
 const URL=process.env.MONGO_URI; 
 
 //MiddleWares
@@ -25,10 +25,9 @@ mongoose.connect(URL,{ useNewUrlParser: true, useUnifiedTopology: true }).then((
 
 //routes
 app.post('/userLogin',async(req,res)=>{
-
     try{
        const userCredentials=req.body;
-        const checkUser= await User.findOne({email:userCredentials.email})
+        let checkUser= await User.findOne({email:userCredentials.email})
         if(!checkUser){
             res.status(404).json({"error":"Login with the correct credentials"});
         }
@@ -36,9 +35,7 @@ app.post('/userLogin',async(req,res)=>{
         else{
             const pass= await bcrypt.compare(userCredentials.password,checkUser.password);
             if(pass){
-                    // res.status(200).send("Successful")
                     const token=jwt.sign({id:checkUser._id},"s4589454988@asd&^%asd1asd2##");
-                    // console.log(token);
                     res.status(200).json({token})
 
                 }
@@ -56,7 +53,7 @@ app.post('/userSignUp',async(req,res)=>{
     const userCredentials=req.body;
 
     try{
-    const checkUser= await User.findOne({email:userCredentials.email})
+    let checkUser= await User.findOne({email:userCredentials.email})
     if(checkUser){
         return res.status(409).json({"error":"User Already Exists"})
     }

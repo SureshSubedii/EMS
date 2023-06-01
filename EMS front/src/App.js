@@ -4,13 +4,15 @@ import './styles/app.css'
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
 import { useDispatch, useSelector } from "react-redux";
-import { checkUser, login, logout } from "./stateManagement/userSlice";
+import { checkSignUpButton, checkUser, login, logout } from "./stateManagement/userSlice";
 import Home from "./components/Home";
 
 function App() {
   const [timeReal, settimeReal] = useState([]);
   const [timeRealMinutes, settimeRealMinutes] = useState([]);
   const user=useSelector(checkUser);
+  const checkButton=useSelector(checkSignUpButton);
+
   const dispatch=useDispatch();
 
   useEffect(()=>{
@@ -43,7 +45,7 @@ function App() {
 
       </div>
       <div className="app_body">
-       {(user )?(<Home/>):(<LogIn/>)}
+       {(user )?(<Home/>):((checkButton)?(<SignUp/>):<LogIn/>)}
         {/* <SignUp/> */}
       </div>
 

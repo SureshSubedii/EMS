@@ -3,8 +3,8 @@ import "../styles/login.css";
 import { useForm } from "react-hook-form";
 import {  RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
-import { useDispatch } from "react-redux";
-import { login } from "../stateManagement/userSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { SignUpButton, login } from "../stateManagement/userSlice";
 
 
 
@@ -38,9 +38,7 @@ else if(fetchedResults?.token){
 
 }}
 catch(error){
-  alert('Network error. Please check your internet connection.');
-
-}
+console.error(error)}
 }
 
 
@@ -71,7 +69,7 @@ catch(error){
         <div className="form_buttons">
           <input type="submit" value="Login" />
           <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
-          <input id="signUp" onClick={()=>1} type="button" value="SignUp" />
+          <input id="signUp" onClick={()=>dispatch(SignUpButton())} type="button" value="SignUp" />
         </div>
         ``
       </form>

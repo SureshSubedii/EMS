@@ -3,9 +3,14 @@ import {useForm} from 'react-hook-form'
 import '../styles/signUp.css'
 import {  RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
 import { useState } from 'react';
+import { useDispatch } from 'react-redux';
+import { login } from '../stateManagement/userSlice';
 
 function SignUp() {
   const [clicked,setClicked]=useState(false);
+  const dispatch=useDispatch()
+  // const [signUpClicked,setsignUpClicked]=useState(false);
+
   const {handleSubmit,register,formState:{errors}}=useForm();
   
   const onSignUp= async(data)=>{
@@ -16,7 +21,17 @@ function SignUp() {
       },
       body: JSON.stringify(data), // Send form data as JSON
     })
-  // console.log(result.text())
+    const responseText= await result.text();
+    const fetchedResults=  await JSON.parse(responseText);
+    if(fetchedResults?.error){
+      alert(fetchedResults.error);
+    }
+    else if(fetchedResults?.token){
+      sessionStorage.setItem('authToken',fetchedResults.token);
+      dispatch(login(sessionStorage.getItem('authToken')))
+    
+    }
+
 
   }
   return (
