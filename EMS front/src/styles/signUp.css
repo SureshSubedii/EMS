@@ -20,6 +20,8 @@
     margin-left: 80%;
     margin-bottom:8%;
     font-size: 2em !important;
+    cursor: pointer;
+
 }
 
 .signUp>form>p{

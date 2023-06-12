@@ -1,8 +1,14 @@
 import React from 'react'
+import '../styles/home.css'
+import Appcontents from './Appcontents'
+import Sidebar from './Sidebar'
 
 function Home() {
   return (
-    <div style={{color:'red',textAlign:'center'}}>Home</div>
+    <div  className="home">
+      <Sidebar/>
+      <Appcontents/>
+    </div>
   )
 }
 

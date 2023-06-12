@@ -1,0 +1,15 @@
+.home{
+    margin: 10px;
+    height: 94vh;
+    width:99vw;
+    background-color: rgb(223, 223, 223);
+    opacity: 0.95;
+    display: flex;
+    /* border: 1px solid black; */
+}
+@media screen and (max-width:910px)  {
+    .home{
+        margin:3px
+    }
+
+}
