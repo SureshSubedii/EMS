@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 // import PhotoUpload from "./components/PhotoUpload.js"
 import { useDispatch, useSelector } from "react-redux";
+import { Route, Routes, useNavigate } from "react-router-dom";
+import Admin from "./components/Admin";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
@@ -10,48 +12,44 @@ import './styles/app.css';
 function App() {
   const [timeReal, settimeReal] = useState([]);
   const [timeRealMinutes, settimeRealMinutes] = useState([]);
-  const user=useSelector(checkUser);
-  const checkButton=useSelector(checkSignUpButton);
+  const user = useSelector(checkUser);
+  const checkButton = useSelector(checkSignUpButton);
+  const navigate = useNavigate(); 
 
-  const dispatch=useDispatch();
+  const dispatch = useDispatch();
 
-  useEffect(()=>{
-    dispatch(login(sessionStorage.getItem('authToken')))
-   
-   const interval= setInterval(() => {
-     const time=new Date();
-      settimeReal(time.getHours())
+  useEffect(() => {
+    dispatch(login(sessionStorage.getItem('authToken')));
+
+    const interval = setInterval(() => {
+      const time = new Date();
+      settimeReal(time.getHours());
       settimeRealMinutes(time.getMinutes());
-      
     }, 1000);
-    
-    return ()=>{
-      clearInterval(interval)
+
+    return () => {
+      clearInterval(interval);
     }
+  }, []);
 
-    
-
-
-  },[])
   return (
-    <div className="app">
-      <div title="E-commerce Management System" className="app_header">
+      <div className="app">
+        <div title="E-commerce Management System" className="app_header">
+          <h1>EMS</h1>
+          <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
+          <button className="header_button" onClick={() => navigate("/admin")} >Admin Login</button> {/* Add onClick event handler */}
+          {user && (
+            <button className="header_button" onClick={() => { dispatch(logout()); sessionStorage.removeItem("authToken"); }}>LogOut</button>
+          )}
+        </div>
 
-     <h1> EMS</h1>
-     <h2> {timeReal>=12?timeReal-12:timeReal}:{timeRealMinutes<10?"0":""}{timeRealMinutes} {(timeReal>=0 && timeReal<12)?"AM":"PM"}</h2>
-     <button className="header_button">Admin Login</button>
-     {(user )?
-     ( <button className="header_button" onClick={()=>{dispatch(logout()); sessionStorage.removeItem("authToken")}}>LogOut</button> ):''}
-
+        <div className="app_body">
+          <Routes>
+            <Route path="/" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
+            <Route path="/admin" element={<Admin />} />
+          </Routes>
+        </div>
       </div>
-      <div className="app_body">
-       {(user )?(<Home/>):((checkButton)?(<SignUp/>):<LogIn/>)}
-        {/* <SignUp/> */}
-      </div>
-
-     {/* <PhotoUpload/> */}
-     
-    </div>
   );
 }
 
