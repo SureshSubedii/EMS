@@ -1,12 +1,13 @@
-import mongoose from 'mongoose'
+import bcrypt from 'bcrypt'
+import bodyParser from 'body-parser'
 import cors from 'cors'
+import { config } from 'dotenv'
 import express from 'express'
-import User from './schemas/UserSchema.js'
-import {config} from 'dotenv'
-import bodyParser from 'body-parser';
-import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
+import jwt from 'jsonwebtoken'
 import { dbConnect } from './db.js'
+import Admin from './schemas/AdminSchema.js'
+import User from './schemas/UserSchema.js'
+
 config({path:'./.env'}); 
 
 
@@ -25,7 +26,50 @@ app.use(bodyParser.json())
 
 
 
-//routes
+//Admin Routes
+app.post('/createAdmin', async(req,res)=>{
+    const adminCredentials=req.body;
+    const unsecurePass=adminCredentials.password;
+    const salt= await bcrypt.genSalt(20);
+    const securePass= await bcrypt.hash(unsecurePass,salt);
+    Admin.create({
+        name:adminCredentials.name,
+        password:securePass,
+        email:adminCredentials.email
+    })
+})
+
+app.post('/loginAdmin', async(req,res)=>{
+    const adminCredentials=req.body;
+    console.log(adminCredentials.email)
+    try{
+    const checkAdmin= await Admin.findOne({email:adminCredentials.email})
+    if(checkAdmin){
+        res.status(200).send({"success":"Admin found"})
+        const comparePass= await bcrypt.compare(adminCredentials.password,checkAdmin.password);
+        if(comparePass){
+        console.log("success");
+
+
+        }
+        else{
+            console.log("Incorrect")
+        }
+    }
+    else{
+        res.status(404).send({"failed":"Admin not found"})
+        console.log("Failure")
+
+
+    }}
+    catch(error){
+        console.error(error);
+    }
+
+    })
+
+
+//User Routes
 app.post('/userLogin',async(req,res)=>{
     try{
        const userCredentials=req.body;
