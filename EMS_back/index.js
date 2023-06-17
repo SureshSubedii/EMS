@@ -45,10 +45,12 @@ app.post('/loginAdmin', async(req,res)=>{
     try{
     const checkAdmin= await Admin.findOne({email:adminCredentials.email})
     if(checkAdmin){
-        res.status(200).send({"success":"Admin found"})
         const comparePass= await bcrypt.compare(adminCredentials.password,checkAdmin.password);
         if(comparePass){
         console.log("success");
+        const token =await jwt.sign({id:checkAdmin._id},"dsfdsfd8943534");
+        console.log(token);
+        res.status(200).json({token});
 
 
         }
