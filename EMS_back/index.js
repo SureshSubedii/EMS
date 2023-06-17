@@ -47,15 +47,13 @@ app.post('/loginAdmin', async(req,res)=>{
     if(checkAdmin){
         const comparePass= await bcrypt.compare(adminCredentials.password,checkAdmin.password);
         if(comparePass){
-        console.log("success");
         const token =await jwt.sign({id:checkAdmin._id},"dsfdsfd8943534");
-        console.log(token);
         res.status(200).json({token});
 
 
         }
         else{
-            console.log("Incorrect")
+            res.json({"error":"Login with correct credentials"})
         }
     }
     else{
@@ -66,6 +64,7 @@ app.post('/loginAdmin', async(req,res)=>{
     }}
     catch(error){
         console.error(error);
+        res.json({error});
     }
 
     })

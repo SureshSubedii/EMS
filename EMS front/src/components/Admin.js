@@ -2,7 +2,8 @@ import { RemoveRedEyeRounded, VisibilityOff } from '@mui/icons-material';
 import React, { useState } from 'react';
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { login } from "../stateManagement/userSlice";
+import { useNavigate } from 'react-router-dom';
+import { AdminLog, login } from "../stateManagement/userSlice";
 import "../styles/admin.css";
 
 
@@ -12,6 +13,7 @@ import "../styles/admin.css";
 function Admin() {
   const [clicked,setClicked]=useState(false);
   const dispatch=useDispatch();
+  const navigate=useNavigate();
 
   const {
     register,
@@ -35,11 +37,17 @@ if(fetchedResults?.error){
 }
 else if(fetchedResults?.token){
   sessionStorage.setItem('authToken',fetchedResults.token);
+  sessionStorage.setItem('admin',true);
+  dispatch(AdminLog());
   dispatch(login(sessionStorage.getItem('authToken')))
+  navigate("/");
 
 }}
 catch(error){
-console.error(error)}
+console.error(error);
+alert(error);
+
+}
 }
 
   return (

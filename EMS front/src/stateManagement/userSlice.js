@@ -1,4 +1,4 @@
-import {createSlice } from '@reduxjs/toolkit';
+import { createSlice } from '@reduxjs/toolkit';
 
 
 
@@ -6,7 +6,8 @@ export const userSlice = createSlice({
   name: 'user',
   initialState:{
   value:null,
-  signUpClicked: false
+  signUpClicked: false,
+  admin:false
 
   },
   reducers: {
@@ -24,6 +25,10 @@ export const userSlice = createSlice({
       state.signUpClicked=false;
 
 
+    },
+    AdminLog:(state)=>{
+      state.admin=true;
+
     }
 
 
@@ -31,7 +36,8 @@ export const userSlice = createSlice({
 
 
 
-export  const {login,logout,SignUpNot,SignUpButton}=userSlice.actions
+export  const {login,logout,SignUpNot,SignUpButton,AdminLog}=userSlice.actions
 export const checkUser=(state) => state.user.value;
 export const checkSignUpButton=(state)=>state.user.signUpClicked;
+export const adminCheck=(state)=>state.user.admin;
 export default userSlice.reducer
