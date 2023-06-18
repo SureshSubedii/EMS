@@ -43,9 +43,8 @@ else if(fetchedResults?.token){
   navigate("/");
 
 }}
-catch(error){
-console.error(error);
-alert(error);
+catch(err){
+alert(err);
 
 }
 }

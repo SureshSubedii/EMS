@@ -20,7 +20,6 @@ function App() {
 
   useEffect(() => {
     dispatch(login(sessionStorage.getItem('authToken')));
-    console.log(sessionStorage.getItem('admin'))
     if(sessionStorage.getItem('admin')){
       dispatch(AdminLog());
     }

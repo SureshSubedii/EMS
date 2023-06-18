@@ -56,14 +56,12 @@ app.post('/loginAdmin', async(req,res)=>{
         }
     }
     else{
-        res.status(404).send({"failed":"Admin not found"})
-        console.log("Failure")
+        res.status(404).send({"error":"Login with correct credentials"})
 
 
     }}
     catch(error){
-        console.error(error);
-        res.json({error});
+        res.json({"error":`${error} Internal server Error`})
     }
 
     })
@@ -91,9 +89,11 @@ app.post('/userLogin',async(req,res)=>{
                 }
             }}
             catch(error){
-                res.status(500).json({"error":"Internal Server Error"});
+                res.status(500).json({"error":`Internal Server Error ${error}`});
+                console.log("Fuck the error")
                }
-})
+            }
+)
 
 app.post('/userSignUp',async(req,res)=>{
     const userCredentials=req.body;
