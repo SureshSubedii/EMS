@@ -6,7 +6,7 @@ import Admin from "./components/Admin";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import { AdminLog, checkSignUpButton, checkUser, login, logout } from "./stateManagement/userSlice";
+import { AdminLog, AdminLogOut, checkSignUpButton, checkUser, login, logout } from "./stateManagement/userSlice";
 import './styles/app.css';
 
 function App() {
@@ -20,6 +20,7 @@ function App() {
 
   useEffect(() => {
     dispatch(login(sessionStorage.getItem('authToken')));
+    console.log(sessionStorage.getItem('admin'))
     if(sessionStorage.getItem('admin')){
       dispatch(AdminLog());
     }
@@ -42,8 +43,11 @@ function App() {
           <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
           <button className="header_button" onClick={() => navigate("/admin")} >Admin Login</button> {/* Add onClick event handler */}
           {user && (
-            <button className="header_button" onClick={() => { dispatch(logout()); sessionStorage.removeItem("authToken");
+            <button className="header_button" onClick={() => { 
+            dispatch(logout()); 
+            sessionStorage.removeItem("authToken");
             sessionStorage.removeItem('admin');
+            dispatch(AdminLogOut());
            }}>LogOut</button>
           )}
         </div>

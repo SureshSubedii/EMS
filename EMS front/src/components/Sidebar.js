@@ -1,8 +1,11 @@
 import { Avatar } from '@mui/material'
 import React from 'react'
+import { useSelector } from 'react-redux'
+import { adminCheck } from '../stateManagement/userSlice'
 import '../styles/sidebar.css'
 
 function Sidebar() {
+  const admin=useSelector(adminCheck)
   return (
     <> 
     <div className="sidebar">
@@ -15,7 +18,7 @@ function Sidebar() {
             <p className='sidebar_items'>Add Products</p>
             <p className='sidebar_items'>Cart</p>
 
-            <p className='sidebar_items'>User Management</p>
+            {admin &&<p className='sidebar_items'>User Management</p>}
 
 
     </div>

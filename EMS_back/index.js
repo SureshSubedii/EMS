@@ -41,7 +41,6 @@ app.post('/createAdmin', async(req,res)=>{
 
 app.post('/loginAdmin', async(req,res)=>{
     const adminCredentials=req.body;
-    console.log(adminCredentials.email)
     try{
     const checkAdmin= await Admin.findOne({email:adminCredentials.email})
     if(checkAdmin){

@@ -29,6 +29,10 @@ export const userSlice = createSlice({
     AdminLog:(state)=>{
       state.admin=true;
 
+    },
+    AdminLogOut:(state)=>{
+      state.admin=null;
+
     }
 
 
@@ -36,7 +40,7 @@ export const userSlice = createSlice({
 
 
 
-export  const {login,logout,SignUpNot,SignUpButton,AdminLog}=userSlice.actions
+export  const {login,logout,SignUpNot,SignUpButton,AdminLog,AdminLogOut}=userSlice.actions
 export const checkUser=(state) => state.user.value;
 export const checkSignUpButton=(state)=>state.user.signUpClicked;
 export const adminCheck=(state)=>state.user.admin;
