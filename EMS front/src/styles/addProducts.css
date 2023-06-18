@@ -1,0 +1,178 @@
+.addProducts{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    width:32vw;
+    box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
+    background-color: rgb(34, 34, 34);
+    /* opacity: 0.79; */
+    top:10%;
+    left:32%;
+    padding-bottom: 10px;
+    border-radius: 20px;
+    height:fit-content;
+
+
+
+}
+.addProducts>form>.showHideIcon{
+    margin-top: -15%;
+    margin-left: 80%;
+    margin-bottom:8%;
+    font-size: 2em !important;
+    cursor: pointer;
+
+}
+
+.addProducts>form>p{
+  
+    font-size:1.5em;
+    color:rgb(254, 13, 0);
+    font-weight: 900;
+    margin-left: 10%;
+    /* height: fit-content; */
+ 
+}
+
+.addProducts>h2{
+    /* width: 60%; */
+    background-color: rgb(0, 6, 113);
+    color: white;
+    padding-left: 37%;
+    padding-top:1%;
+    padding-bottom:1%;
+
+}
+.form_buttons{
+    display: flex;
+    justify-content: space-around;
+    padding-top:2%;
+    padding-bottom:1%;
+    color: white;
+    margin:2px;
+
+
+
+}
+.form_buttons>input{
+    border:none;
+    border-radius: 7px;
+    background-color: rgb(0, 6, 113);
+
+    color:white;
+    padding:20px;
+    font-size: 1.5em;
+    font-weight: 800;
+    
+}
+.form_buttons>input:hover{
+    cursor:pointer;
+    background-color: rgb(13, 22, 188);
+
+
+}
+form> .credential{
+    width:83%;
+    font-weight: 500;
+    margin-top: 10px;
+    margin-left:6%;
+    border: none;
+    outline: none;
+    border-radius: 25px;
+    padding-left: 5%;
+    margin-bottom:3% ;
+    margin-top: 5%;
+    font-size: 2em;
+
+}
+form>input{
+    padding: 3%;
+}
+@media (min-width:220px) and (max-width:1450px) {
+    .addProducts{
+    height:max-content;
+    width:45vw;
+    left:28%
+   
+
+    }
+  
+    form> .credential{
+        font-size: 1.05em;
+
+    }
+
+   
+    .form_buttons>input{
+        padding:0.7vh;
+        height: max-content;
+        font-size:1em;
+
+    }
+    .addProducts>h2{
+    font-size: 15px;
+    padding-left: 30%;
+
+    }
+   
+}
+@media (min-width:950px) and (max-width:1630px){
+   .addProducts{
+    height:fit-content;
+    font-size: 1em;
+    top:15%;
+    width:45vw;
+    left:28%;
+
+
+    
+
+   } 
+   .addProducts>h2{
+    font-size: 25px;
+    padding-left: 35%;
+
+    }
+    .addProducts>form>p{
+        font-size: 1.5em;
+    }
+
+
+}
+@media (min-width:220px) and (max-width:599px) {
+    .addProducts{
+        width: 70vw;
+        left:26%;
+        top:20%;
+
+
+        
+}
+.addProducts>h2{
+    font-size: 12px;
+    padding-left: 30%;
+
+    }
+    form> .credential{
+        font-size: 0.87em;
+
+    }
+    form>input{
+        padding: 3%;
+    }
+    .form_buttons>input{
+        font-size: 0.8em;
+    }
+    .addProducts>form>p{
+        font-size: 1em;
+    }
+
+   
+}
+@media (max-width:350px){
+    .addProducts>form>.showHideIcon{
+      
+        font-size: 1.4em !important;
+        margin-bottom: 10%;
+    }
+}

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
+import '../styles/photoUpload.css';
 
 const PhotoUploadButton = () => {
   const [uploadedImage, setUploadedImage] = useState(null);
@@ -20,7 +21,7 @@ const PhotoUploadButton = () => {
         <button>Upload Photo</button>
       </div>
       {uploadedImage && (
-        <div>
+        <div className='uploadedPhoto'>
           <img src={uploadedImage} alt="Uploaded" />
         </div>
       )}

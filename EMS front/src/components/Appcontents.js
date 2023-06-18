@@ -1,9 +1,18 @@
 import React from 'react'
+import { Route, Routes } from 'react-router-dom'
 import '../styles/appcontents.css'
+import AddProducts from './AddProducts'
+import Products from './Products'
 
 function Appcontents() {
   return (
-    <div className='appcontents'>Appcontents</div>
+    <div className='appcontents'>
+         <Routes>
+         <Route path="/" element={<Products/>}/>
+        <Route  path="/addProduct" element={<AddProducts/>}/>
+          
+            </Routes>
+    </div>
   )
 }
 

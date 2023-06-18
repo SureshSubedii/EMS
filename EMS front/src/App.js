@@ -53,7 +53,7 @@ function App() {
 
         <div className="app_body">
           <Routes>
-            <Route path="/" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
+            <Route path="*" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
             <Route path="/admin" element={<Admin />} />
           </Routes>
         </div>
