@@ -37,7 +37,8 @@ else if(fetchedResults?.token){
 
 }}
 catch(error){
-console.error(error)}
+console.error(error)
+alert(error)}
 }
 
 

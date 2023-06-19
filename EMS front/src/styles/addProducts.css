@@ -7,7 +7,7 @@
     background-color: rgb(34, 34, 34);
     /* opacity: 0.79; */
     top:10%;
-    left:38%;
+    left:30%;
     padding-bottom: 10px;
     border-radius: 20px;
     height:fit-content;
@@ -80,11 +80,11 @@
 .addProducts>form>input{
     padding: 3%;
 }
-@media (min-width:600px) and (max-width:1450px) {
+@media (min-width:600px) and (max-width:1000px) {
     .addProducts{
     height:max-content;
     width:45vw;
-    left:45%
+    left:48%
    
 
     }
@@ -183,7 +183,7 @@
 } */
 @media screen and (max-width:450px)  {
     .addProducts{
-        left:50%;
+        left:58%;
         width:33vw;
         top:10%
             }

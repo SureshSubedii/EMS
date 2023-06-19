@@ -12,13 +12,12 @@
 @media  (max-width:1800px)  {
     .home{
         margin:3px;
-        height:fit-content
     }
 
 }
-@media  (max-height:465px)  {
+@media  (max-height:565px)  {
     .home{
-        height:fit-content
+        height:150vh
     }
 
 }
