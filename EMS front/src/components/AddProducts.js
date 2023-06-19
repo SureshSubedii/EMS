@@ -22,7 +22,7 @@ function AddProducts() {
         <input
           name="productName"
           className="credential"
-          placeholder="Enter Product name"
+          placeholder="Product name"
           type="text"
           {...register("productName", { required: "Product name is required!" })}
         />
@@ -37,7 +37,9 @@ function AddProducts() {
           {...register("price", { required: "Price is required!" })}
         />
         {errors.price && <p> {errors.price.message}</p>}
-        <div className="credential">
+       
+          <textarea className="credential" placeholder='Describe the product'/>
+          <div className="credential">
         <PhotoUpload/>
 
         </div>

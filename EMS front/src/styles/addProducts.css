@@ -62,7 +62,8 @@
 
 
 }
-.addProducts>form> .credential{
+
+.addProducts>form>.credential{
     width:83%;
     font-weight: 500;
     margin-top: 10px;
