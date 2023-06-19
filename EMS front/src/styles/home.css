@@ -9,9 +9,16 @@
     border-radius: 10px;
     overflow-y: scroll;
 }
-@media screen and (max-width:910px)  {
+@media  (max-width:1800px)  {
     .home{
-        margin:3px
+        margin:3px;
+        height:fit-content
+    }
+
+}
+@media  (max-height:465px)  {
+    .home{
+        height:fit-content
     }
 
 }

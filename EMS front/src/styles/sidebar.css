@@ -52,7 +52,7 @@ cursor: pointer;
     }
 
 }
-@media screen and (max-width:250px)  {
+@media screen and (max-width:350px)  {
     .sidebar_items{
         margin:3px;
         font-size:7px;

@@ -7,7 +7,7 @@
     background-color: rgb(34, 34, 34);
     /* opacity: 0.79; */
     top:10%;
-    left:32%;
+    left:38%;
     padding-bottom: 10px;
     border-radius: 20px;
     height:fit-content;
@@ -79,17 +79,29 @@
 .addProducts>form>input{
     padding: 3%;
 }
-@media (min-width:220px) and (max-width:1450px) {
+@media (min-width:600px) and (max-width:1450px) {
     .addProducts{
     height:max-content;
     width:45vw;
-    left:28%
+    left:45%
    
 
     }
+}
+    @media (min-width:450px) and (max-width:599px)   {
+        .addProducts{
+    left:45%;
+    width:35vw;
+    top:10%
+        }
+        .addProducts>form>p{
+            font-size: 1.5em;
+        }
+
+    
   
     .addProducts>form> .credential{
-        font-size: 1.05em;
+        font-size: 0.8em;
 
     }
 
@@ -107,13 +119,13 @@
     }
    
 }
-@media (min-width:950px) and (max-width:1630px){
+/* @media (min-width:950px) and (max-width:1630px){
    .addProducts{
     height:fit-content;
     font-size: 1em;
     top:15%;
     width:45vw;
-    left:28%;
+    left:38%;
 
 
     
@@ -129,12 +141,13 @@
     }
 
 
-}
-@media (min-width:220px) and (max-width:599px) {
+} */
+/* @media (min-width:220px) and (max-width:599px) {
     .addProducts{
-        width: 70vw;
-        left:26%;
-        top:20%;
+        left:40%;
+        width:35vh;
+
+        top:10%;
 
 
         
@@ -159,11 +172,59 @@
     }
 
    
-}
-@media (max-width:350px){
+} */
+/* @media (max-width:350px){
     .addProducts>form>.showHideIcon{
       
         font-size: 1.4em !important;
         margin-bottom: 10%;
     }
+} */
+@media screen and (max-width:450px)  {
+    .addProducts{
+        left:50%;
+        width:33vw;
+        top:10%
+            }
+            
+    .addProducts>form> .credential{
+        font-size: 0.8em;
+
+    }
+    .addProducts>form>p{
+        font-size: 0.8em;
+    }
+
+   
+    .addProducts>form>.form_buttons>input{
+        padding:0.4vh;
+        height: max-content;
+        font-size:0.7em;
+
+    }
+    .addProducts>h2{
+    font-size: 11px;
+    padding-left: 20%;
+
+    }
+
+}
+@media screen and (max-width:280px)  {
+    .addProducts{
+        left: 65%;
+    }
+    .addProducts>form>.form_buttons>input{
+        padding:0.1vh;
+        /* height: max-content; */
+        font-size:0.5em;
+
+    }
+    .addProducts>form> .credential{
+        font-size: 0.5em;
+
+    }
+    .addProducts>form>p{
+        font-size: 0.5em;
+    }
+
 }
