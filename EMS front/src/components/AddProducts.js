@@ -5,15 +5,36 @@ import PhotoUpload from "./PhotoUpload.js";
 
 
 function AddProducts() {
-  const onAdd=()=>{
-    
-  }
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm();
 
+  const onAdd= async (data)=>{
+    try{
+      const result=await fetch("http://192.168.18.177:5000/addProduct", {
+      method: 'POST', 
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data), // Send form data as JSON
+    })
+    const responseText= await result.text();
+  const fetchedResults=  await JSON.parse(responseText);
+  if(fetchedResults?.error){
+    alert(fetchedResults.error);
+  }
+ 
+  
+  }
+  catch(err){
+  alert(err);
+  
+  }
+    
+  }
+  
   return (
     <div className='addProducts'>
       <h2>Add products</h2>
@@ -38,7 +59,11 @@ function AddProducts() {
         />
         {errors.price && <p> {errors.price.message}</p>}
        
-          <textarea className="credential" placeholder='Describe the product'/>
+          <textarea name="description" className="credential" placeholder='Describe the product'
+          {...register("description", { required: "description is required!" })}
+          
+          />
+
           <div className="credential">
         <PhotoUpload/>
 

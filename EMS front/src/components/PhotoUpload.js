@@ -22,7 +22,10 @@ const PhotoUploadButton = () => {
       </div>
       {uploadedImage && (
         <div className='uploadedPhoto'>
-          <img src={uploadedImage} alt="Uploaded" />
+          {/* <input type= "file" name="photo"> */}
+          <img  src={uploadedImage} alt="Uploaded" />
+
+          {/* </input> */}
         </div>
       )}
     </div>

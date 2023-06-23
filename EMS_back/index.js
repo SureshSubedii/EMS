@@ -6,7 +6,9 @@ import express from 'express'
 import jwt from 'jsonwebtoken'
 import { dbConnect } from './db.js'
 import Admin from './schemas/AdminSchema.js'
+import Product from './schemas/ProductSchema.js'
 import User from './schemas/UserSchema.js'
+
 
 config({path:'./.env'}); 
 
@@ -122,6 +124,24 @@ app.post('/userSignUp',async(req,res)=>{
         res.status(500).send(err);
     } 
 
+})
+
+//Product Route
+app.post('/addProduct',async (req,res)=>{
+    const productData=req.body;
+    try{
+    const product=await Product.create({
+        name:productData.productName,
+        description:productData.description,
+        price:productData.price,
+        photo:productData.photo
+
+    })
+    console.log(productData.description)
+}
+catch(error){
+    res.json({error});
+}
 })
 
 

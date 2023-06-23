@@ -39,9 +39,9 @@
     padding-left: 37%;
     padding-top:1%;
     padding-bottom:1%;
-    animation: anime 8s infinite;
+    /* animation: anime 8s infinite; */
 }
-@keyframes anime {
+/* @keyframes anime {
     0%{
         background-size:50%  ;
         
@@ -61,9 +61,9 @@
     85%{
         background-size:150% 150% ;
 
-    }
+    } */
     
-}
+/* } */
 .form_buttons{
     display: flex;
     justify-content: space-around;
