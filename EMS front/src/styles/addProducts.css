@@ -5,7 +5,7 @@
     box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
     background-color: rgb(34, 34, 34);
     
-    padding-bottom: 10px;
+    padding-bottom: 15px;
     border-radius: 20px;
     height:fit-content;
     margin: 7% 15%;
@@ -121,7 +121,7 @@
 }
 @media  (max-height:565px)  {
     .addProducts{
-        position: static;
+        /* position: static; */
         margin: 10%;
     }
 }
@@ -129,7 +129,7 @@
 @media screen and (max-width:450px)  {
     .addProducts{
         left:58%;
-        width:33vw;
+        width:45vw;
         top:10%
             }
             

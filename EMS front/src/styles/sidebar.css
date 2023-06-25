@@ -1,23 +1,17 @@
 .sidebar{
     display: flex;
-    flex: 0.5;
+    flex: 0.7;
     flex-direction: column;
     position: sticky;
     
 
 }
-.line {
-    width: 1px;
-    background-color: rgb(135, 135, 127);
-    overflow: auto;
-    height: 94vh;
-  }
-  
+
 .sidebar_items{
     margin: 5px;
     white-space: nowrap;
     font-weight: 800;
-    font-size: 18px;
+    font-size: 25px;
     padding: 3px;
     height: fit-content;
     border-bottom: 1px solid grey;

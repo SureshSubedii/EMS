@@ -3,8 +3,11 @@
     color:white;
     display: flex;
     position: sticky;
+    height:100%
+
     
 }
+
 .app_header>h2{
     display: block;
     margin: auto;

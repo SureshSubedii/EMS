@@ -15,6 +15,7 @@ function Sidebar() {
         <Avatar className='avatar'/>
       <h1 className='username'>Suresh Subedi</h1>
 
+
       </div>
             <p className='sidebar_items'>Products</p>
             <p className='sidebar_items' onClick={()=>navigate("/addProduct")}>Add Products</p>
@@ -24,8 +25,9 @@ function Sidebar() {
             {admin &&<p className='sidebar_items'>User Management</p>}
 
 
+
     </div>
-            <div className="line"></div>
+
             </>
 
   )

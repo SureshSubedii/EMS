@@ -6,13 +6,20 @@ import Products from './Products'
 
 function Appcontents() {
   return (
+    <>
+    
     <div className='appcontents'>
+    <div className="line"></div>
+
+
          <Routes>
          <Route path="/" element={<Products/>}/>
         <Route  path="/addProduct" element={<AddProducts/>}/>
           
             </Routes>
     </div>
+    </>
+
   )
 }
 

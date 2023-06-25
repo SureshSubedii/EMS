@@ -66,7 +66,7 @@ function AddProducts() {
           
           />
           <select ref={ref1} name="categorySelect"   {...register("categorySelect", { required: "categorySelect is required!" })} className="credential">
-          <option value="" disabled>Select a category</option>
+          <option value="others"  disabled selected>Select a category</option>
             <option value="clothing">Clothing</option>
             <option value="electronics">Electronics</option>
             <option value="Furniture">Furniture</option>
