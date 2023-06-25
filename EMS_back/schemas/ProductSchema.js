@@ -3,7 +3,8 @@ const productSchema=mongoose.Schema({
     name:String,
     photo:String,
     price:Number,
-    description:String
+    description:String,
+    category:String
 
 })
 export default mongoose.model('product',productSchema);

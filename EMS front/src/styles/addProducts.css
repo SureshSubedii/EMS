@@ -1,16 +1,14 @@
 .addProducts{
     display: flex;
     flex-direction: column;
-    position: absolute;
-    width:32vw;
+    width:35vw;
     box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
     background-color: rgb(34, 34, 34);
-    /* opacity: 0.79; */
-    top:10%;
-    left:30%;
+    
     padding-bottom: 10px;
     border-radius: 20px;
     height:fit-content;
+    margin: 7% 15%;
 
 
 
@@ -70,7 +68,7 @@
     margin-left:6%;
     border: none;
     outline: none;
-    border-radius: 25px;
+    border-radius: 10px;
     padding-left: 5%;
     margin-bottom:3% ;
     margin-top: 5%;
@@ -82,18 +80,15 @@
 }
 @media (min-width:600px) and (max-width:1000px) {
     .addProducts{
-    height:max-content;
+    /* height:max-content; */
     width:45vw;
-    left:48%
    
 
     }
 }
     @media (min-width:450px) and (max-width:599px)   {
         .addProducts{
-    left:45%;
     width:35vw;
-    top:10%
         }
         .addProducts>form>p{
             font-size: 1.5em;
@@ -120,67 +115,13 @@
     }
    
 }
-/* @media (min-width:950px) and (max-width:1630px){
-   .addProducts{
-    height:fit-content;
-    font-size: 1em;
-    top:15%;
-    width:45vw;
-    left:38%;
-
-
-    
-
-   } 
-   .addProducts>h2{
-    font-size: 25px;
-    padding-left: 35%;
-
-    }
-    .addProducts>form>p{
-        font-size: 1.5em;
-    }
-
-
-} */
-/* @media (min-width:220px) and (max-width:599px) {
+@media  (max-height:565px)  {
     .addProducts{
-        left:40%;
-        width:35vh;
-
-        top:10%;
-
-
-        
+        position: static;
+        margin: 10%;
+    }
 }
-.addProducts>h2{
-    font-size: 12px;
-    padding-left: 30%;
 
-    }
-    .addProducts>form> .credential{
-        font-size: 0.87em;
-
-    }
-    .addProducts>form>input{
-        padding: 3%;
-    }
-    .addProducts>form>.form_buttons>input{
-        font-size: 0.8em;
-    }
-    .addProducts>form>p{
-        font-size: 1em;
-    }
-
-   
-} */
-/* @media (max-width:350px){
-    .addProducts>form>.showHideIcon{
-      
-        font-size: 1.4em !important;
-        margin-bottom: 10%;
-    }
-} */
 @media screen and (max-width:450px)  {
     .addProducts{
         left:58%;

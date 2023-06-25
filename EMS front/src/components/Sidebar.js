@@ -18,6 +18,7 @@ function Sidebar() {
       </div>
             <p className='sidebar_items'>Products</p>
             <p className='sidebar_items' onClick={()=>navigate("/addProduct")}>Add Products</p>
+            <p className="sidebar_items">Category</p>
             <p className='sidebar_items'>Cart</p>
 
             {admin &&<p className='sidebar_items'>User Management</p>}

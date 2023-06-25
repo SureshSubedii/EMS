@@ -134,10 +134,10 @@ app.post('/addProduct',async (req,res)=>{
         name:productData.productName,
         description:productData.description,
         price:productData.price,
-        photo:productData.photo
+        photo:productData.photo,
+        category:productData.categorySelect
 
     })
-    console.log(productData.description)
 }
 catch(error){
     res.json({error});

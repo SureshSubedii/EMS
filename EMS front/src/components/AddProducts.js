@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styles/addProducts.css';
 import PhotoUpload from "./PhotoUpload.js";
@@ -10,6 +10,8 @@ function AddProducts() {
     handleSubmit,
     formState: { errors },
   } = useForm();
+
+  const ref1=useRef()
 
   const onAdd= async (data)=>{
     try{
@@ -63,7 +65,16 @@ function AddProducts() {
           {...register("description", { required: "description is required!" })}
           
           />
-
+          <select ref={ref1} name="categorySelect"   {...register("categorySelect", { required: "categorySelect is required!" })} className="credential">
+          <option value="" disabled>Select a category</option>
+            <option value="clothing">Clothing</option>
+            <option value="electronics">Electronics</option>
+            <option value="Furniture">Furniture</option>
+            <option value="Utensils">Utensils</option>
+            <option value="Others">Others</option>
+          </select>
+        
+{}
           <div className="credential">
         <PhotoUpload/>
 
