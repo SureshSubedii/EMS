@@ -32,9 +32,13 @@
     padding-bottom:1%;
 
 }
+.addProducts>.photoComponent{
+    margin: 12%;
+}
 .addProducts>.form_buttons{
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    /* justify-content:  */
     padding-top:2%;
     padding-bottom:1%;
     color: white;

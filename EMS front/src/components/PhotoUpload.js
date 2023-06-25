@@ -15,13 +15,13 @@ const PhotoUploadButton = () => {
   const { getRootProps, getInputProps } = useDropzone({ onDrop });
 
   return (
-    <div>
+    <div className='photo_upload'>
       <div {...getRootProps()}>
         <input {...getInputProps()} />
         <button>Upload Photo</button>
       </div>
       {uploadedImage && (
-        <div className='uploadedPhoto'>
+        <div className='uploaded_photo'>
           {/* <input type= "file" name="photo"> */}
           <img  src={uploadedImage} alt="Uploaded" />
 

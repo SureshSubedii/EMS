@@ -75,15 +75,20 @@ function AddProducts() {
           </select>
         
 {}
-          <div className="credential">
-        <PhotoUpload/>
+          {/* <div className="credential">
 
-        </div>
+        </div> */}
 
-        
+      <div className="photoComponent">
+<PhotoUpload />
+
+        </div>  
+
+
 
 
         <div className="form_buttons">
+
           <input type="submit" value="Add Product" />
         </div>
         
