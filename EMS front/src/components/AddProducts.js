@@ -1,8 +1,8 @@
+import axios from 'axios';
 import React, { useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import '../styles/addProducts.css';
-import PhotoUpload from "./PhotoUpload.js";
-
+import PhotoUpload from './PhotoUpload.js';
 
 function AddProducts() {
   const {
@@ -11,90 +11,76 @@ function AddProducts() {
     formState: { errors },
   } = useForm();
 
-  const ref1=useRef()
+  const ref1 = useRef();
 
-  const onAdd= async (data)=>{
-    try{
-      const result=await fetch("http://192.168.18.177:5000/addProduct", {
-      method: 'POST', 
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data), // Send form data as JSON
-    })
-    const responseText= await result.text();
-  const fetchedResults=  await JSON.parse(responseText);
-  if(fetchedResults?.error){
-    alert(fetchedResults.error);
-  }
- 
-  
-  }
-  catch(err){
-  alert(err);
-  
-  }
-    
-  }
-  
+  const onAdd = async (data) => {
+    try {
+      const response = await axios.post('http://192.168.18.177:5000/addProduct', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+
+      const fetchedResults = response.data;
+
+      if (fetchedResults?.error) {
+        alert(fetchedResults.error);
+      }
+    } catch (err) {
+      alert(err);
+    }
+  };
+
   return (
     <div className='addProducts'>
       <h2>Add products</h2>
       <form onSubmit={handleSubmit(onAdd)}>
-       
         <input
-          name="productName"
-          className="credential"
-          placeholder="Product name"
-          type="text"
-          {...register("productName", { required: "Product name is required!" })}
+          name='productName'
+          className='credential'
+          placeholder='Product name'
+          type='text'
+          {...register('productName', { required: 'Product name is required!' })}
         />
-        {errors.productName && <p> {errors.productName.message}</p>}
-      
-      
+        {errors.productName && <p>{errors.productName.message}</p>}
+
         <input
-          name="price"
-          className="credential"
-          placeholder="Enter price"
-          type="number"
-          {...register("price", { required: "Price is required!" })}
+          name='price'
+          className='credential'
+          placeholder='Enter price'
+          type='number'
+          {...register('price', { required: 'Price is required!' })}
         />
-        {errors.price && <p> {errors.price.message}</p>}
-       
-          <textarea name="description" className="credential" placeholder='Describe the product'
-          {...register("description", { required: "description is required!" })}
-          
-          />
-          <select ref={ref1} name="categorySelect"   {...register("categorySelect", { required: "categorySelect is required!" })} className="credential">
-          <option value="others"  disabled selected>Select a category</option>
-            <option value="clothing">Clothing</option>
-            <option value="electronics">Electronics</option>
-            <option value="Furniture">Furniture</option>
-            <option value="Utensils">Utensils</option>
-            <option value="Others">Others</option>
-          </select>
-        
-{}
-          {/* <div className="credential">
+        {errors.price && <p>{errors.price.message}</p>}
 
-        </div> */}
+        <textarea
+          name='description'
+          className='credential'
+          placeholder='Describe the product'
+          {...register('description', { required: 'Description is required!' })}
+        />
 
-      <div className="photoComponent">
-<PhotoUpload />
+        <select ref={ref1} name='categorySelect' {...register('categorySelect', { required: 'Category is required!' })} className='credential'>
+          <option value='others' disabled defaultValue>
+            Select a category
+          </option>
+          <option value='clothing'>Clothing</option>
+          <option value='electronics'>Electronics</option>
+          <option value='furniture'>Furniture</option>
+          <option value='utensils'>Utensils</option>
+          <option value='others'>Others</option>
+        </select>
 
-        </div>  
-
-
-
-
-        <div className="form_buttons">
-
-          <input type="submit" value="Add Product" />
+        <div className='photoComponent'>
+          <PhotoUpload />
         </div>
-        
+
+        <div className='form_buttons'>
+          <input type='submit' value='Add Product' />
+        </div>
       </form>
     </div>
-  )
+  );
 }
 
-export default AddProducts
+export default AddProducts;
