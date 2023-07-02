@@ -4,6 +4,9 @@
 
 
 }
+.photo_upload>input{
+    background-color: aliceblue;
+}
 .photo_upload{
     display: flex;
     flex-direction: column;

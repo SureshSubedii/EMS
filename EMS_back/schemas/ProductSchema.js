@@ -4,7 +4,12 @@ const productSchema=mongoose.Schema({
     photo:String,
     price:Number,
     description:String,
-    category:String
+    category:String,
+    image:{
+        data:Buffer,
+        contentType:String
+    },
+    uploader:String
 
 })
 export default mongoose.model('product',productSchema);

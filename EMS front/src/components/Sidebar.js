@@ -13,12 +13,14 @@ function Sidebar() {
     <div className="sidebar">
       <div className="user">
         <Avatar className='avatar'/>
-      <h1 className='username'>Suresh Subedi</h1>
+      <h1 className='username'>{sessionStorage.getItem('uploader')}
+</h1>
 
 
       </div>
             <p className='sidebar_items' onClick={()=>navigate("/")}>Products</p>
             <p className='sidebar_items' onClick={()=>navigate("/addProduct")}>Add Products</p>
+            <p className="sidebar_items">Your Products</p>
             <p className="sidebar_items">Category</p>
             <p className='sidebar_items'>Cart</p>
 

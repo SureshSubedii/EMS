@@ -32,6 +32,8 @@ function LogIn() {
         sessionStorage.setItem('authToken', fetchedResults.token);
         dispatch(login(sessionStorage.getItem('authToken')));
       }
+      sessionStorage.setItem('uploader', fetchedResults.uploader);
+
     } catch (error) {
       console.error(error);
       alert(error);

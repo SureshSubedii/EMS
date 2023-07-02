@@ -1,34 +1,58 @@
 import axios from 'axios';
-import React, { useRef } from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 import '../styles/addProducts.css';
-import PhotoUpload from './PhotoUpload.js';
+import '../styles/photoUpload.css';
 
 function AddProducts() {
+  const [uploadedImage, setUploadedImage] = useState(null);
+  const navigate=useNavigate();
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
-
-  const ref1 = useRef();
 
   const onAdd = async (data) => {
     try {
-      const response = await axios.post('http://192.168.18.177:5000/addProduct', data, {
+      const formData = new FormData();
+      formData.append('productName', data.productName);
+      formData.append('price', data.price);
+      formData.append('description', data.description);
+      formData.append('categorySelect', data.categorySelect);
+      formData.append('image', data.product_image[0]);
+      formData.append('uploader', sessionStorage.getItem('uploader'))
+
+      const response = await axios.post('http://192.168.18.177:5000/addProduct', formData, {
         headers: {
-          'Content-Type': 'application/json',
+          'Content-Type': 'multipart/form-data',
         },
       });
 
       const fetchedResults = response.data;
+      if (fetchedResults.error && fetchedResults.error.message) {
+        alert(fetchedResults.error.message);
+      }
+      else if(fetchedResults.message){
+        alert(fetchedResults.message)
+        navigate("/")
+ 
 
-      if (fetchedResults?.error) {
-        alert(fetchedResults.error);
       }
     } catch (err) {
       alert(err);
+      console.log(err);
     }
+  };
+
+  const onFileChange = (e) => {
+    const file = e.target.files[0];
+    const uploadedImageURL = URL.createObjectURL(file);
+    setUploadedImage(uploadedImageURL);
+    setValue('product_image', [file]); // Update the value of 'product_image' in the form data
   };
 
   return (
@@ -59,9 +83,10 @@ function AddProducts() {
           placeholder='Describe the product'
           {...register('description', { required: 'Description is required!' })}
         />
+        {errors.description && <p>{errors.description.message}</p>}
 
-        <select ref={ref1} name='categorySelect' {...register('categorySelect', { required: 'Category is required!' })} className='credential'>
-          <option value='others' disabled defaultValue>
+        <select name='categorySelect' className='credential' {...register('categorySelect')}>
+          <option value='others' disabled selected defaultValue>
             Select a category
           </option>
           <option value='clothing'>Clothing</option>
@@ -72,7 +97,14 @@ function AddProducts() {
         </select>
 
         <div className='photoComponent'>
-          <PhotoUpload />
+          <div className='photo_upload'>
+            <input type='file' name='product_image' accept='image/*' onChange={onFileChange} />
+            {uploadedImage && (
+              <div className='uploaded_photo'>
+                <img name='image' src={uploadedImage} alt='No image' />
+              </div>
+            )}
+          </div>
         </div>
 
         <div className='form_buttons'>
