@@ -26,7 +26,7 @@ function AddProducts() {
       formData.append('image', data.product_image[0]);
       formData.append('uploader', sessionStorage.getItem('uploader'))
 
-      const response = await axios.post('http://192.168.18.177:5000/addProduct', formData, {
+      const response = await axios.post('http://192.168.18.177:5000/api/v1/product/addProduct', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },

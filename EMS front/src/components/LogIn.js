@@ -34,9 +34,13 @@ function LogIn() {
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
 
-    } catch (error) {
-      console.error(error);
-      alert(error);
+    } catch (err) {
+      console.error(err);
+      if (err.response && err.response.data && err.response.data.error) {
+        alert(err.response.data.error);
+      } else {
+        alert(err.message);
+      }
     }
   };
 

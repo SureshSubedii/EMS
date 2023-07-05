@@ -4,12 +4,10 @@ import cors from 'cors'
 import { config } from 'dotenv'
 import express from 'express'
 import jwt from 'jsonwebtoken'
-import multer from 'multer'
 import { dbConnect } from './db.js'
+import ProductRoute from './routes/ProductRoute.js'
 import Admin from './schemas/AdminSchema.js'
-import Product from './schemas/ProductSchema.js'
 import User from './schemas/UserSchema.js'
-
 
 
 config({path:'./.env'}); 
@@ -21,17 +19,7 @@ const port= process.env.PORT ||  5000;
 
 
 //Multer  config
-const storage=multer.diskStorage({
-    destination:'images',
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname)
-    }
-})
 
-const upload=multer({
-    storage:storage,
-
-}).single("image")
 
 
 //MiddleWares
@@ -71,12 +59,12 @@ app.post('/loginAdmin', async(req,res)=>{
         }
     }
     else{
-        res.status(404).send({"error":"Login with correct credentials"})
+        res.status(404).json({"error":"Login with correct credentials"})
 
 
     }}
     catch(error){
-        res.json({"error":`${error} Internal server Error`})
+        res.status(500).json({"error":`${error} Internal server Error`})
     }
 
     })
@@ -138,26 +126,8 @@ app.post('/userSignUp',async(req,res)=>{
 })
 
 //Product Route
-app.post('/addProduct', upload, async (req, res) => {
-    const productData = req.body;
-    try {
-      const product = await Product.create({
-        name: productData.productName,
-        description: productData.description,
-        price: productData.price,
-        category: productData.categorySelect,
-        image: {
-          data: req.file.filename,
-          contentType: 'image/png',
-        },
-        uploader:productData.uploader
-      });
-  
-      res.status(201).json({ message: 'Product added successfully' });
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to add product' });
-    }
-  });
+app.use('/api/v1/product',ProductRoute);
+
   
 
 
