@@ -3,18 +3,21 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { login } from '../stateManagement/userSlice';
 import '../styles/signUp.css';
 
 function SignUp() {
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
 
   const { handleSubmit, register, formState: { errors } } = useForm();
 
   const onSignUp = async (data) => {
     try {
-      const response = await axios.post('http://192.168.18.177:5000/userSignUp', data, {
+      const response = await axios.post('http://192.168.18.177:5000/api/v1/user/userSignup', data, {
         headers: {
           'Content-Type': 'application/json'
         },
@@ -38,7 +41,10 @@ function SignUp() {
 
   return (
     <div className='signUp'>
-      <h2>Register to EMS</h2>
+      <h2>
+      <p onClick={()=>window.location.reload()}> &larr;</p>
+        
+        <span> Register to EMS</span></h2>
       <form onSubmit={handleSubmit(onSignUp)}>
         <input
           name='email'

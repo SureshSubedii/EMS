@@ -18,7 +18,7 @@ function LogIn() {
 
   const onLogin = async (data) => {
     try {
-      const response = await axios.post('http://192.168.18.177:5000/userLogin', data, {
+      const response = await axios.post('http://192.168.18.177:5000/api/v1/user/userLogin', data, {
         headers: {
           'Content-Type': 'application/json',
         },

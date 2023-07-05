@@ -20,7 +20,7 @@ function Admin() {
 
   const onLogin = async (data) => {
     try {
-      const response = await axios.post('http://192.168.18.177:5000/loginAdmin', data, {
+      const response = await axios.post('http://192.168.18.177:5000/api/v1/user/adminLogin', data, {
         headers: {
           'Content-Type': 'application/json',
         },
@@ -34,16 +34,25 @@ function Admin() {
         sessionStorage.setItem('admin', true);
         dispatch(AdminLog());
         dispatch(login(sessionStorage.getItem('authToken')));
+        sessionStorage.setItem("uploader",fetchedResults.uploader)
         navigate('/');
       }
     } catch (err) {
-      alert(err);
+      if (err.response && err.response.data && err.response.data.error) {
+        alert(err.response.data.error);
+      } else {
+        alert(err.message);
+      }
     }
   };
 
   return (
     <div className='admin'>
-      <h2>Admin</h2>
+
+      <h2> 
+      <p onClick={()=>navigate('/*')}> &larr;</p>
+        
+       <span>Admin </span> </h2>
       <form onSubmit={handleSubmit(onLogin)}>
         <input
           name='email'

@@ -1,11 +1,19 @@
 import { Avatar } from '@mui/material'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { adminCheck } from '../stateManagement/userSlice'
 import '../styles/sidebar.css'
 
 function Sidebar() {
+  const [username,setUsername]=useState('');
+  useEffect(() => {
+    setUsername(sessionStorage.getItem('uploader'))
+    
+  
+ 
+  }, [])
+  
   const admin=useSelector(adminCheck)
   const navigate=useNavigate();
   return (
@@ -13,8 +21,10 @@ function Sidebar() {
     <div className="sidebar">
       <div className="user">
         <Avatar className='avatar'/>
-      <h1 className='username'>{sessionStorage.getItem('uploader')}
-</h1>
+      <h1 className='username'>{username}
+      {admin && <p>(Admin)</p>}
+      
+      </h1>
 
 
       </div>
