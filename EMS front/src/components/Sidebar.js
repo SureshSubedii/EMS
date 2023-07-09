@@ -1,3 +1,8 @@
+import { AddToPhotos } from '@mui/icons-material'
+import AlignHorizontalCenterOutlinedIcon from '@mui/icons-material/AlignHorizontalCenterOutlined'
+import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
+import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'
+import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -28,11 +33,21 @@ function Sidebar() {
 
 
       </div>
-            <p className='sidebar_items' onClick={()=>navigate("/")}>Products</p>
-            <p className='sidebar_items' onClick={()=>navigate("/addProduct")}>Add Products</p>
-            <p className="sidebar_items">Your Products</p>
-            <p className="sidebar_items">Category</p>
-            <p className='sidebar_items'>Cart</p>
+            <p className='sidebar_items' onClick={()=>navigate("/")}>
+              <DeckOutlinedIcon/>
+              Products</p>
+            <p className='sidebar_items' onClick={()=>navigate("/addProduct")}>
+              <AddToPhotos/>
+              Add Products</p>
+            <p className="sidebar_items">
+              <AlignHorizontalCenterOutlinedIcon/>
+              Your Products</p>
+            <p className="sidebar_items">
+              <CategoryOutlinedIcon/>
+              Category</p>
+            <p className='sidebar_items'>
+              <ShoppingCartOutlinedIcon/>
+              Cart</p>
 
             {admin &&<p className='sidebar_items'>User Management</p>}
 

@@ -16,6 +16,13 @@
     height: fit-content;
     border-bottom: 1px solid grey;
     padding: 10px;
+    display: flex;
+    align-items: center;
+    color:rgb(56, 54, 54)
+}
+.sidebar_items>.MuiSvgIcon-root{
+    color: rgb(6, 6, 81);
+    margin-right: 5px;
 }
 .user{
     display: flex;

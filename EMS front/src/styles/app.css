@@ -1,5 +1,5 @@
 .app_header{
-    background-color: rgb(107, 0, 113);
+    background:linear-gradient(to right,rgb(113, 3, 119),rgb(156, 33, 156)); 
     color:white;
     display: flex;
     position: sticky;

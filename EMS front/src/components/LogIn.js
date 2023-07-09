@@ -24,7 +24,7 @@ function LogIn() {
         },
       });
 
-      const fetchedResults = response.data;
+      const fetchedResults = response.data; 
 
       if (fetchedResults?.error) {
         alert(fetchedResults.error);
