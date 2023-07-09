@@ -37,4 +37,29 @@ const addPRoduct=async(req,res)=>{
     }
 
 }
-export { addPRoduct, upload }
+
+const getAllProduct=(req,res)=>{
+  Product.find()
+  .then(data=>res.status(200).send(data))
+  .catch(err=>res.status(500).send(err))
+
+}
+const getProdPhoto= async(req,res)=>{
+  try {
+    // console.log(req.params.pid)
+    const prodPhoto = await Product.findById(req.params.pid).select('image');
+
+    if (prodPhoto.image.data) {
+        res.set('Content-type', prodPhoto.image.contentType);
+        return res.status(200).send(prodPhoto.image.data)
+    }
+
+} catch (error) {
+    res.status(500).send({
+        success: false,
+        message: "photo fetch unsuccess",
+    })
+}
+}
+export { addPRoduct, getAllProduct, getProdPhoto, upload }
+

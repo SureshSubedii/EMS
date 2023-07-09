@@ -1,0 +1,14 @@
+.products{
+    display: flex;
+    flex-wrap: wrap;
+
+
+}
+.items{
+    background-color: rgb(166, 178, 178);
+    margin:8px;
+    
+}
+.products>img{
+    width:50px
+}
