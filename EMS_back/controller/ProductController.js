@@ -46,7 +46,7 @@ const getAllProduct=(req,res)=>{
 }
 const getProdPhoto= async(req,res)=>{
   try {
-    // console.log(req.params.pid)
+    console.log(req.params.pid)
     const prodPhoto = await Product.findById(req.params.pid).select('image');
 
     if (prodPhoto.image.data) {
