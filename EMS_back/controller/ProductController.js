@@ -44,22 +44,24 @@ const getAllProduct=(req,res)=>{
   .catch(err=>res.status(500).send(err))
 
 }
-const getProdPhoto= async(req,res)=>{
+const getProdPhoto = async (req, res) => {
   try {
-    console.log(req.params.pid)
     const prodPhoto = await Product.findById(req.params.pid).select('image');
 
     if (prodPhoto.image.data) {
-        res.set('Content-type', prodPhoto.image.contentType);
-        return res.status(200).send(prodPhoto.image.data)
+      const base64Image = prodPhoto.image.data.toString('base64');
+      const imageData = `data:${prodPhoto.image.contentType};base64,${base64Image}`;
+      
+      res.set('Content-Type', prodPhoto.image.contentType);
+      return res.status(200).send(imageData);
     }
-
-} catch (error) {
+  } catch (error) {
+    console.error('Error fetching photo:', error);
     res.status(500).send({
-        success: false,
-        message: "photo fetch unsuccess",
-    })
-}
-}
+      error: 'Failed to fetch photo',
+    });
+  }
+};
+
 export { addPRoduct, getAllProduct, getProdPhoto, upload }
 
