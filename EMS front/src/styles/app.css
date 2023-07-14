@@ -1,5 +1,5 @@
 .app_header{
-    background:linear-gradient(to right,rgb(113, 3, 119),rgb(156, 33, 156)); 
+    background:linear-gradient(to right,rgb(156, 33, 156),rgb(51, 23, 23)); 
     color:white;
     display: flex;
     position: sticky;
@@ -35,7 +35,8 @@ body{
     background-color: blue;
     color:white;
     font-weight: bold;
-    margin:2px
+    margin:2px;
+    cursor: pointer;
 
 }
 

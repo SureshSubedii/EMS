@@ -1,9 +1,10 @@
 import express from 'express';
-import { addPRoduct, getAllProduct, getProdPhoto, upload } from '../controller/ProductController.js';
+import formidable from 'express-formidable';
+import { addProduct, getAllProducts, getProductPhoto } from '../controller/ProductController.js';
 const router=express.Router();
 
-router.post('/addProduct',upload,addPRoduct);
-router.get('/getAllProducts',getAllProduct);
-router.get('/getProductPhoto/:pid', getProdPhoto);
+router.post('/addProduct',formidable(),addProduct);
+router.get('/getAllProducts',getAllProducts);
+router.get('/getProductPhoto/:pid', getProductPhoto);
 
 export default router

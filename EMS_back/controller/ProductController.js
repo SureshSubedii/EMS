@@ -1,67 +1,53 @@
-import multer from 'multer'
-import Product from '../schemas/ProductSchema.js'
+import fs from 'fs';
+import Product from '../schemas/ProductSchema.js';
 
+const addProduct = async (req, res) => {
+  console.log(req.fields.productName);
 
-//Multer Configuration for Photo Uploads
-const storage=multer.diskStorage({
-    destination:'images',
-    filename:(req,file,cb)=>{
-        cb(null,file.originalname)
-    }
-})
-
-const upload=multer({
-    storage:storage,
-
-}).single("image")
-
-
-const addPRoduct=async(req,res)=>{
-    const productData = req.body;
-    try {
-      const product = await Product.create({
-        name: productData.productName,
-        description: productData.description,
-        price: productData.price,
-        category: productData.categorySelect,
-        image: {
-          data: req.file.filename,
-          contentType: 'image/png',
-        },
-        uploader:productData.uploader
-      });
-  
-      res.status(201).json({ message: 'Product added successfully' });
-    } catch (error) {
-      res.status(500).json({ error: 'Failed to add product' });
-    }
-
-}
-
-const getAllProduct=(req,res)=>{
-  Product.find()
-  .then(data=>res.status(200).send(data))
-  .catch(err=>res.status(500).send(err))
-
-}
-const getProdPhoto = async (req, res) => {
+  const productData = req.fields;
   try {
-    const prodPhoto = await Product.findById(req.params.pid).select('image');
+    const product = new Product({
+      name: productData.productName,
+      description: productData.description,
+      price: productData.price,
+      category: productData.categorySelect,
+      uploader: productData.uploader,
+      photo: {
+        data: fs.readFileSync(req.files.image.path),
+        contentType: req.files.image.type,
+      },
+    });
 
-    if (prodPhoto.image.data) {
-      const base64Image = prodPhoto.image.data.toString('base64');
-      const imageData = `data:${prodPhoto.image.contentType};base64,${base64Image}`;
-      
-      res.set('Content-Type', prodPhoto.image.contentType);
-      return res.status(200).send(imageData);
+    await product.save();
+
+    res.status(201).json({ message: 'Product added successfully' });
+  }
+   catch (error) {
+    res.status(500).json({ error: 'Failed to add product' });
+  }
+};
+
+
+const getAllProducts = (req, res) => {
+  Product.find()
+    .then((data) => res.status(200).send(data))
+    .catch((err) => res.status(500).send(err));
+};
+
+const getProductPhoto = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.pid).select('photo');
+
+    if (product.photo && product.photo.data) {
+      res.set('Content-Type', product.photo.contentType);
+      return res.status(200).send(product.photo.data);
     }
   } catch (error) {
-    console.error('Error fetching photo:', error);
+    console.error(error);
     res.status(500).send({
-      error: 'Failed to fetch photo',
+      error: 'Failed to fetch product photo',
     });
   }
 };
 
-export { addPRoduct, getAllProduct, getProdPhoto, upload }
-
+export { addProduct, getAllProducts, getProductPhoto };

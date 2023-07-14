@@ -33,20 +33,23 @@ function AddProducts() {
       });
 
       const fetchedResults = response.data;
-      if (fetchedResults.error && fetchedResults.error.message) {
-        alert(fetchedResults.error.message);
+      if (fetchedResults?.message) {
+        alert(fetchedResults.message);
       }
-      else if(fetchedResults.message){
-        alert(fetchedResults.message)
-        navigate("/")
- 
-
-      }
+      
     } catch (err) {
-      alert(err);
       console.log(err);
-    }
-  };
+      if (err.response && err.response.data && err.response.data.error) {
+        alert(err.response.data.error);
+      } 
+      else {
+        alert(err.message);
+      }
+  }
+  navigate("/")
+
+}
+
 
   const onFileChange = (e) => {
     const file = e.target.files[0];
