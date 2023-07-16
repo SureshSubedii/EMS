@@ -25,7 +25,7 @@ function Products() {
           <div className="items" key={product._id}>
             <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
             <div className="product_details">
-            <h2>{product.name}</h2>
+            <h2>{product.name.slice(0,15)} {product.name[15]?"...":""}</h2>
             {/* <p>{product.description}</p> */}
             <h3>Rs.{product.price}</h3>
             <button>Add to cart</button>
