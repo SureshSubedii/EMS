@@ -22,7 +22,6 @@ function Sidebar() {
   const admin=useSelector(adminCheck)
   const navigate=useNavigate();
   return (
-    <> 
     <div className="sidebar">
       <div className="user">
         <Avatar className='avatar'/>
@@ -55,7 +54,6 @@ function Sidebar() {
 
     </div>
 
-            </>
 
   )
 }

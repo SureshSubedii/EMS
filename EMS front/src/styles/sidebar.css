@@ -1,8 +1,11 @@
 .sidebar{
+    position: sticky;
+    top:0;
     display: flex;
     flex: 0.7;
     flex-direction: column;
-    position: sticky !important;
+    border-right: 0.9px solid rgb(156, 150, 150);
+    min-height: 100vh; 
     
 
 }
@@ -56,8 +59,9 @@ cursor: pointer;
 @media screen and (max-width:350px)  {
     .sidebar_items{
         margin:3px;
-        font-size:7px;
-        padding: 3px;
+        font-size:8px;
+        padding: 2px;
+        font-weight: 700;
 
     }
     .user{
@@ -72,4 +76,19 @@ cursor: pointer;
     }
     
 
+}
+@media screen and (max-height:375px){
+    .sidebar_items{
+        font-size: 15px;
+    margin: 0px;
+    padding: 2px;
+
+
+
+    }
+    .username{
+        margin:2px;
+        font-size: 18px;
+    }
+    
 }
