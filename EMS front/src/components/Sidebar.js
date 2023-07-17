@@ -2,6 +2,7 @@ import { AddToPhotos } from '@mui/icons-material'
 import AlignHorizontalCenterOutlinedIcon from '@mui/icons-material/AlignHorizontalCenterOutlined'
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Avatar } from '@mui/material'
 import React, { useEffect, useState } from 'react'
@@ -48,7 +49,9 @@ function Sidebar() {
               <ShoppingCartOutlinedIcon/>
               Cart</p>
 
-            {admin &&<p className='sidebar_items'>User Management</p>}
+            {admin &&<p className='sidebar_items' onClick={()=>navigate("/userManagement")}>
+              <ManageAccountsIcon/>
+              User Management</p>}
 
 
 

@@ -1,0 +1,14 @@
+.usersManagement{
+    margin:20px
+}
+.tableList{
+
+    border-collapse: collapse;
+    width: 80vw;
+}
+.tableList td{
+    padding: 4px;
+}
+.tableList>tbody>tr>td:first-child{
+    text-align: center;
+}
