@@ -24,17 +24,23 @@ function SignUp() {
       });
 
       const fetchedResults = response.data;
-      if (fetchedResults?.error) {
-        alert(fetchedResults.error);
-      } else if (fetchedResults?.token) {
+      console.log(fetchedResults.success)
+      if (fetchedResults.success) {
+        alert(fetchedResults.success);
+      } 
+      // else if (fetchedResults?.token) {
         sessionStorage.setItem('authToken', fetchedResults.token);
         dispatch(login(sessionStorage.getItem('authToken')));
-      }
+      // }
     sessionStorage.setItem('uploader', fetchedResults.uploader);
 
-    } catch (error) {
-      console.error(error);
-      alert(error);
+    } catch (err) {
+      console.log(err)
+      if (err.response && err.response.data && err.response.data.error) {
+        alert(err.response.data.error);
+      } else {
+        alert(err.message);
+      }
     }
 
   };

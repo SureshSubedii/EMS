@@ -40,22 +40,28 @@ const userSignUp=async(req,res)=>{
     if(checkUser){
         return res.status(409).json({"error":"User Already Exists"})
     }
-    const salt= await bcrypt.genSalt(10);
-    const protectedPass= await bcrypt.hash(userCredentials.password,salt);
-
-    const createUSer=await User.create({
-        email:userCredentials.email,
-        name:userCredentials.name,
-        password:protectedPass,
-        contact:userCredentials.contact,
-        address:userCredentials.address
-    })
-   
-    const token=jwt.sign({id:createUSer._id},"s4589454988@asd&^%asd1asd2##");
-    res.status(201).json({token,"uploader":checkUser.name})
+    else{
+        const salt= await bcrypt.genSalt(10);
+        const protectedPass= await bcrypt.hash(userCredentials.password,salt);
+    
+        const createUser=await User.create({
+            email:userCredentials.email,
+            name:userCredentials.name,
+            password:protectedPass,
+            contact:userCredentials.contact,
+            address:userCredentials.address
+        })
+        const token=jwt.sign({id:createUser._id},"s4589454988@asd&^%asd1asd2##");
+    
+        res.status(201).json({token,"uploader":createUser.name,"success":"Sucessfully Registered"})
     }
+   
+   
+
+    }
+
     catch(err){
-        res.status(500).send(err);
+        res.status(500).send({"error":"Internal Server Error"});
     } 
 }
 
