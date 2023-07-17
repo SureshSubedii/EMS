@@ -93,6 +93,19 @@ const userSignUp=async(req,res)=>{
     
         }
 
+        const manageUSer=(req,res)=>{
+            User.find().then(data=>{
+                res.status(200).send(data)
+            })
+            .catch((err)=>{
+                
+                console.log(err)
+                res.status(500).send("Internal Server Error")
+     
+            })
 
-export { adminLogin, userLogin, userSignUp };
+        }
+
+
+export { adminLogin, manageUSer, userLogin, userSignUp };
 
