@@ -1,14 +1,46 @@
+
 .usersManagement{
-    margin:20px
+    width:100%
 }
 .tableList{
 
     border-collapse: collapse;
-    width: 80vw;
+    width: 85%;
+    margin:20px;
+
+
 }
 .tableList td{
     padding: 4px;
 }
-.tableList>tbody>tr>td:first-child{
+.tableList>tbody>tr>td:first-child,td:nth-child(3){
     text-align: center;
+    }
+.tableList>tbody>tr>td:nth-child(3):hover{
+    background-color: aliceblue;
+    cursor: pointer;
+        }   
+
+@media   screen and (max-width:1460px){
+    .tableList{
+        margin:10px;
+    
+    
+        }
+
+}
+@media   screen and (max-width:390px){
+    .tableList{
+    margin:3px;
+
+
+    }
+
+    .tableList td{
+    padding: 1px;
+    font-size: 10px;
+
+
+    }
+
 }
