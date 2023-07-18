@@ -6,16 +6,33 @@ import '../styles/userManagement.css';
 function UsersManagement() {
   const [users,setUsers]=useState([]);
 
-  const deleteUSer=()=>{
-    
-  }
+  const deleteUSer=(uid)=>{
+    const ans=window.confirm("Are you sure?")
+    if(ans){
+      axios.delete(`http://192.168.18.177:5000/api/v1/user/manageUser/deleteUSer/${uid}`)
+      .then(response=>{
+        alert(response.data.success)
+         window.location.reload()
+
+      })
+      .catch(err=>{
+        if (err.response && err.response.data && err.response.data.error) {
+          alert(err.response.data.error);
+        } else {
+          alert(err.message);
+        }}
+      )
+      
+    }
+
+    }
+   
 
   useEffect(()=>{
-  axios.get("http://192.168.18.177:5000/api/v1/user/manageUser").then(data=>{
-    console.log(data.data)
-    setUsers(data.data)
+  axios.get("http://192.168.18.177:5000/api/v1/user/manageUser").then(response=>{
+    setUsers(response.data)
   } )
-  .catch(err=>alert(err))
+  .catch(()=>alert("Error in fetching users"))
 
   },[])
   return (
@@ -34,7 +51,7 @@ function UsersManagement() {
         <tr key={user._id}>
           <td>{index+1}.</td>
           <td>{user.email} </td>
-          <td onClick={deleteUSer}><DeleteForeverIcon/></td>
+          <td onClick={()=>deleteUSer(user._id)}><DeleteForeverIcon/></td>
         </tr>
     
      )) }

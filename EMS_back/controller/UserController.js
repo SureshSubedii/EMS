@@ -103,9 +103,17 @@ const userSignUp=async(req,res)=>{
                 res.status(500).send("Internal Server Error")
      
             })
+        }
+        const deleteUSer=(req,res)=>{
+            const userId=req.params.uid
+            User.deleteOne({_id:userId}).then(()=>{
+            res.status(200).json({"success":"Deleted Sucessfully"})
 
+            }
+             )
+             .catch(()=>res.status(500).json({error:"Eror in deleting user!"}))
+            
         }
 
-
-export { adminLogin, manageUSer, userLogin, userSignUp };
+export { adminLogin, deleteUSer, manageUSer, userLogin, userSignUp };
 

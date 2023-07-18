@@ -1,7 +1,7 @@
 .products{
     display: flex;
     flex-wrap: wrap;
-    margin-left: 3%;
+    margin-left: 2.5%;
     align-content: flex-start;
     width:100%;
 
@@ -15,7 +15,7 @@
     align-items: center;
     width:15vw;
     background-color: rgb(245, 245, 245);
-    margin:12px;
+    margin:11px;
     height: auto;
     border-radius: 10px;
 }
