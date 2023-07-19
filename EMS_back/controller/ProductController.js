@@ -51,20 +51,45 @@ const getProductPhoto = async (req, res) => {
   }
 };
 
-const addToCart=(req,res)=>{
-  const {name,id,description,price}=req.body
-  console.log(req.body.name)
-  const cart =new Cart({
-    ...req.body
+const addToCart=async (req,res)=>{
+  const check= await Cart.findOne({pid:req.body.pid,userId:req.body.userId})
+  console.log(req.body.pid,req.body.userId)
+  console.log(check)
+  if(check){
+    res.json({"success":"Product is already in the cart"})
+  }
+  else{
+    const cart =new Cart({
+      ...req.body
+  
+    })
+    cart.save().then(()=>{
+      res.json({"success":"Added to cart"})
+    })
+    .catch(err=>res.status(500).json({"error":"Internal Server Error"}))
 
-  })
-  cart.save().then(()=>{
-    res.json({"success":"Added to cart"})
-  })
-  .catch(err=>res.status(500).json({"Error":"Internal Server Error"}))
+  }
+  
   }
 
+  const showCart=async (req,res)=>{
+    try{
+      const check= await Cart.find({userId:req.params.userId})
+      if(check){
+        res.send(check)
+      }
+      else{
+        res.status(404).send("Nothing on the cart")
+      }
+    }
+      catch(err){
+        res.status(500).json({"error":"Internal Server Error"})
+      }
+
+    }
+   
 
 
-export { addProduct, addToCart, getAllProducts, getProductPhoto };
+
+export { addProduct, addToCart, getAllProducts, getProductPhoto, showCart };
 

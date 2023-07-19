@@ -14,17 +14,21 @@ function Products() {
     }
   }
 
-  const handleAddToCart= async(name,price,description)=>{
+  const handleAddToCart= async(name,price,description,pid,category)=>{
     
 
-const id=sessionStorage.getItem("userId")
-    console.log(name,price,description,id)
+const userId=sessionStorage.getItem("userId")
+    // console.log(name,price,description,id)
     try {
       const formData = new FormData();
     formData.append('name',name)
     formData.append('price',price)
     formData.append('description',description)
-    formData.append('id',id)
+    formData.append('userId',userId)
+    formData.append('pid',pid)
+    formData.append('category',category)
+
+
 
       const response = await axios.post('http://192.168.18.177:5000/api/v1/product/addToCart',formData,
       {
@@ -63,7 +67,7 @@ const id=sessionStorage.getItem("userId")
             <div className="product_details">
             <h2>{product.name.slice(0,15)} {product.name[15]?"...":""}</h2>
             <h3>Rs.{product.price}</h3>
-            <button onClick={()=>handleAddToCart(product.name,product.price,product.description)}>Add to cart</button>
+            <button onClick={()=>handleAddToCart(product.name,product.price,product.description,product._id,product.category)}>Add to cart</button>
             </div>
           
          

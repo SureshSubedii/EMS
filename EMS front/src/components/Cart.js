@@ -22,29 +22,34 @@ function Cart() {
     });
   };
 
-  const getProducts = async () => {
+  const getCart = async () => {
     try {
-      const response = await axios.get('http://192.168.18.177:5000/api/v1/product/getAllProducts');
+      const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(0));
     } catch (error) {
-      console.error('Error fetching products:', error);
+      console.error('Error fetching cart:', error);
     }
   };
 
   useEffect(() => {
-    getProducts();
+    getCart();
   }, []);
 
   return (
     <>
     <h1 align="center">YOUR CART</h1>
+    {products.length===0 && 
+    <h2 align="center">CART is Empty!</h2>
+        
+        }
+
 
       <div className='cart'>
         {products?.map((product, index) => {
           return (
-            <div className="cart_items" key={product._id}>
-              <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
+            <div className="cart_items" key={product.pid}>
+              <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product.pid}`} alt={product.name} />
               <div className="product_details">
                 <h2>{product.name.slice(0, 15)} {product.name[15] ? "..." : ""}</h2>
                 <h3>Rs.{product.price}</h3>
@@ -58,6 +63,7 @@ function Cart() {
             </div>
           );
         })}
+      
       </div>
     </>
   );
