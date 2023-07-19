@@ -39,6 +39,8 @@ function Cart() {
 
   return (
     <>
+    <h1 align="center">YOUR CART</h1>
+
       <div className='cart'>
         {products?.map((product, index) => {
           return (

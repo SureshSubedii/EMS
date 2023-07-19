@@ -19,7 +19,7 @@ function Sidebar() {
     const selectedElement = document.querySelector('.selected');
 
     if (selectedElement) {
-      selectedElement.classList.remove("selected");
+      selectedElement.classList.toggle("selected");
     }
     
     const sidebarItems = document.querySelectorAll('.sidebar_items');

@@ -5,6 +5,7 @@ import { adminCheck } from '../stateManagement/userSlice'
 import '../styles/appcontents.css'
 import AddProducts from './AddProducts'
 import Cart from './Cart'
+import Category from './Category'
 import Products from './Products'
 import UserManagement from './UsersManagement'
 
@@ -22,8 +23,9 @@ function Appcontents() {
         <Route  path="/addProduct" element={<AddProducts/>}/>
         {admin && <Route  path="/userManagement" element={<UserManagement/>}/>}
         <Route  path="/cart" element={<Cart/>}/>
+        <Route  path="/category" element={<Category/>}/>
 
-        {/* <Route  path="/yourproducts" element={<UserManagement/>}/> */}
+
 
           
             </Routes>

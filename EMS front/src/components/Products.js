@@ -19,6 +19,9 @@ function Products() {
   }, []);
 
   return (
+    <>
+        <h1 align="center">PRODUCTS</h1>
+
     <div className='products'>
       {products?.map((product) => {
         return (
@@ -36,6 +39,8 @@ function Products() {
         );
       })}
     </div>
+    </>
+
   );
 }
 

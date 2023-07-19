@@ -1,6 +1,6 @@
 .appcontents{
     flex: 4;
-    display: flex;
+    /* display: flex; */
     height: 100%;
 }
 /* .line {
