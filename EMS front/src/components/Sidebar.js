@@ -12,6 +12,34 @@ import { adminCheck } from '../stateManagement/userSlice'
 import '../styles/sidebar.css'
 
 function Sidebar() {
+  const admin=useSelector(adminCheck)
+  const navigate=useNavigate();
+
+  const toggle=(cpath,i)=>{
+    const selectedElement = document.querySelector('.selected');
+
+    if (selectedElement) {
+      selectedElement.classList.remove("selected");
+    }
+    
+    const sidebarItems = document.querySelectorAll('.sidebar_items');
+
+sidebarItems.forEach((item,index )=> {
+  if(index===i){
+  item.classList.add("selected");
+
+  
+  navigate(`/${cpath}`);
+
+
+
+  }
+
+});
+
+    
+
+  }
   const [username,setUsername]=useState('');
   useEffect(() => {
     setUsername(sessionStorage.getItem('uploader'))
@@ -20,8 +48,7 @@ function Sidebar() {
  
   }, [])
   
-  const admin=useSelector(adminCheck)
-  const navigate=useNavigate();
+  
   return (
     <div className="sidebar">
       <div className="user">
@@ -33,23 +60,23 @@ function Sidebar() {
 
 
       </div>
-            <p className='sidebar_items' onClick={()=>navigate("/")}>
+            <p className='sidebar_items' onClick={()=>toggle("",0)}>
               <DeckOutlinedIcon/>
               Products</p>
-            <p className='sidebar_items' onClick={()=>navigate("/addProduct")}>
+            <p className='sidebar_items' onClick={()=>toggle("addProduct",1)}>
               <AddToPhotos/>
               Add Products</p>
-            <p className="sidebar_items">
+            <p className="sidebar_items" onClick={()=>toggle("yourProducts",2)}>
               <AlignHorizontalCenterOutlinedIcon/>
               Your Products</p>
-            <p className="sidebar_items">
+            <p className="sidebar_items" onClick={()=>toggle("category",3)}>
               <CategoryOutlinedIcon/>
               Category</p>
-            <p className='sidebar_items'>
+            <p className='sidebar_items' onClick={()=>toggle("cart",4)}>
               <ShoppingCartOutlinedIcon/>
               Cart</p>
 
-            {admin &&<p className='sidebar_items' onClick={()=>navigate("/userManagement")}>
+            {admin &&<p className='sidebar_items' onClick={()=>toggle("userManagement",5)}>
               <ManageAccountsIcon/>
               User Management</p>}
 

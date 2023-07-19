@@ -5,11 +5,14 @@
     flex: 0.7;
     flex-direction: column;
     border-right: 0.9px solid rgb(156, 150, 150);
-    min-height: 100vh; 
     
 
 }
+.selected{
+background-color: rgb(253, 242, 242);
 
+
+}
 .sidebar_items{
     margin: 5px;
     white-space: nowrap;
@@ -40,6 +43,11 @@
 background-color: rgb(255, 255, 255);
 cursor: pointer;
 }
+.selected{
+    background-color: rgb(151, 175, 174);
+    
+    
+    }
 
 @media screen and (max-width:600px)  {
     .sidebar_items{
