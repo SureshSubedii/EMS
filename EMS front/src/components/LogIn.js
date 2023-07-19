@@ -33,6 +33,8 @@ function LogIn() {
         dispatch(login(sessionStorage.getItem('authToken')));
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
+      sessionStorage.setItem('userId', fetchedResults.userId);
+
 
     } catch (err) {
       console.error(err);

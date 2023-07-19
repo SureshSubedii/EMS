@@ -1,4 +1,5 @@
 import fs from 'fs';
+import Cart from '../schemas/CartSchema.js';
 import Product from '../schemas/ProductSchema.js';
 
 const addProduct = async (req, res) => {
@@ -50,4 +51,20 @@ const getProductPhoto = async (req, res) => {
   }
 };
 
-export { addProduct, getAllProducts, getProductPhoto };
+const addToCart=(req,res)=>{
+  const {name,id,description,price}=req.body
+  console.log(req.body.name)
+  const cart =new Cart({
+    ...req.body
+
+  })
+  cart.save().then(()=>{
+    res.json({"success":"Added to cart"})
+  })
+  .catch(err=>res.status(500).json({"Error":"Internal Server Error"}))
+  }
+
+
+
+export { addProduct, addToCart, getAllProducts, getProductPhoto };
+

@@ -18,7 +18,7 @@ const userLogin =async(req,res)=>{
             const pass= await bcrypt.compare(userCredentials.password,checkUser.password);
             if(pass){
                     const token=jwt.sign({id:checkUser._id},"s4589454988@asd&^%asd1asd2##");
-                    res.status(200).json({token,"uploader":checkUser.name})
+                    res.status(200).json({token,"uploader":checkUser.name,"userId":checkUser._id})
 
                 }
                 else{
