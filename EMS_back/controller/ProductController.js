@@ -54,7 +54,6 @@ const getProductPhoto = async (req, res) => {
 
 const addToCart=async (req,res)=>{
   const check= await Cart.findOne({pid:req.body.pid,userId:req.body.userId})
-  console.log(req.body.pid,req.body.userId)
   console.log(check)
   if(check){
     res.json({"success":"Product is already in the cart"})

@@ -21,18 +21,12 @@ function Sidebar() {
     if (selectedElement) {
       selectedElement.classList.toggle("selected");
     }
-    
     const sidebarItems = document.querySelectorAll('.sidebar_items');
 
-sidebarItems.forEach((item,index )=> {
-  if(index===i){
-  item.classList.add("selected");
-
-  
-  navigate(`/${cpath}`);
-
-
-
+     sidebarItems.forEach((item,index )=> {
+    if(index===i){
+      item.classList.add("selected");
+     navigate(`/${cpath}`);
   }
 
 });

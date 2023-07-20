@@ -3,7 +3,8 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { SignUpButton, login } from '../stateManagement/userSlice';
+import { AdminLog, SignUpButton, login } from '../stateManagement/userSlice';
+
 import '../styles/login.css';
 import Spinner from './Spinner';
 
@@ -35,6 +36,10 @@ function LogIn() {
       } else if (fetchedResults?.token) {
         sessionStorage.setItem('authToken', fetchedResults.token);
         dispatch(login(sessionStorage.getItem('authToken')));
+      }
+      if(fetchedResults.admin){
+        sessionStorage.setItem('admin', true);
+        dispatch(AdminLog());
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
       sessionStorage.setItem('userId', fetchedResults.userId);

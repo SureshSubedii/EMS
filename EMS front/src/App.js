@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 // import PhotoUpload from "./components/PhotoUpload.js"
 import { useDispatch, useSelector } from "react-redux";
 import { Route, Routes, useNavigate } from "react-router-dom";
-import Admin from "./components/Admin";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
@@ -40,12 +39,14 @@ function App() {
         <div title="E-commerce Management System" className="app_header">
           <h1>EMS</h1>
           <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
-          <button className="header_button" onClick={() => navigate("/admin")} >Admin Login</button> {/* Add onClick event handler */}
+          {/* <button className="header_button" onClick={() => navigate("/admin")} >Admin Login</button>  */}
           {user && (
             <button className="header_button" onClick={() => { 
             dispatch(logout()); 
             sessionStorage.removeItem("authToken");
             sessionStorage.removeItem('admin');
+            sessionStorage.removeItem('uploader');
+
             dispatch(AdminLogOut());
            }}>LogOut</button>
           )}
@@ -54,7 +55,7 @@ function App() {
         <div className="app_body">
           <Routes>
             <Route path="/*" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
-            <Route path="/admin" element={<Admin />} />
+            {/* <Route path="/admin" element={<Admin />} /> */}
           </Routes>
         </div>
       </div>

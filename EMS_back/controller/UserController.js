@@ -10,8 +10,23 @@ const userLogin =async(req,res)=>{
     try{
        const userCredentials=req.body;
         let checkUser= await User.findOne({email:userCredentials.email})
-        if(!checkUser){
+        let checkAdmin=await Admin.findOne({email:userCredentials.email})
+        if(!checkUser && !checkAdmin){
             res.status(404).json({"error":"Login with the correct credentials"});
+        }
+
+        else if(checkAdmin){
+            const comparePass= await bcrypt.compare(userCredentials.password,checkAdmin.password);
+            if(comparePass){
+            const token = jwt.sign({id:checkAdmin._id},"s4589454988@asd&^%asd1asd2##");
+            res.status(200).json({token,"uploader":checkAdmin.name,"admin":true,"userId":checkAdmin._id});
+    
+    
+            }
+            else{
+                res.json({"error":"Login with correct credentials"})
+            }
+
         }
         
         else{
@@ -66,32 +81,32 @@ const userSignUp=async(req,res)=>{
 }
 
 
-   const adminLogin =async(req,res)=>{
-        const adminCredentials=req.body;
-        try{
-        const checkAdmin= await Admin.findOne({email:adminCredentials.email})
-        if(checkAdmin){
-            const comparePass= await bcrypt.compare(adminCredentials.password,checkAdmin.password);
-            if(comparePass){
-            const token = jwt.sign({id:checkAdmin._id},"dsfdsfd8943534");
-            res.status(200).json({token,"uploader":checkAdmin.name});
+//    const adminLogin =async(req,res)=>{
+//         const adminCredentials=req.body;
+//         try{
+//         const checkAdmin= await Admin.findOne({email:adminCredentials.email})
+//         if(checkAdmin){
+//             const comparePass= await bcrypt.compare(adminCredentials.password,checkAdmin.password);
+//             if(comparePass){
+//             const token = jwt.sign({id:checkAdmin._id},"dsfdsfd8943534");
+//             res.status(200).json({token,"uploader":checkAdmin.name});
     
     
-            }
-            else{
-                res.json({"error":"Login with correct credentials"})
-            }
-        }
-        else{
-            res.status(404).json({"error":"Login with correct credentials"})
+//             }
+//             else{
+//                 res.json({"error":"Login with correct credentials"})
+//             }
+//         }
+//         else{
+//             res.status(404).json({"error":"Login with correct credentials"})
     
     
-        }}
-        catch(error){
-            res.status(500).json({"error":`${error} Internal server Error`})
-        }
+//         }}
+//         catch(error){
+//             res.status(500).json({"error":`${error} Internal server Error`})
+//         }
     
-        }
+//         }
 
         const manageUSer=(req,res)=>{
             User.find().then(data=>{
@@ -115,5 +130,5 @@ const userSignUp=async(req,res)=>{
             
         }
 
-export { adminLogin, deleteUSer, manageUSer, userLogin, userSignUp };
+export { deleteUSer, manageUSer, userLogin, userSignUp };
 
