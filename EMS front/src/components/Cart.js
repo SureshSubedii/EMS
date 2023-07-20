@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../styles/cart.css';
+import Spinner from './Spinner';
 
 function Cart() {
   const [products, setProducts] = useState([]);
   const [counts, setCounts] = useState([]);
+  const [loading,setLoading]=useState(true);
+
 
   const decreaseCount = (index) => {
     setCounts((prevCounts) => {
@@ -24,11 +27,19 @@ function Cart() {
 
   const getCart = async () => {
     try {
+      setLoading(true)
+
       const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(0));
+      setLoading(false)
     } catch (error) {
+      setLoading(true)
+      alert("Error")
+
       console.error('Error fetching cart:', error);
+      setLoading(false)
+
     }
   };
 
@@ -43,6 +54,12 @@ function Cart() {
     <h2 align="center">CART is Empty!</h2>
         
         }
+         {loading && <div className="loader">
+    <Spinner/>
+    please wait...
+
+    </div> }
+
 
 
       <div className='cart'>

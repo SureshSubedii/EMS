@@ -5,9 +5,12 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { SignUpButton, login } from '../stateManagement/userSlice';
 import '../styles/login.css';
+import Spinner from './Spinner';
 
 function LogIn() {
   const [clicked, setClicked] = useState(false);
+  const [loading,setLoading]=useState(false);
+
   const dispatch = useDispatch();
 
   const {
@@ -18,6 +21,7 @@ function LogIn() {
 
   const onLogin = async (data) => {
     try {
+      setLoading(true)
       const response = await axios.post('http://192.168.18.177:5000/api/v1/user/userLogin', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -34,15 +38,20 @@ function LogIn() {
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
       sessionStorage.setItem('userId', fetchedResults.userId);
+      setLoading(false)
+
 
 
     } catch (err) {
-      console.error(err);
+      setLoading(true)
+
       if (err.response && err.response.data && err.response.data.error) {
         alert(err.response.data.error);
       } else {
         alert(err.message);
       }
+      setLoading(false)
+
     }
   };
 
@@ -78,6 +87,11 @@ function LogIn() {
           <input id='signUp' onClick={() => dispatch(SignUpButton())} type='button' value='SignUp' />
         </div>
       </form>
+      {loading && <div className="loader">
+    <Spinner/>
+    please wait...
+
+    </div>}
     </div>
   );
 }

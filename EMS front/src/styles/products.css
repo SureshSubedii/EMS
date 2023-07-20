@@ -7,6 +7,14 @@
 
 
 }
+.loader{
+    display:grid;
+    place-items: center;
+    color:rgb(255, 0, 0);
+    font-weight: 700;
+
+ 
+}
 .items{
     position: relative;
 

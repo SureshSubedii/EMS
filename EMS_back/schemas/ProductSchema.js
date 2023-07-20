@@ -1,5 +1,7 @@
 import mongoose from 'mongoose';
-const productSchema=mongoose.Schema({
+const { Schema } = mongoose;
+
+const productSchema=new Schema({
     name:String,
     photo:String,
     price:Number,
@@ -9,7 +11,11 @@ const productSchema=mongoose.Schema({
         data:Buffer,
         contentType:String
     },
-    uploader:String
+    uploader:String,
+    userId: {
+        type: Schema.Types.ObjectId,
+        required: true,
+      },
 
 })
 export default mongoose.model('product',productSchema);

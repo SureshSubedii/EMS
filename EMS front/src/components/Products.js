@@ -1,14 +1,20 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import '../styles/products.css';
+import Spinner from './Spinner';
 
 function Products() {
   const [products, setProducts] = useState([]);
+  const [loading,setLoading]=useState(true);
+
 
   const getProducts = async () => {
+    setLoading(true)
     try {
       const response = await axios.get('http://192.168.18.177:5000/api/v1/product/getAllProducts');
       setProducts(response.data);
+    setLoading(false)
+
     } catch (error) {
       console.error('Error fetching products:', error);
     }
@@ -58,8 +64,15 @@ const userId=sessionStorage.getItem("userId")
   return (
     <>
         <h1 align="center">PRODUCTS</h1>
+    {loading && <div className="loader">
+    <Spinner/>
+    please wait...
+
+    </div> }
+
 
     <div className='products'>
+
       {products?.map((product) => {
         return (
           <div className="items" key={product._id}>

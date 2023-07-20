@@ -15,7 +15,7 @@ function Appcontents() {
     <>
     
     <div className='appcontents'>
-    <div className="line"></div>
+    {/* <div className="line"></div> */}
 
 
          <Routes>

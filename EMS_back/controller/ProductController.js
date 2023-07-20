@@ -17,6 +17,7 @@ const addProduct = async (req, res) => {
         data: fs.readFileSync(req.files.image.path),
         contentType: req.files.image.type,
       },
+      userId:productData.userId
     });
 
     await product.save();

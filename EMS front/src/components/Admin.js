@@ -6,11 +6,14 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { AdminLog, login } from '../stateManagement/userSlice';
 import '../styles/admin.css';
+import Spinner from './Spinner';
 
 function Admin() {
   const [clicked, setClicked] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const [loading,setLoading]=useState(false);
+
 
   const {
     register,
@@ -20,6 +23,7 @@ function Admin() {
 
   const onLogin = async (data) => {
     try {
+      setLoading(true)
       const response = await axios.post('http://192.168.18.177:5000/api/v1/user/adminLogin', data, {
         headers: {
           'Content-Type': 'application/json',
@@ -37,12 +41,18 @@ function Admin() {
         sessionStorage.setItem("uploader",fetchedResults.uploader)
         navigate('/');
       }
+      setLoading(false)
+
     } catch (err) {
+      setLoading(true)
+
       if (err.response && err.response.data && err.response.data.error) {
         alert(err.response.data.error);
       } else {
         alert(err.message);
       }
+      setLoading(false)
+
     }
   };
 
@@ -80,6 +90,10 @@ function Admin() {
           <input type='submit' value='Login' />
         </div>
       </form>
+      {loading && <div className="loader">
+    <Spinner/>
+    please wait...
+    </div>}
     </div>
   );
 }
