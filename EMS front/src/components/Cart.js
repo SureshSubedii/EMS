@@ -32,6 +32,7 @@ function Cart() {
       const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(0));
+      
       setLoading(false)
     } catch (error) {
       setLoading(true)
@@ -85,5 +86,4 @@ function Cart() {
     </>
   );
 }
-
 export default Cart;

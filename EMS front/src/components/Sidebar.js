@@ -12,73 +12,72 @@ import { adminCheck } from '../stateManagement/userSlice'
 import '../styles/sidebar.css'
 
 function Sidebar() {
-  const admin=useSelector(adminCheck)
-  const navigate=useNavigate();
+  const admin = useSelector(adminCheck)
+  const navigate = useNavigate()
+  const [username, setUsername] = useState('')
 
-  const toggle=(cpath,i)=>{
-    const selectedElement = document.querySelector('.selected');
-
+  const toggle = (cpath, i) => {
+    const selectedElement = document.querySelector('.selected')
+    sessionStorage.setItem('selectedItemIndex', i)
     if (selectedElement) {
-      selectedElement.classList.toggle("selected");
+      selectedElement.classList.remove('selected')
     }
-    const sidebarItems = document.querySelectorAll('.sidebar_items');
-
-     sidebarItems.forEach((item,index )=> {
-    if(index===i){
-      item.classList.add("selected");
-     navigate(`/${cpath}`);
+    document.querySelectorAll('.sidebar_items')[i]?.classList.add('selected')
+    navigate(`/${cpath}`)
   }
 
-});
-
-    
-
-  }
-  const [username,setUsername]=useState('');
   useEffect(() => {
     setUsername(sessionStorage.getItem('uploader'))
-    
-  
- 
+    const storedIndex = sessionStorage.getItem('selectedItemIndex')
+
+    document.querySelectorAll('.sidebar_items')
+    [storedIndex].classList.add('selected')
+//     const element = document.querySelector('.sidebar .sidebar_items:nth-child(6)');
+// const dynamicData = 10; 
+// element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
+
   }, [])
-  
-  
+
   return (
-    <div className="sidebar">
-      <div className="user">
-        <Avatar className='avatar'/>
-      <h1 className='username'>{username}
-      {admin && <p>(Admin)</p>}
-      
-      </h1>
-
-
+    <div className='sidebar'>
+      <div className='user'>
+        <Avatar className='avatar' />
+        <h1 className='username'>
+          {username}
+          {admin && <p>(Admin)</p>}
+        </h1>
       </div>
-            <p className='sidebar_items' onClick={()=>toggle("",0)}>
-              <DeckOutlinedIcon/>
-              Products</p>
-            <p className='sidebar_items' onClick={()=>toggle("addProduct",1)}>
-              <AddToPhotos/>
-              Add Products</p>
-            <p className="sidebar_items" onClick={()=>toggle("yourProducts",2)}>
-              <AlignHorizontalCenterOutlinedIcon/>
-              Your Products</p>
-            <p className="sidebar_items" onClick={()=>toggle("category",3)}>
-              <CategoryOutlinedIcon/>
-              Category</p>
-            <p className='sidebar_items' onClick={()=>toggle("cart",4)}>
-              <ShoppingCartOutlinedIcon/>
-              Cart</p>
+      <p className='sidebar_items ' onClick={() => toggle('', 0)}>
+        <DeckOutlinedIcon />
+        Products
+      </p>
+      <p className='sidebar_items' onClick={() => toggle('addProduct', 1)}>
+        <AddToPhotos />
+        Add Products
+      </p>
+      <p className='sidebar_items' onClick={() => toggle('yourProducts', 2)}>
+        <AlignHorizontalCenterOutlinedIcon />
+        Your Products
+      </p>
+      <p className='sidebar_items' onClick={() => toggle('category', 3)}>
+        <CategoryOutlinedIcon />
+        Category
+      </p>
+      <p className='sidebar_items' onClick={() => toggle('cart', 4)}>
+        <ShoppingCartOutlinedIcon />
+        Cart
+      </p>
 
-            {admin &&<p className='sidebar_items' onClick={()=>toggle("userManagement",5)}>
-              <ManageAccountsIcon/>
-              User Management</p>}
-
-
-
+      {admin && (
+        <p
+          className='sidebar_items'
+          onClick={() => toggle('userManagement', 5)}
+        >
+          <ManageAccountsIcon />
+          User Management
+        </p>
+      )}
     </div>
-
-
   )
 }
 

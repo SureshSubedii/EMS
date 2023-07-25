@@ -1,5 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
+import { toast } from 'react-toastify';
 import '../styles/products.css';
 import Spinner from './Spinner';
 
@@ -19,6 +20,8 @@ function Products() {
 
     } catch (error) {
       console.error('Error fetching products:', error);
+    setLoading(false)
+
     }
   }
 
@@ -45,7 +48,8 @@ const userId=sessionStorage.getItem("userId")
       }
       })
       const fetchedResults = response.data; 
-      alert(fetchedResults.success)
+      toast.success(fetchedResults.success)
+      // alert(fetchedResults.success)
 
       
     } catch (err) {

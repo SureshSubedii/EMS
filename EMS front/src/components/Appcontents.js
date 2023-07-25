@@ -1,6 +1,6 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useSelector } from 'react-redux'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation } from 'react-router-dom'
 import { adminCheck } from '../stateManagement/userSlice'
 import '../styles/appcontents.css'
 import AddProducts from './AddProducts'
@@ -9,8 +9,17 @@ import Category from './Category'
 import Products from './Products'
 import UserManagement from './UsersManagement'
 
+
 function Appcontents() {
   const admin=useSelector(adminCheck);
+  const location=useLocation();
+
+  useEffect(() => {
+    console.log(location.pathname)
+
+  
+  }, [location.pathname])
+  
   return (
     <>
     
