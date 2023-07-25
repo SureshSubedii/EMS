@@ -16,10 +16,12 @@ const userLogin =async(req,res)=>{
         }
 
         else if(checkAdmin){
+            console.time("admin")
             const comparePass= await bcrypt.compare(userCredentials.password,checkAdmin.password);
             if(comparePass){
             const token = jwt.sign({id:checkAdmin._id},"s4589454988@asd&^%asd1asd2##");
             res.status(200).json({token,"uploader":checkAdmin.name,"admin":true,"userId":checkAdmin._id});
+            console.timeEnd("admin")
     
     
             }

@@ -6,6 +6,8 @@ import Spinner from './Spinner';
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading,setLoading]=useState(true);
+  const [searchData, setSearchData] = useState('');
+
 
 
   const getProducts = async () => {
@@ -61,6 +63,14 @@ const userId=sessionStorage.getItem("userId")
     getProducts();
   }, []);
 
+  let filteredProducts=products;
+  if(searchData){
+    filteredProducts=products.filter((product)=>{
+      return product.name.toLowerCase().includes(searchData.toLowerCase())
+    })
+    console.log(filteredProducts)
+  }
+
   return (
     <>
         <h1 align="center">PRODUCTS</h1>
@@ -69,16 +79,17 @@ const userId=sessionStorage.getItem("userId")
     please wait...
 
     </div> }
-
-
+    { !loading && <div  className="searchBar">
+      <input value={searchData} onChange={(e)=>setSearchData(e.target.value)} placeholder='Search Products'/>
+      </div>}
+      
+      {searchData&& <p align="center" className='results'>{filteredProducts.length} results found!</p>}
+ 
     <div className='products'>
-      {/* <div className="search">
-      <input placeholder='Search'></input>
+   
 
 
-      </div> */}
-
-      {products?.map((product) => {
+      {filteredProducts?.map((product) => {
         return (
           <div className="items" key={product._id}>
             <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
