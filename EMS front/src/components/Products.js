@@ -72,6 +72,11 @@ const userId=sessionStorage.getItem("userId")
 
 
     <div className='products'>
+      {/* <div className="search">
+      <input placeholder='Search'></input>
+
+
+      </div> */}
 
       {products?.map((product) => {
         return (

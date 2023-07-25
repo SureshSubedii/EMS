@@ -39,6 +39,7 @@ function LogIn() {
       }
       if(fetchedResults.admin){
         sessionStorage.setItem('admin', true);
+      sessionStorage.setItem('uploader', fetchedResults.uploader);
         dispatch(AdminLog());
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
@@ -62,6 +63,7 @@ function LogIn() {
 
   return (
     <div className='login'>
+      {console.log(sessionStorage.getItem("uploader"))}
       <h2>Login</h2>
       <form onSubmit={handleSubmit(onLogin)}>
         <input

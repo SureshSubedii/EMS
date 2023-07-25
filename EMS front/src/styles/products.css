@@ -1,12 +1,14 @@
 .products{
     display: flex;
     flex-wrap: wrap;
-    margin-left: 2.5%;
+    /* margin-left: 2.5%; */
     align-content: flex-start;
     width:100%;
+    justify-content: center;
 
 
 }
+
 .loader{
     display:grid;
     place-items: center;
@@ -53,7 +55,7 @@
     font-size: 20px ;
     cursor: pointer;
     padding: 2px 8px;
-    margin-top: 10px;
+    margin-top: auto;
     margin-bottom: 5px;
 
 }
@@ -62,12 +64,7 @@
 
 
 }
-@media screen and (max-width:1797px){
-    .products{
-        margin-left: 1%;
-    }
 
-}
 @media screen and (max-width:1441px){
     .products{
         margin-left: 1%;
@@ -87,9 +84,7 @@
 }
 
 @media screen and (max-width:841px){
-    .products{
-        margin-left: 1%;
-    }
+ 
     .items{
         margin:7px
     }
@@ -128,18 +123,14 @@
 
 }
 @media screen and (max-width:600px){
-    .products{
-        margin-left: 1%;
-    }
+   
     .items{
         margin:2px
     }
 
 }
 @media screen and (max-width:510px){
-    .products{
-        margin-left: 7%;
-    }
+    
     .items{
         margin:5px
     }

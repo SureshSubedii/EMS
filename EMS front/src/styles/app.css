@@ -37,6 +37,7 @@ body{
     font-weight: bold;
     margin:2px;
     cursor: pointer;
+    border: none;
 
 }
 
@@ -53,7 +54,7 @@ body{
  }
  @media screen and (max-width:230px)  {
     h1,h2{
-        font-size: 15px;
+        font-size: 14px;
     }
 
  }
