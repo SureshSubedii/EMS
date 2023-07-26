@@ -30,14 +30,12 @@ background-color: rgb(253, 242, 242);
     color: rgb(6, 6, 81);
     margin-right: 5px;
 }
-.sidebar .sidebar_items:nth-child(6){
+/* .sidebar .sidebar_items:nth-child(6){
     position: relative;
 
     
-}
-/* .sidebar .sidebar_items:nth-child(6)::after{
-    top:0;
-    position: absolute;
+} */
+.sidebar .sidebar_items:nth-child(6)::after{
     content:var(--noOfCartProducts) ;
     color:white;
     background-color: red;
@@ -45,7 +43,8 @@ background-color: rgb(253, 242, 242);
     border-radius: 100px;
     padding: 5px;
     z-index: 1;
-} */
+    margin-left: 2%;
+}
 .user{
     display: flex;
     /* white-space: nowrap; */
@@ -71,6 +70,10 @@ cursor: pointer;
         font-size:10px;
         padding: 5px;
 
+    }
+    .sidebar .sidebar_items:nth-child(6)::after{
+        font-size: 10px;
+        padding: 3px;
     }
     .user{
         margin:3px;

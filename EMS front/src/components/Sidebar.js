@@ -30,11 +30,11 @@ function Sidebar() {
     setUsername(sessionStorage.getItem('uploader'))
     const storedIndex = sessionStorage.getItem('selectedItemIndex')
 
-    document.querySelectorAll('.sidebar_items')
-    [storedIndex].classList.add('selected')
-//     const element = document.querySelector('.sidebar .sidebar_items:nth-child(6)');
-// const dynamicData = 10; 
-// element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
+    document.querySelectorAll('.sidebar_items')[storedIndex]?.classList.add('selected')
+    
+    const element = document.querySelector('.sidebar .sidebar_items:nth-child(6)');
+const dynamicData = 10; 
+element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
 
   }, [])
 

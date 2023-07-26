@@ -5,6 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { AdminLog, SignUpButton, login } from '../stateManagement/userSlice';
 
+import { toast } from 'react-toastify';
 import '../styles/login.css';
 import Spinner from './Spinner';
 
@@ -52,9 +53,9 @@ function LogIn() {
       setLoading(true)
 
       if (err.response && err.response.data && err.response.data.error) {
-        alert(err.response.data.error);
+        toast.error( err.response.data.error)
       } else {
-        alert(err.message);
+        toast.error(err.message);
       }
       setLoading(false)
 
