@@ -6,7 +6,7 @@ import express from 'express'
 import { dbConnect } from './db.js'
 import ProductRoute from './routes/ProductRoute.js'
 import UserRoute from './routes/UserRoutes.js'
-import Admin from './schemas/AdminSchema.js'
+import UserSchema from './schemas/UserSchema.js'
 config({path:'./.env'}); 
 
 
@@ -29,12 +29,13 @@ app.use(bodyParser.json())
 app.post('/createAdmin', async(req,res)=>{
     const adminCredentials=req.body;
     const unsecurePass=adminCredentials.password;
-    const salt= await bcrypt.genSalt(20);
+    const salt= await bcrypt.genSalt(10);
     const securePass= await bcrypt.hash(unsecurePass,salt);
-    Admin.create({
+    UserSchema.create({
         name:adminCredentials.name,
+        email:adminCredentials.email,
         password:securePass,
-        email:adminCredentials.email
+        role:1
     })
 })
 

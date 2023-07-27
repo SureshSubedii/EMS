@@ -32,30 +32,35 @@ function LogIn() {
 
       const fetchedResults = response.data; 
 
-      if (fetchedResults?.error) {
-        alert(fetchedResults.error);
-      } else if (fetchedResults?.token) {
+      if (fetchedResults.error) {
+        toast.error(fetchedResults.error);
+      } 
+      else if (fetchedResults.token) {
         sessionStorage.setItem('authToken', fetchedResults.token);
         dispatch(login(sessionStorage.getItem('authToken')));
       }
       if(fetchedResults.admin){
         sessionStorage.setItem('admin', true);
-      sessionStorage.setItem('uploader', fetchedResults.uploader);
         dispatch(AdminLog());
+
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
       sessionStorage.setItem('userId', fetchedResults.userId);
+      console.log(  sessionStorage.getItem('userId')
+      )
       setLoading(false)
 
 
 
     } catch (err) {
+      console.log("errrrrorr")
+
       setLoading(true)
 
       if (err.response && err.response.data && err.response.data.error) {
         toast.error( err.response.data.error)
       } else {
-        toast.error(err.message);
+        toast.error(err.message); 
       }
       setLoading(false)
 
@@ -64,7 +69,6 @@ function LogIn() {
 
   return (
     <div className='login'>
-      {console.log(sessionStorage.getItem("uploader"))}
       <h2>Login</h2>
       <form onSubmit={handleSubmit(onLogin)}>
         <input

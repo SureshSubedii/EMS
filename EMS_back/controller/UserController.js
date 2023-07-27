@@ -1,6 +1,5 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import Admin from '../schemas/AdminSchema.js';
 import User from '../schemas/UserSchema.js';
 
 
@@ -8,44 +7,33 @@ import User from '../schemas/UserSchema.js';
 
 const userLogin = async (req, res) => {
     try {
-        const userCredentials = req.body;
-        let checkUser = await User.findOne({ email: userCredentials.email })
-        let checkAdmin = await Admin.findOne({ email: userCredentials.email })
-        if (!checkUser && !checkAdmin) {
-            res.status(404).json({ "error": "Login with the correct credentials" });
+        const { email, password } = req.body;
+        const checkUser = await User.findOne({ email } || {});
+
+        if (!checkUser) {
+            return res.status(404).json({ "error": "Login with the correct credentials." });
         }
 
-        else if (checkAdmin) {
-            console.time("admin")
-            const comparePass = await bcrypt.compare(userCredentials.password, checkAdmin.password);
-            if (comparePass) {
-                const token = jwt.sign({ id: checkAdmin._id }, "s4589454988@asd&^%asd1asd2##");
-                res.status(200).json({ token, "uploader": checkAdmin.name, "admin": true, "userId": checkAdmin._id });
-                console.timeEnd("admin")
+        let entity= checkUser;
 
-
-            }
-            else {
-                res.json({ "error": "Login with correct credentials" })
-            }
-
+        const isPasswordValid = await bcrypt.compare(password, entity.password);
+        if (!isPasswordValid) {
+            return res.status(401).json({ "error": "Invalid credentials. Please try again." });
         }
 
-        else {
-            const pass = await bcrypt.compare(userCredentials.password, checkUser.password);
-            if (pass) {
-                const token = jwt.sign({ id: checkUser._id }, "s4589454988@asd&^%asd1asd2##");
-                res.status(200).json({ token, "uploader": checkUser.name, "userId": checkUser._id })
+        const token = jwt.sign({ id: entity._id }, process.env.JWT_SECRET);
+        
+        const responseData = {
+            token,
+            "uploader": entity.name,
+            "userId": entity._id,
+            ...(entity.role===1 &&{ "admin": true }),
+        };
 
-            }
-            else {
-                res.status(404).json({ "error": "Login with the correct credentials" });
-
-            }
-        }
-    }
-    catch (error) {
-        res.status(500).json({ "error": `Internal Server Error ${error}` });
+        return res.status(200).json(responseData);
+    } catch (error) {
+        console.log("ERRRRPR")
+        return res.status(500).json({ "error": "Server Error" });
     }
 }
 
@@ -69,7 +57,7 @@ const userSignUp = async (req, res) => {
                 contact: userCredentials.contact,
                 address: userCredentials.address
             })
-            const token = jwt.sign({ id: createUser._id }, "s4589454988@asd&^%asd1asd2##");
+            const token = jwt.sign({ id: createUser._id }, process.env.JWT_SECRET);
 
             res.status(201).json({ token, "uploader": createUser.name, "success": "Sucessfully Registered" })
         }

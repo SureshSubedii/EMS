@@ -5,16 +5,18 @@ import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
 import { Avatar } from '@mui/material'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { adminCheck } from '../stateManagement/userSlice'
+import { adminCheck, cartCheck } from '../stateManagement/userSlice'
 import '../styles/sidebar.css'
 
 function Sidebar() {
   const admin = useSelector(adminCheck)
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
+  const cart=useSelector(cartCheck);
 
   const toggle = (cpath, i) => {
     const selectedElement = document.querySelector('.selected')
@@ -25,16 +27,23 @@ function Sidebar() {
     document.querySelectorAll('.sidebar_items')[i]?.classList.add('selected')
     navigate(`/${cpath}`)
   }
+const findCartLength=async()=>{
+  const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
+    let cartLength=response.data.length;
 
-  useEffect(() => {
-    setUsername(sessionStorage.getItem('uploader'))
     const storedIndex = sessionStorage.getItem('selectedItemIndex')
 
     document.querySelectorAll('.sidebar_items')[storedIndex]?.classList.add('selected')
     
-    const element = document.querySelector('.sidebar .sidebar_items:nth-child(6)');
-const dynamicData = 10; 
-element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
+  const element = document.querySelector('.sidebar .sidebar_items:nth-child(6)');
+element.style.setProperty('--noOfCartProducts', `'${cartLength}'`);
+
+}
+  useEffect( () => {
+    findCartLength();
+    setUsername(sessionStorage.getItem('uploader'))
+
+    
 
   }, [])
 
@@ -44,6 +53,7 @@ element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
         <Avatar className='avatar' />
         <h1 className='username'>
           {username}
+
           {admin && <p>(Admin)</p>}
         </h1>
       </div>
@@ -68,7 +78,7 @@ element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
         Cart
       </p>
 
-      {admin && (
+      {admin && 
         <p
           className='sidebar_items'
           onClick={() => toggle('userManagement', 5)}
@@ -76,7 +86,7 @@ element.style.setProperty('--noOfCartProducts', `'${dynamicData}'`);
           <ManageAccountsIcon />
           User Management
         </p>
-      )}
+      }
     </div>
   )
 }

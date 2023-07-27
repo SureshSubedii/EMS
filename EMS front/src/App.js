@@ -17,7 +17,7 @@ function App() {
 
   useEffect(() => {
     dispatch(login(sessionStorage.getItem('authToken')));
-    if(sessionStorage.getItem('admin')){
+    if (sessionStorage.getItem('admin')) {
       dispatch(AdminLog());
     }
 
@@ -33,28 +33,29 @@ function App() {
   }, []);
 
   return (
-      <div className="app">
-        <div title="E-commerce Management System" className="app_header">
-          <h1>EMS</h1>
-          <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
-          {user && (
-            <button className="header_button" onClick={() => { 
-            dispatch(logout()); 
-            sessionStorage.removeItem("authToken");
-            sessionStorage.removeItem('admin');
-            sessionStorage.removeItem('uploader');
+    <div className="app">
+      <div title="E-commerce Management System" className="app_header">
+        <h1>EMS</h1>
+        <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
+        {user && (
+          <button className="header_button" onClick={() => {
+            dispatch(logout());
+            sessionStorage.clear()
+            // sessionStorage.removeItem("authToken");
+            // sessionStorage.removeItem('admin');
+            // sessionStorage.removeItem('uploader');
 
             dispatch(AdminLogOut());
-           }}>LogOut</button>
-          )}
-        </div>
-
-        <div className="app_body">
-          <Routes>
-            <Route path="/*" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
-          </Routes>
-        </div>
+          }}>LogOut</button>
+        )}
       </div>
+
+      <div className="app_body">
+        <Routes>
+          <Route path="/*" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
+        </Routes>
+      </div>
+    </div>
   );
 }
 

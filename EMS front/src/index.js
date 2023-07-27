@@ -8,9 +8,11 @@ import App from './App';
 import './index.css';
 import { store } from './stateManagement/store';
 
+
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
+
       <Provider store={store}>
         <App />
         <ToastContainer
@@ -26,6 +28,7 @@ ReactDOM.render(
         theme="dark"
         />
       </Provider>
+
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')

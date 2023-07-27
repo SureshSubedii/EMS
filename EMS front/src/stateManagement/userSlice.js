@@ -7,7 +7,8 @@ export const userSlice = createSlice({
   initialState:{
   value:null,
   signUpClicked: false,
-  admin:false
+  admin:false,
+  cart:1
 
   },
   reducers: {
@@ -33,6 +34,9 @@ export const userSlice = createSlice({
     AdminLogOut:(state)=>{
       state.admin=null;
 
+    },
+    AddCart:(state)=>{
+      state.cart+=1
     }
 
 
@@ -40,8 +44,10 @@ export const userSlice = createSlice({
 
 
 
-export  const {login,logout,SignUpNot,SignUpButton,AdminLog,AdminLogOut}=userSlice.actions
+export  const {login,logout,SignUpNot,SignUpButton,AdminLog,AdminLogOut,AddCart}=userSlice.actions
 export const checkUser=(state) => state.user.value;
 export const checkSignUpButton=(state)=>state.user.signUpClicked;
 export const adminCheck=(state)=>state.user.admin;
+export const cartCheck=(state)=>state.user.cart;
+
 export default userSlice.reducer

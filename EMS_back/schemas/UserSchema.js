@@ -5,7 +5,8 @@ const userSchema=mongoose.Schema({
     email:String,
     password:String,
     contact:String,
-    address:String
+    address:String,
+    role:Number
 }
 
 )
