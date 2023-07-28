@@ -1,6 +1,4 @@
-import { Menu } from '@mui/icons-material';
 import SearchIcon from '@mui/icons-material/Search';
-import { IconButton } from '@mui/material';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -67,15 +65,10 @@ function Products() {
       }
     }
   }
-const handleShow=()=>{
-  document.querySelector(".sidebar").classList.remove("hide")
-  document.querySelector(".home_menu").classList.add("hide")
 
-}
 
   useEffect(() => {
     getProducts();
-  document.querySelector(".home_menu").classList.add("hide")
 
     
   
@@ -95,12 +88,7 @@ const handleShow=()=>{
       <h1  className="product_header" align="center">
       
   PRODUCTS</h1>
-<div className="home_menu">
-<IconButton  onClick={()=>handleShow()}>
-         <Menu />
-          </IconButton> 
-</div>
-  
+
       {loading && <div className="loader">
         <Spinner />
         please wait...
