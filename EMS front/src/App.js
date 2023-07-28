@@ -39,10 +39,9 @@ function App() {
         <h1>EMS</h1>
         <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
         {user && (
-          <button className="header_button" onClick={() => {
+          <button  title="Click to logout"className="header_button" onClick={() => {
             dispatch(logout());
             dispatch(AdminLogOut());
-
             sessionStorage.clear()
             navigate('/')
             

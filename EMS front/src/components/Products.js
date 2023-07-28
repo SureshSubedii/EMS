@@ -53,7 +53,6 @@ function Products() {
       const fetchedResults = response.data;
       toast.success(fetchedResults.success)
       dispatch(AddCart());
-      // alert(fetchedResults.success)
 
 
     } catch (err) {
@@ -81,7 +80,7 @@ function Products() {
 
   return (
     <>
-      <h1 align="center">PRODUCTS</h1>
+      <h1  className="product_header" align="center">PRODUCTS</h1>
       {loading && <div className="loader">
         <Spinner />
         please wait...

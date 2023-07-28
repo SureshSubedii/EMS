@@ -1,5 +1,5 @@
 .app_header{
-    background:linear-gradient(to right,rgb(166, 64, 5),rgb(51, 23, 23)); 
+    background:linear-gradient(to right,rgb(133, 61, 19),rgb(51, 23, 23)); 
     color:white;
     display: flex;
     position: sticky;
@@ -35,17 +35,23 @@ body{
     background-color: blue;
     color:white;
     font-weight: bold;
-    margin:2px;
+    margin:5px;
     cursor: pointer;
     border: none;
+    padding: 1px 5px;
+
+
+
+}
+.header_button:hover{
+    background-color: rgb(69, 69, 232);
 
 }
 
  @media screen and (max-width:360px)  {
     .header_button{
-        padding:0;
         font-size: 10px;
-        font-weight: bolder;
+        font-weight: 800;
     }
     h1,h2{
         font-size: 18px;

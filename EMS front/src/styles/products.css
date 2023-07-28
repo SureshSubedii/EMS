@@ -5,9 +5,11 @@
     align-content: flex-start;
     width:100%;
     justify-content: center;
+    margin-top: 2%;
 
 
 }
+
 
 .loader{
     display:grid;
@@ -116,7 +118,7 @@
 @media screen and (max-width:1224px){
    
     .items{
-        margin:5px
+        margin:7px
     }
 
 }
@@ -163,7 +165,15 @@
 @media screen and (max-width:600px){
    
     .items{
-        margin:2px
+        margin:5px
+    }
+    .product_header{
+        font-size: 20px;
+    }
+    .searchBar>input{
+        font-size: 18px;
+
+
     }
 
 }
