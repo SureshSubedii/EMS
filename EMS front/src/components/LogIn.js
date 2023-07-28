@@ -23,49 +23,45 @@ function LogIn() {
 
   const onLogin = async (data) => {
     try {
-      setLoading(true)
+      setLoading(true);
       const response = await axios.post('http://192.168.18.177:5000/api/v1/user/userLogin', data, {
         headers: {
           'Content-Type': 'application/json',
         },
       });
-
+  
       const fetchedResults = response.data; 
-
+  
       if (fetchedResults.error) {
         toast.error(fetchedResults.error);
-      } 
-      else if (fetchedResults.token) {
+      }
+       else if (fetchedResults.token) {
         sessionStorage.setItem('authToken', fetchedResults.token);
         dispatch(login(sessionStorage.getItem('authToken')));
       }
-      if(fetchedResults.admin){
+      if (fetchedResults.admin) {
         sessionStorage.setItem('admin', true);
         dispatch(AdminLog());
+        console.log("Admin")
 
       }
       sessionStorage.setItem('uploader', fetchedResults.uploader);
       sessionStorage.setItem('userId', fetchedResults.userId);
-      console.log(  sessionStorage.getItem('userId')
-      )
-      setLoading(false)
-
-
-
-    } catch (err) {
-      console.log("errrrrorr")
-
-      setLoading(true)
-
-      if (err.response && err.response.data && err.response.data.error) {
-        toast.error( err.response.data.error)
+      console.log(sessionStorage.getItem('userId'))
+      setLoading(false);
+      // window.location.reload()
+    } catch (error) {
+      setLoading(false);
+      if (error.response && error.response.data && error.response.data.error) {
+        toast.error(error.response.data.error);
+      } else if (error.message) {
+        toast.error(error.message);
       } else {
-        toast.error(err.message); 
+        toast.error('An error occurred during login.');
       }
-      setLoading(false)
-
     }
   };
+  
 
   return (
     <div className='login'>

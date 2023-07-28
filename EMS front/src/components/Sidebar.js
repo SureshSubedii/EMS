@@ -16,6 +16,8 @@ function Sidebar() {
   const admin = useSelector(adminCheck)
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
+  const [cartLength, setCartLength] = useState(0)
+
   const cart=useSelector(cartCheck);
 
   const toggle = (cpath, i) => {
@@ -28,24 +30,27 @@ function Sidebar() {
     navigate(`/${cpath}`)
   }
 const findCartLength=async()=>{
-  const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
-    let cartLength=response.data.length;
+  setTimeout(async()=>{
+     setUsername(sessionStorage.getItem('uploader'))
+   const res= await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem('userId')}`)
+   setCartLength(res.data.length)
+  },0)
 
+    
+
+}
+  useEffect( () => {
+    findCartLength();
+  }, [])
+  useEffect(() => {
     const storedIndex = sessionStorage.getItem('selectedItemIndex')
 
     document.querySelectorAll('.sidebar_items')[storedIndex]?.classList.add('selected')
     
   const element = document.querySelector('.sidebar .sidebar_items:nth-child(6)');
 element.style.setProperty('--noOfCartProducts', `'${cartLength}'`);
-
-}
-  useEffect( () => {
-    findCartLength();
-    setUsername(sessionStorage.getItem('uploader'))
-
-    
-
-  }, [])
+    console.log(cartLength);
+  }, [cartLength]);
 
   return (
     <div className='sidebar'>

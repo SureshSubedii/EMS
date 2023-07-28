@@ -8,32 +8,38 @@ import User from '../schemas/UserSchema.js';
 const userLogin = async (req, res) => {
     try {
         const { email, password } = req.body;
-        const checkUser = await User.findOne({ email } || {});
+        const checkUser = await User.findOne({ email } );
 
         if (!checkUser) {
-            return res.status(404).json({ "error": "Login with the correct credentials." });
+             res.status(404).json({ "error": "Login with the correct credentials." });
         }
 
-        let entity= checkUser;
 
-        const isPasswordValid = await bcrypt.compare(password, entity.password);
+        const isPasswordValid = await bcrypt.compare(password, checkUser.password);
         if (!isPasswordValid) {
-            return res.status(401).json({ "error": "Invalid credentials. Please try again." });
+             res.status(401).json({ "error": "Invalid credentials. Please try again." });
         }
 
-        const token = jwt.sign({ id: entity._id }, process.env.JWT_SECRET);
-        
-        const responseData = {
+        const token = jwt.sign({ id: checkUser._id }, process.env.JWT_SECRET);
+        let responseData={
             token,
-            "uploader": entity.name,
-            "userId": entity._id,
-            ...(entity.role===1 &&{ "admin": true }),
-        };
+            "uploader": checkUser.name,
+            "userId": checkUser._id,
 
-        return res.status(200).json(responseData);
-    } catch (error) {
-        console.log("ERRRRPR")
-        return res.status(500).json({ "error": "Server Error" });
+        }
+
+      
+        if(checkUser.role==1) {
+            responseData = {
+                ...responseData,
+                "admin": true
+            }
+
+        }
+         res.status(200).json(responseData);
+    }
+    catch (error) {
+         res.status(500).json({ "error": "Server Error" });
     }
 }
 

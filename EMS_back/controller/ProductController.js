@@ -75,14 +75,18 @@ const addToCart=async (req,res)=>{
   const showCart=async (req,res)=>{
     try{
       const check= await Cart.find({userId:req.params.userId})
+      console.log(req.params.userId)
       if(check){
         res.send(check)
+        console.log("Here")
+
       }
       else{
         res.status(404).send("Nothing on the cart")
       }
     }
       catch(err){
+        console.log(err)
         res.status(500).json({"error":"Internal Server Error"})
       }
 

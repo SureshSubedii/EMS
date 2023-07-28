@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
@@ -12,6 +12,7 @@ function App() {
   const [timeRealMinutes, settimeRealMinutes] = useState([]);
   const user = useSelector(checkUser);
   const checkButton = useSelector(checkSignUpButton);
+  const navigate=useNavigate();
 
   const dispatch = useDispatch();
 
@@ -40,19 +41,20 @@ function App() {
         {user && (
           <button className="header_button" onClick={() => {
             dispatch(logout());
-            sessionStorage.clear()
-            // sessionStorage.removeItem("authToken");
-            // sessionStorage.removeItem('admin');
-            // sessionStorage.removeItem('uploader');
-
             dispatch(AdminLogOut());
+
+            sessionStorage.clear()
+            navigate('/')
+            
+         
+
           }}>LogOut</button>
         )}
       </div>
 
       <div className="app_body">
         <Routes>
-          <Route path="/*" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
+          <Route path="*" element={user ? <Home /> : (checkButton ? <SignUp /> : <LogIn />)} />
         </Routes>
       </div>
     </div>

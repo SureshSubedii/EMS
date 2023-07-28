@@ -10,7 +10,6 @@
     left:37%;
     padding-bottom: 10px;
     border-radius: 20px;
-    /* height: fit-content; */
     height:max-content;
 
 
@@ -23,7 +22,6 @@
     color:rgb(254, 13, 0);
     font-weight: 900;
     margin-left: 10%;
-    /* height: fit-content; */
  
 }
 .login>form>.showHideIcon{
@@ -73,7 +71,7 @@
     display: flex;
     align-items: center;
 }
-form> .credential{
+form>.credential{
     width:83%;
     font-weight: 500;
     margin-top: 10px;
@@ -84,11 +82,17 @@ form> .credential{
     padding-left: 5%;
     margin-bottom:3% ;
     margin-top: 5%;
-    font-size: 2em;
 
 }
 .form_buttons>h2{
     font-weight: 900;
+
+}
+@media (min-width:1451px){
+    form>.credential{
+    font-size: 1.5em !important;
+
+    }
 
 }
 @media (min-width:220px) and (max-width:1450px) {

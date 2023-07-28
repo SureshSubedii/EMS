@@ -6,8 +6,8 @@ export const userSlice = createSlice({
   name: 'user',
   initialState:{
   value:null,
-  signUpClicked: false,
-  admin:false,
+  signUpClicked: Boolean(false),
+  admin:Boolean(false),
   cart:1
 
   },
@@ -32,7 +32,7 @@ export const userSlice = createSlice({
 
     },
     AdminLogOut:(state)=>{
-      state.admin=null;
+      state.admin=false;
 
     },
     AddCart:(state)=>{
