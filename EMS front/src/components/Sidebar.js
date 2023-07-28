@@ -41,7 +41,7 @@ const findCartLength=async()=>{
 }
   useEffect( () => {
     findCartLength();
-  }, [])
+  }, [cart])
   useEffect(() => {
     const storedIndex = sessionStorage.getItem('selectedItemIndex')
 
