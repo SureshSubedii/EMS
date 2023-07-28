@@ -1,19 +1,43 @@
-.sidebar{
+.sidebar {
     position: sticky;
-    top:0;
+    top: 0;
     display: flex;
     flex: 0.7;
     flex-direction: column;
     border-right: 0.9px solid rgb(156, 150, 150);
-    
+    background-color: rgba(54, 54, 54, 0.902);
+    color: rgb(238, 234, 234);
+
+
 
 }
-.selected{
-background-color: rgb(253, 242, 242);
+
+
+.hide {
+    display: none;
 
 
 }
-.sidebar_items{
+
+.selected {
+    background-color: rgb(253, 242, 242);
+
+
+}
+
+.username>.menu {
+    color: rgb(255, 255, 255);
+    position: absolute;
+    top: 2%;
+    ;
+    right: 0;
+}
+
+.username>.menu:hover {
+    background-color: rgb(150, 158, 163);
+}
+
+.sidebar_items {
     margin: 5px;
     white-space: nowrap;
     font-weight: 800;
@@ -24,16 +48,16 @@ background-color: rgb(253, 242, 242);
     padding: 10px;
     display: flex;
     align-items: center;
-    color:rgb(56, 54, 54)
 }
-.sidebar_items>.MuiSvgIcon-root{
-    color: rgb(6, 6, 81);
+
+.sidebar_items>.MuiSvgIcon-root {
+    color: rgb(113, 113, 255);
     margin-right: 5px;
 }
 
-.sidebar .sidebar_items:nth-child(6)::after{
-    content:var(--noOfCartProducts) ;
-    color:white;
+.sidebar .sidebar_items:nth-child(6)::after {
+    content: var(--noOfCartProducts);
+    color: white;
     background-color: red;
     font-size: 15px;
     border-radius: 100%;
@@ -41,77 +65,93 @@ background-color: rgb(253, 242, 242);
     z-index: 1;
     margin-left: 2%;
 }
-.user{
+
+.user {
     display: flex;
-    /* white-space: nowrap; */
-    margin:5px;
+    margin: 5px;
     align-items: center;
 }
-.username{
-    margin:3px;
-}
-.sidebar_items:hover{
-background-color: rgb(255, 255, 255);
-cursor: pointer;
-}
-.selected{
-    background-color: rgb(151, 175, 174);
-    
-    
-    }
 
-@media screen and (max-width:600px)  {
-    .sidebar_items{
-        margin:3px;
-        font-size:10px;
+.username {
+    margin: 3px;
+}
+
+.sidebar_items:hover {
+    background-color: rgb(105, 199, 213);
+    cursor: pointer;
+}
+
+.selected {
+    background-color: rgb(33, 101, 184);
+
+
+}
+
+@media screen and (max-width:600px) {
+    .sidebar_items {
+        margin: 3px;
+        font-size: 10px;
         padding: 5px;
 
     }
-    .sidebar .sidebar_items:nth-child(6)::after{
+
+    .sidebar .sidebar_items:nth-child(6)::after {
         font-size: 10px;
         padding: 3px;
     }
-    .user{
-        margin:3px;
+
+    .user {
+        margin: 3px;
     }
-    .username{
+
+    .username {
+        font-size: 18px;
+    }
+
+    .username>Button>.MuiSvgIcon-root {
         font-size: 18px;
     }
 
 }
-@media screen and (max-width:350px)  {
-    .sidebar_items{
-        margin:3px;
-        font-size:8px;
+
+@media screen and (max-width:350px) {
+    .sidebar_items {
+        margin: 3px;
+        font-size: 8px;
         padding: 2px;
         font-weight: 700;
 
     }
-    .user{
-        margin:2px;
+
+    .user {
+        margin: 2px;
     }
-    .username{
+
+    .username {
         font-size: 12px;
     }
+
     .sidebar>.user>.avatar {
-        font-size: 0.5em  !important;
-        color:black
+        font-size: 0.5em !important;
+        color: black
     }
-    
+
 
 }
-@media screen and (max-height:375px){
-    .sidebar_items{
+
+@media screen and (max-height:375px) {
+    .sidebar_items {
         font-size: 15px;
-    margin: 0px;
-    padding: 2px;
+        margin: 0px;
+        padding: 2px;
 
 
 
     }
-    .username{
-        margin:2px;
+
+    .username {
+        margin: 2px;
         font-size: 18px;
     }
-    
+
 }

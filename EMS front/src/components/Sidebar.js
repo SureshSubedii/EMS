@@ -1,10 +1,10 @@
-import { AddToPhotos } from '@mui/icons-material'
+import { AddToPhotos, Menu } from '@mui/icons-material'
 import AlignHorizontalCenterOutlinedIcon from '@mui/icons-material/AlignHorizontalCenterOutlined'
 import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import { Avatar } from '@mui/material'
+import { IconButton } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -35,8 +35,12 @@ const findCartLength=async()=>{
    const res= await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem('userId')}`)
    setCartLength(res.data.length)
   },0)
+}
+const handleHide=()=>{
+  document.querySelector(".sidebar").classList.add("hide")
+  document.querySelector(".home_menu").classList.remove("hide")
 
-    
+
 
 }
   useEffect( () => {
@@ -55,11 +59,15 @@ element.style.setProperty('--noOfCartProducts', `'${cartLength}'`);
   return (
     <div className='sidebar'>
       <div className='user'>
-        <Avatar className='avatar' />
+        {/* <Avatar className='avatar' /> */}
         <h1 className='username'>
           {username}
+          <IconButton className='menu' onClick={()=>handleHide()}>
+         <Menu/>
+          </IconButton> 
 
-          {admin && <p>(Admin)</p>}
+          {admin && <p>(Admin)  </p>}
+        
         </h1>
       </div>
       <p className='sidebar_items ' onClick={() => toggle('', 0)}>

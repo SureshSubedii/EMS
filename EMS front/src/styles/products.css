@@ -1,7 +1,6 @@
 .products{
     display: flex;
     flex-wrap: wrap;
-    /* margin-left: 2.5%; */
     align-content: flex-start;
     width:100%;
     justify-content: center;
@@ -26,12 +25,21 @@
     display: flex;
     /* place-items: center; */
     background-color: white;
-    margin-left: 2%;
-    z-index:1;
     border-radius: 10px;
     height: max-content;
+    align-items: center;
+    padding: 4px;
+    margin-left: 4%;
+    left:4.5%;
 
 
+
+}
+.home_menu{
+    position: sticky;
+    top:0;
+    margin-right: 10px;
+    z-index:999
 }
 .searchBar:hover{
     outline: 0.5px solid blue;
@@ -58,7 +66,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width:15vw;
+    width:14vw;
     background-color: rgb(245, 245, 245);
     margin:11px;
     height: auto;
@@ -105,6 +113,7 @@
 
 }
 
+
 @media screen and (max-width:1441px){
     .products{
         margin-left: 1%;
@@ -137,7 +146,10 @@
     margin-top: 7px;
     margin-bottom: 3px;
 
-
+    }
+    .searchBar{
+        width:82%;
+        left:10%
     }
     
 } 
@@ -165,10 +177,10 @@
 @media screen and (max-width:600px){
    
     .items{
-        margin:5px
+        margin:7px;
     }
     .product_header{
-        font-size: 20px;
+        font-size: 18px;
     }
     .searchBar>input{
         font-size: 18px;
@@ -200,5 +212,20 @@
     
     
         }
+
+}
+@media screen and (max-width:325px){
+    .home_menu .MuiSvgIcon-root{
+        font-size: 14px
+    }
+
+}
+@media screen and (max-width:290px){
+    .searchBar>input{
+        font-size: 11px;
+        padding:0px
+
+
+    }
 
 }

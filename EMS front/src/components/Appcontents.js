@@ -10,6 +10,7 @@ import Products from './Products'
 import UserManagement from './UsersManagement'
 
 
+
 function Appcontents() {
   const admin=useSelector(adminCheck);
   const location=useLocation();
@@ -24,7 +25,7 @@ function Appcontents() {
     <>
     
     <div className='appcontents'>
-    {/* <div className="line"></div> */}
+ 
 
 
          <Routes>
