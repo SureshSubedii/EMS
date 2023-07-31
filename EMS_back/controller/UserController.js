@@ -11,13 +11,13 @@ const userLogin = async (req, res) => {
         const checkUser = await User.findOne({ email } );
 
         if (!checkUser) {
-             res.status(404).json({ "error": "Login with the correct credentials." });
+           return  res.status(404).json({ "error": "Login with the correct credentials." });
         }
 
 
         const isPasswordValid = await bcrypt.compare(password, checkUser.password);
         if (!isPasswordValid) {
-             res.status(401).json({ "error": "Invalid credentials. Please try again." });
+           return  res.status(401).json({ "error": "Invalid credentials. Please try again." });
         }
 
         const token = jwt.sign({ id: checkUser._id }, process.env.JWT_SECRET);
@@ -36,7 +36,7 @@ const userLogin = async (req, res) => {
             }
 
         }
-         res.status(200).json(responseData);
+       return  res.status(200).json(responseData);
     }
     catch (error) {
          res.status(500).json({ "error": "Server Error" });

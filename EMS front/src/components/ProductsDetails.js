@@ -1,10 +1,12 @@
 import { Rating } from '@mui/material';
 import React, { useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/productDetails.css';
 
 function ProductsDetails() {
     const [productDetails, setProductDetails] = useState({});
     const [randomValue, setRandom] = useState(2);
+    const navigate=useNavigate();
 
 
     useEffect(() => {
@@ -18,6 +20,9 @@ function ProductsDetails() {
     }, [])
     return (
         <div className='product_details'>
+            <p className='back' onClick={()=>navigate("/")}>&larr;</p>
+
+
             <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${productDetails._id}`} alt={productDetails.name} />
 
             <p className="title">
