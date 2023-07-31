@@ -31,7 +31,7 @@ function Cart() {
 
       const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
       setProducts(response.data);
-      setCounts(new Array(response.data.length).fill(0));
+      setCounts(new Array(response.data.length).fill(1));
       
       setLoading(false)
     } catch (error) {
@@ -76,7 +76,7 @@ function Cart() {
                   {counts[index]}
                   <button onClick={() => increaseCount(index)}>+</button>
                 </div>
-                <button className="buy">Buy</button>
+               {counts[index]!=0 && <button className="buy">Buy</button>}
               </div>
             </div>
           );

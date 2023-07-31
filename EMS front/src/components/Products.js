@@ -5,16 +5,23 @@ import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { AddCart } from '../stateManagement/userSlice';
 
+import { useNavigate } from 'react-router-dom';
 import '../styles/products.css';
 import Spinner from './Spinner';
 function Products() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [searchData, setSearchData] = useState('');
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
+  const navigate=useNavigate();
 
 
+const handleClick=(products)=>{
+  let productDetails=JSON.stringify(products)
+  sessionStorage.setItem('productDetails',productDetails)
+  navigate("/productDetails")
 
+}
   const getProducts = async () => {
     setLoading(true)
     try {
@@ -29,11 +36,11 @@ function Products() {
     }
   }
 
-  const handleAddToCart = async (name, price, description, pid, category) => {
+  const handleAddToCart = async (e,name, price, description, pid, category,) => {
+    e.stopPropagation()
 
 
     const userId = sessionStorage.getItem("userId")
-    // console.log(name,price,description,id)
     try {
       const formData = new FormData();
       formData.append('name', name)
@@ -108,12 +115,12 @@ function Products() {
 
         {filteredProducts?.map((product) => {
           return (
-            <div className="items" key={product._id}>
+            <div className="items" key={product._id} onClick={()=>handleClick(product)}>
               <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
               <div className="product_details">
                 <h2>{product.name.slice(0, 15)} {product.name[15] ? "..." : ""}</h2>
                 <h3>Rs.{product.price}</h3>
-                <button onClick={() => handleAddToCart(product.name, product.price, product.description, product._id, product.category)}>Add to cart</button>
+                <button onClick={(e) => handleAddToCart(e,product.name, product.price, product.description, product._id, product.category)}>Add to cart</button>
               </div>
 
 

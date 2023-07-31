@@ -7,6 +7,7 @@ import AddProducts from './AddProducts'
 import Cart from './Cart'
 import Category from './Category'
 import Products from './Products'
+import ProductsDetails from './ProductsDetails'
 import UserManagement from './UsersManagement'
 
 
@@ -34,6 +35,7 @@ function Appcontents() {
         {admin && <Route  path="/userManagement" element={<UserManagement/>}/>}
         <Route  path="/cart" element={<Cart/>}/>
         <Route  path="/category" element={<Category/>}/>
+        <Route path='productDetails' element={<ProductsDetails/>}/>
 
 
 
