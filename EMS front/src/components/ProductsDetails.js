@@ -19,7 +19,7 @@ function ProductsDetails() {
 
     }, [])
     return (
-        <div className='product_details'>
+        <div className='show_product_details'>
             <p className='back' onClick={()=>navigate("/")}>&larr;</p>
 
 

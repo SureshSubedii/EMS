@@ -1,4 +1,4 @@
-.product_details{
+.show_product_details{
     width:90%;
     background-color: rgb(251, 252, 252);
     margin:0 auto ;
@@ -8,35 +8,39 @@
     flex-direction: column;
     /* justify-content: center; */
     margin-top: 4%;
+    position: relative;
 }
-.product_details>.back{
+.show_product_details>.back{
+    position: sticky;
+    top:0;
     padding:5px;
     margin:5px;
-    font-weight: 800;
     border-radius: 55%;
-    width:2%;
+    width:fit-content;
     cursor: pointer;
     color: rgb(33, 38, 139);
     font-size: 30px;
+    background-color: rgb(173, 197, 229);
 }
 .title{
     font-size: 3em;
-    color:rgb(27, 80, 203);
+    color:rgb(49, 105, 234);
     margin:0 1%;
+    font-weight: 550;
 }
-.product_details>img{
+.show_product_details>img{
     width:21%;
     margin: 0% auto;
 
 }
-.product_details>.price{
+.show_product_details>.price{
     color: rgba(255, 0, 0, 0.777);
     margin: 0 1%  1% 1.6%;
     font-weight: 650;
     font-size: 1.3em;
 
 }
-.product_details>.description{
+.show_product_details>.description{
     margin: 0 1%  1% 1%;
     font-weight: 500;
     font-size: 2em;
@@ -44,7 +48,7 @@
 
 
 }
-.product_details>.category,.rating{
+.show_product_details>.category,.rating{
     margin: 1% 1%  1% 1%;
     font-weight: 700;
     font-size: 1.5em;
@@ -53,13 +57,13 @@
 
 }
 @media screen and (max-width:629px) {
-    .product_details{
+    .show_product_details{
         padding: 5px;
     }
     .title{
         font-size:2.1em
     }
-    .product_details>.description{
+    .show_product_details>.description{
     font-size: 1.6em;
 
 
@@ -71,12 +75,12 @@
     .title{
         font-size:1.7em
     }
-    .product_details>.description{
+    .show_product_details>.description{
         font-size: 1em;
     
     
         }
-        .product_details>.category,.rating{
+        .show_product_details>.category,.rating{
     font-size: 1.2em;
 
         }
@@ -86,17 +90,17 @@
     .title{
         font-size:1.1em
     }
-    .product_details>.description{
+    .show_product_details>.description{
         font-size: 0.6em;
     
     
         }
-        .product_details>.price{
+        .show_product_details>.price{
         font-size: 0.5em;
 
 
         }
-        .product_details>.category,.rating{
+        .show_product_details>.category,.rating{
     font-size: 0.8em;
 
         }

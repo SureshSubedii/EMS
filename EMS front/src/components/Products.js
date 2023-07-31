@@ -8,38 +8,21 @@ import { AddCart } from '../stateManagement/userSlice';
 import { useNavigate } from 'react-router-dom';
 import '../styles/products.css';
 import Spinner from './Spinner';
-function Products() {
-  const [products, setProducts] = useState([]);
-  const [loading, setLoading] = useState(true);
+
+
+function Products({products,loading}) {
   const [searchData, setSearchData] = useState('');
   const dispatch = useDispatch();
   const navigate=useNavigate();
 
 
-const handleClick=(products)=>{
-  let productDetails=JSON.stringify(products)
-  sessionStorage.setItem('productDetails',productDetails)
+  const handleClick=(productDetails)=>{
+  let productDetailsStringified=JSON.stringify(productDetails)
+  sessionStorage.setItem('productDetails',productDetailsStringified)
   navigate("/productDetails")
-
 }
-  const getProducts = async () => {
-    setLoading(true)
-    try {
-      const response = await axios.get('http://192.168.18.177:5000/api/v1/product/getAllProducts');
-      setProducts(response.data);
-      setLoading(false)
-
-    } catch (error) {
-      console.error('Error fetching products:', error);
-      setLoading(false)
-
-    }
-  }
-
   const handleAddToCart = async (e,name, price, description, pid, category,) => {
     e.stopPropagation()
-
-
     const userId = sessionStorage.getItem("userId")
     try {
       const formData = new FormData();
@@ -49,9 +32,6 @@ const handleClick=(products)=>{
       formData.append('userId', userId)
       formData.append('pid', pid)
       formData.append('category', category)
-
-
-
       const response = await axios.post('http://192.168.18.177:5000/api/v1/product/addToCart', formData,
         {
           headers: {
@@ -61,7 +41,6 @@ const handleClick=(products)=>{
       const fetchedResults = response.data;
       toast.success(fetchedResults.success)
       dispatch(AddCart());
-
 
     } catch (err) {
       console.log('Error fetching products:', err);
@@ -75,7 +54,7 @@ const handleClick=(products)=>{
 
 
   useEffect(() => {
-    getProducts();
+    console.log(products)
 
     
   
@@ -83,10 +62,9 @@ const handleClick=(products)=>{
 
   let filteredProducts = products;
   if (searchData) {
-    filteredProducts = products.filter((product) => {
+    filteredProducts = products?.filter((product) => {
       return product.name.toLowerCase().includes(searchData.toLowerCase())
     })
-    console.log(filteredProducts)
   }
 
   return (
@@ -107,7 +85,7 @@ const handleClick=(products)=>{
         <input value={searchData} onChange={(e) => setSearchData(e.target.value)} placeholder='Search Products' />
       </div>}
 
-      {searchData && <p align="center" className='results'>{filteredProducts.length} results found!</p>}
+      {searchData && <p align="center" className='results'>{filteredProducts?.length} results found!</p>}
 
       <div className='products'>
 
