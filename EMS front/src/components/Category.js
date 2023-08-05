@@ -1,59 +1,57 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/category.css';
 import Spinner from './Spinner';
 
 function Category({ products, loading }) {
-  // const [product,setProduct]=useState([])
-  // useEffect(()=>{
-  //   try{
-  //     const response =  axios.get('http://192.168.18.177:5000/api/v1/product/getAllProducts');
-  //     console.log(response.data)
-  //   setProduct(response.data)
-  // }
-  // catch(err){
-  //   toast.error("Error fetchinf data")
-  // }
-
-
-  // },[])
-  // useEffect(()=>{
-  //   console.log(products)
-
-  // },[])
+  const [categoryOption,setCategoryOption]=useState();
+ 
   return (
     <>
     <h1 className="category_header" align="center">
-      CATEGORIES</h1>
+      CATEGORIES
+    {  loading && 
+            <Spinner />
+          }
+      </h1>
+      <h2 align="center">
+        Choose a category:
+        <select onChange={(e)=>setCategoryOption(e.target.value)}>
+          <option value="clothing" >Clothing</option>
+          <option value="others">Others</option>
+          <option value="electronics">Electronics</option>
+          <option value="furniture">Furniture</option>
+        </select>
+      </h2>
+
       
       <div className="category">
 
-        <div className="clothing">
-          {loading ? (<div className="loader">
-            <Spinner />
-            please wait...
+      
 
-          </div>) :
-            (
-              <><h2>Clothing</h2><div className="items_container">
+               {/* <> */}
                 {products?.map((prod) => (
-                  prod.category==='clothing'?
-                 ( <div className="clothing_items">
+                  prod.category===categoryOption?
+                 ( <div className="category_items">
                     <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${prod._id}`} alt={prod.name} />
                     <h2>{prod.name.slice(0, 15)} {prod.name[15] ? "..." : ""}</h2>
                     <h3>Rs.{prod.price}</h3>
                   </div>):
                   ''
 
+                  // (<div className="not_found">
+                  //   Items not found
+                  // </div>
+                  //   )
+
                 ))}
-              </div></>
+             
+               {/* </> */}
               
-            )}
 
 
 
 
         </div>
-      </div>
       </>
   )
 }

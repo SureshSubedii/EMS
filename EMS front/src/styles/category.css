@@ -1,5 +1,9 @@
 .category{
     width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+ 
  
 }
 .clothing{
@@ -7,24 +11,31 @@
     flex-direction: column;
 
 }
-.items_container{
-    width: 80vw;
+/* .categories_options{
+    background-color: aliceblue;
+    width: max-content;
+    position: absolute;
+    left: -10%;
+    top:500%
+} */
 
-    display:flex;
-    /* flex-direction: column; */
-    margin:5px;
-    overflow-x: scroll;
-    height: max-content;
-}
-.clothing_items>img{
-    width:25vw
-}
-.clothing_items{
-    width:25vw;
-    margin: 5px;
-    background-color: white;
+.category_items{
     height: auto;
-
-
-
+    margin: 5px;
+    width:22vw;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
 }
+.category_items>img{
+    width:18vw;
+    object-fit: contain;
+}
+/* .category{
+    width:20vw;
+    margin: 5px;
+    background-color: rgb(183, 81, 81);
+    height: auto
+
+
+} */

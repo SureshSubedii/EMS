@@ -85,8 +85,11 @@ function Sidebar() {
 
       <p className='sidebar_items' onClick={() => toggle('category', 2)}>
         <CategoryOutlinedIcon />
-        Category
+        Category &gt;
+        
+        
       </p>
+    
 
       <p className='sidebar_items' onClick={() => toggle('cart', 3)}>
         <ShoppingCartOutlinedIcon />
