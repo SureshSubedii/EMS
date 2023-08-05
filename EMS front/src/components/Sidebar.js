@@ -53,6 +53,11 @@ function Sidebar() {
     const storedIndex = sessionStorage.getItem('selectedItemIndex')
 
     document.querySelectorAll('.sidebar_items')[storedIndex]?.classList.add('selected')
+    if(!storedIndex){
+    document.querySelectorAll('.sidebar_items')[0]?.classList.add('selected')
+
+
+    }
 
     const element = document.querySelector('.sidebar .sidebar_items:nth-child(5)');
     element.style.setProperty('--noOfCartProducts', `'${cartLength}'`);
