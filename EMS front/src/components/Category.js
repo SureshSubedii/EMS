@@ -1,19 +1,30 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import '../styles/category.css';
 import Spinner from './Spinner';
 
 function Category({ products, loading }) {
-  const [categoryOption,setCategoryOption]=useState();
+  const [categoryOption,setCategoryOption]=useState('clothing');
+  const navigate=useNavigate();
+  const handleClick=(productDetails)=>{
+    sessionStorage.removeItem('productdetails');
+    let productDetailsStringified=JSON.stringify(productDetails)
+    sessionStorage.setItem('productDetails',productDetailsStringified)
+    navigate("/productDetails")
+  }
  
   return (
     <>
     <h1 className="category_header" align="center">
       CATEGORIES
-    {  loading && 
-            <Spinner />
-          }
+      {loading && <div className="loader">
+        <Spinner />
+        please wait...
+
+      </div>}
+      
       </h1>
-      <h2 align="center">
+     {!loading && <h2 align="center">
         Choose a category:
         <select onChange={(e)=>setCategoryOption(e.target.value)}>
           <option value="clothing" >Clothing</option>
@@ -21,7 +32,7 @@ function Category({ products, loading }) {
           <option value="electronics">Electronics</option>
           <option value="furniture">Furniture</option>
         </select>
-      </h2>
+      </h2>}
 
       
       <div className="category">
@@ -31,10 +42,13 @@ function Category({ products, loading }) {
                {/* <> */}
                 {products?.map((prod) => (
                   prod.category===categoryOption?
-                 ( <div className="category_items">
+                 ( <div className="category_items" onClick={()=>handleClick(products)}>
                     <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${prod._id}`} alt={prod.name} />
-                    <h2>{prod.name.slice(0, 15)} {prod.name[15] ? "..." : ""}</h2>
-                    <h3>Rs.{prod.price}</h3>
+                   <div>
+                   <h2>{prod.name.slice(0, 15)} {prod.name[15] ? "..." : ""}</h2>
+                    <p color='red'>Rs.{prod.price}</p>
+                     </div> 
+                    
                   </div>):
                   ''
 

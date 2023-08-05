@@ -6,7 +6,7 @@ import '../styles/productDetails.css';
 function ProductsDetails() {
     const [productDetails, setProductDetails] = useState({});
     const [randomValue, setRandom] = useState(2);
-    const navigate=useNavigate();
+    const navigate = useNavigate();
 
 
     useEffect(() => {
@@ -20,18 +20,19 @@ function ProductsDetails() {
     }, [])
     return (
         <div className='show_product_details'>
-            <p className='back' onClick={()=>navigate("/")}>&larr;</p>
+            <p className='back' onClick={() => navigate("/")}>&larr;</p>
 
 
             <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${productDetails._id}`} alt={productDetails.name} />
 
             <p className="title">
                 {productDetails.name}
-
             </p>
+
             <p className="price">
                 Rs.{productDetails.price}
             </p>
+            
             <p className="description">
                 {productDetails.description}.
             </p>

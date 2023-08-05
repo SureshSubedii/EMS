@@ -17,7 +17,6 @@ function Sidebar() {
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [cartLength, setCartLength] = useState(0)
-  const [products, setProducts] = useState([])
 
   const cart = useSelector(cartCheck);
 
@@ -47,7 +46,6 @@ function Sidebar() {
   
   useEffect(() => {
     findCartLength();
-    console.log(products)
   }, [cart])
 
   useEffect(() => {
@@ -74,7 +72,7 @@ function Sidebar() {
 
         </h1>
       </div>
-      <p className='sidebar_items ' products={products} onClick={() => toggle('', 0)}>
+      <p className='sidebar_items '  onClick={() => toggle('', 0)}>
         <DeckOutlinedIcon />
         Products
       </p>
