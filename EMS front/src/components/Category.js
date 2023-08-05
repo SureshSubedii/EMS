@@ -7,7 +7,8 @@ function Category({ products, loading }) {
   const [categoryOption,setCategoryOption]=useState('clothing');
   const navigate=useNavigate();
   const handleClick=(productDetails)=>{
-    sessionStorage.removeItem('productdetails');
+    sessionStorage.removeItem('productDetails');
+    console.log( sessionStorage.getItem('productDetails'))
     let productDetailsStringified=JSON.stringify(productDetails)
     sessionStorage.setItem('productDetails',productDetailsStringified)
     navigate("/productDetails")
@@ -42,7 +43,7 @@ function Category({ products, loading }) {
                {/* <> */}
                 {products?.map((prod) => (
                   prod.category===categoryOption?
-                 ( <div className="category_items" onClick={()=>handleClick(products)}>
+                 ( <div className="category_items" key={prod._id} onClick={()=>handleClick(prod)}>
                     <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${prod._id}`} alt={prod.name} />
                    <div>
                    <h2>{prod.name.slice(0, 15)} {prod.name[15] ? "..." : ""}</h2>

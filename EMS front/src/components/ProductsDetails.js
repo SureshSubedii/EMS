@@ -10,6 +10,7 @@ function ProductsDetails() {
 
 
     useEffect(() => {
+
         let parsedProduct = JSON.parse(sessionStorage.getItem("productDetails"))
         setProductDetails(parsedProduct)
         setRandom(Math.random() * 3 + 2)
@@ -37,7 +38,7 @@ function ProductsDetails() {
                 {productDetails.description}.
             </p>
 
-            <p className="category">
+            <p className="categories">
                 Category: {productDetails.category}
             </p>
 
