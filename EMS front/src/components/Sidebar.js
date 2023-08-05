@@ -43,7 +43,7 @@ function Sidebar() {
 
 
   }
-  
+
   useEffect(() => {
     findCartLength();
   }, [cart])
@@ -61,21 +61,23 @@ function Sidebar() {
 
   return (
     <div className='sidebar'>
+
       <div className='user'>
+        
         <h1 className='username'>
           {username}
           <IconButton className='menu' onClick={() => handleHide()}>
             <Menu />
           </IconButton>
-
           {admin && <p>(Admin)  </p>}
-
         </h1>
       </div>
-      <p className='sidebar_items '  onClick={() => toggle('', 0)}>
+
+      <p className='sidebar_items ' onClick={() => toggle('', 0)}>
         <DeckOutlinedIcon />
         Products
       </p>
+
       <p className='sidebar_items' onClick={() => toggle('addProduct', 1)}>
         <AddToPhotos />
         Add Products
@@ -84,10 +86,8 @@ function Sidebar() {
       <p className='sidebar_items' onClick={() => toggle('category', 2)}>
         <CategoryOutlinedIcon />
         Category &gt;
-        
-        
       </p>
-    
+
 
       <p className='sidebar_items' onClick={() => toggle('cart', 3)}>
         <ShoppingCartOutlinedIcon />
@@ -95,16 +95,19 @@ function Sidebar() {
       </p>
 
       {admin &&
-        <><p className='sidebar_items' onClick={() => toggle('manageProducts', 4)}>
-          <AlignHorizontalCenterOutlinedIcon />
-          Manage Products
-        </p><p
-          className='sidebar_items'
-          onClick={() => toggle('userManagement', 5)}
-        >
+        <>
+          <p className='sidebar_items' onClick={() => toggle('manageProducts', 4)}>
+            <AlignHorizontalCenterOutlinedIcon />
+            Manage Products
+          </p>
+
+          <p
+            className='sidebar_items'
+            onClick={() => toggle('userManagement', 5)}>
             <ManageAccountsIcon />
             User Management
-          </p></>
+          </p>
+        </>
       }
     </div>
   )

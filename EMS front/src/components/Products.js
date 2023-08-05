@@ -69,15 +69,11 @@ function Products({products,loading}) {
 
   return (
     <>
-  
-      <h1  className="product_header" align="center">
-      
-  PRODUCTS</h1>
+      <h1  className="product_header" align="center">PRODUCTS</h1>
 
       {loading && <div className="loader">
         <Spinner />
         please wait...
-
       </div>}
       
       {!loading && <div className="searchBar">
@@ -88,9 +84,6 @@ function Products({products,loading}) {
       {searchData && <p align="center" className='results'>{filteredProducts?.length} results found!</p>}
 
       <div className='products'>
-
-
-
         {filteredProducts?.map((product) => {
           return (
             <div className="items" key={product._id} onClick={()=>handleClick(product)}>
@@ -100,11 +93,10 @@ function Products({products,loading}) {
                 <h3>Rs.{product.price}</h3>
                 <button onClick={(e) => handleAddToCart(e,product.name, product.price, product.description, product._id, product.category)}>Add to cart</button>
               </div>
-
-
             </div>
           );
         })}
+        
       </div>
       </>
 

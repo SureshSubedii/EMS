@@ -12,24 +12,23 @@ function Home() {
     document.querySelector(".home_menu")?.classList.add("hide")
 
   }, [])
-  const handleShow=()=>{
+  const handleShow = () => {
     document.querySelector(".sidebar").classList.remove("hide")
     document.querySelector(".home_menu").classList.add("hide")
-  
+
   }
-  
+
   return (
-    <div  className="home">
-       
-      <Sidebar/> 
-      <div className="home_menu">
-<IconButton  onClick={()=>handleShow()}>
-         <Menu />
-          </IconButton> 
-</div>
-  
+    <div className="home">
+      <Sidebar />
       
-      <Appcontents/>
+      <div className="home_menu">
+        <IconButton onClick={() => handleShow()}>
+          <Menu />
+        </IconButton>
+      </div>
+
+      <Appcontents />
     </div>
   )
 }

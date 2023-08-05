@@ -16,10 +16,10 @@ import UserManagement from './UsersManagement'
 
 
 function Appcontents() {
-  const admin=useSelector(adminCheck);
-  const location=useLocation();
+  const admin = useSelector(adminCheck);
+  const location = useLocation();
   const [products, setProducts] = useState([])
-  const [loading,setLoading]=useState(false)
+  const [loading, setLoading] = useState(false)
 
   const getProducts = async () => {
     try {
@@ -34,43 +34,34 @@ function Appcontents() {
       if (err.response && err.response.data && err.response.data.error) {
         toast.error(err.response.data.error)
 
-        
+
       } else {
         toast.error(err.message);
       }
     }
 
-    }
-  
+  }
+
 
   useEffect(() => {
     getProducts()
 
-  
+
   }, [])
-  
+
   return (
     <>
-    
-    <div className='appcontents'>
- 
-
-
-         <Routes>
-         <Route path="/" element={<Products loading={loading} products={products}/>}/>
-        <Route  path="/addProduct" element={<AddProducts/>}/>
-        {admin && <Route  path="/userManagement" element={<UserManagement/>}/>}
-        <Route  path="/cart" element={<Cart/>}/>
-        <Route  path="/category" element={<Category  loading={loading} products={products}/>} />
-        <Route path='productDetails' element={<ProductsDetails/>}/>
-        <Route path='manageProducts' element={<ManageProducts  loading={loading} products={products}/>}/>
-
-
-
-
-          
-            </Routes>
-    </div>
+      <div className='appcontents'>
+        <Routes>
+          <Route path="/" element={<Products loading={loading} products={products} />} />
+          <Route path="/addProduct" element={<AddProducts />} />
+          {admin && <Route path="/userManagement" element={<UserManagement />} />}
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/category" element={<Category loading={loading} products={products} />} />
+          <Route path='productDetails' element={<ProductsDetails />} />
+          <Route path='manageProducts' element={<ManageProducts loading={loading} products={products} />} />
+        </Routes>
+      </div>
     </>
 
   )

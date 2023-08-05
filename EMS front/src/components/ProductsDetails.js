@@ -21,8 +21,8 @@ function ProductsDetails() {
     }, [])
     return (
         <div className='show_product_details'>
+            
             <p className='back' onClick={() => navigate(-1)}>&larr;</p>
-
 
             <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${productDetails._id}`} alt={productDetails.name} />
 
