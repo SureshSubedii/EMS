@@ -25,16 +25,21 @@
 
 }
 
-.username>.menu {
+.user>.menu {
     color: rgb(255, 255, 255);
-    position: absolute;
-    top: 2%;
-    ;
-    right: 0;
+    /* position: absolute; */
+    /* top: 1%; */
+    /* right: 0;  */
 }
 
-.username>.menu:hover {
+.user>.menu:hover {
     background-color: rgb(150, 158, 163);
+}
+.username>.avtr{
+    color: rgb(12, 12, 12);
+    height: 100%;
+    /* width: 20%; */
+    margin-right: 4px;
 }
 
 .sidebar_items {
@@ -71,10 +76,13 @@
     display: flex;
     margin: 5px;
     align-items: center;
+    justify-content: space-between;
 }
 
 .username {
+    display: flex;
     margin: 3px;
+    align-items: center;
 }
 
 .sidebar_items:hover {

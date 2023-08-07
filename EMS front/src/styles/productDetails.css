@@ -1,13 +1,13 @@
 .show_product_details{
     width:90%;
-    background-color: rgb(251, 252, 252);
-    margin:0 auto ;
+    background-color: rgb(237, 237, 237);
+    margin:1% auto ;
     height: max-content;
     border-radius: 2%;
     display: flex;
     flex-direction: column;
     /* justify-content: center; */
-    margin-top: 4%;
+    /* margin-top: 3%; */
     position: relative;
 }
 .show_product_details>.back{
@@ -78,7 +78,7 @@
     
     
         }
-        .show_product_details>.category,.rating{
+        .show_product_details>.categories,.rating{
     font-size: 1.2em;
 
         }
@@ -98,7 +98,7 @@
 
 
         }
-        .show_product_details>.category,.rating{
+        .show_product_details>.categories,.rating{
     font-size: 0.8em;
 
         }

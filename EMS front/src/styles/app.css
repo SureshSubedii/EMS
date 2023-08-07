@@ -1,5 +1,5 @@
 .app_header{
-    background:linear-gradient(to right,rgb(133, 61, 19),rgb(51, 23, 23)); 
+    background:linear-gradient(to right,rgb(148, 11, 29),rgb(46, 165, 155)); 
     color:white;
     display: flex;
     position: sticky;
@@ -32,7 +32,7 @@ body{
  
 }
 .header_button{
-    background-color: blue;
+    background-color: rgb(36, 36, 179);
     color:white;
     font-weight: bold;
     margin:5px;

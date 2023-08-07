@@ -1,9 +1,9 @@
 .home{
-    margin: 10px;
+    /* margin-left: 1%; */
     height: 94vh;
     width:99vw;
-    background-color: rgb(207, 196, 196);
-    opacity: 0.95;
+    background-color:rgb(225, 213, 213);
+    /* opacity: 0.95; */
     display: flex;
     border-radius: 10px;
     overflow: scroll;

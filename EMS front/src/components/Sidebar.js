@@ -4,7 +4,7 @@ import CategoryOutlinedIcon from '@mui/icons-material/CategoryOutlined'
 import DeckOutlinedIcon from '@mui/icons-material/DeckOutlined'
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts'
 import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined'
-import { IconButton } from '@mui/material'
+import { Avatar, IconButton } from '@mui/material'
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
@@ -67,15 +67,19 @@ function Sidebar() {
   return (
     <div className='sidebar'>
 
-      <div className='user'>
+      <div className='user' >
         
-        <h1 className='username'>
+        <h1 className='username' >
+        <Avatar className='avtr'/>
+
           {username}
+          {admin && <p>(Admin)  </p>}
+
+        </h1>
+
           <IconButton className='menu' onClick={() => handleHide()}>
             <Menu />
           </IconButton>
-          {admin && <p>(Admin)  </p>}
-        </h1>
       </div>
 
       <p className='sidebar_items ' onClick={() => toggle('', 0)}>

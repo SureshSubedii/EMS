@@ -1,9 +1,9 @@
 .cart{
     display: flex;
     flex-wrap: wrap;
-    margin-left: 2.5%;
     align-content: flex-start;
-    width:100%;
+    justify-content: center;
+    width:99%;
 
 
 }
