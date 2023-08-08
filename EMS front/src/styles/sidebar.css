@@ -104,10 +104,10 @@
 
     }
 
-    .sidebar .sidebar_items:nth-child(6)::after {
+    /* .sidebar .sidebar_items:nth-child(4)::after {
         font-size: 10px;
         padding: 3px;
-    }
+    } */
 
     .user {
         margin: 3px;

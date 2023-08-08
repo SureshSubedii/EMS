@@ -61,8 +61,9 @@ function Sidebar() {
     }
 
     const element = document.querySelector('.sidebar .sidebar_items:nth-child(4)');
-    element.style.setProperty('--noOfCartProducts', `'${cartLength}'`);
+    element.style.setProperty('--noOfCartProducts',`'${cartLength}'`);
     console.log(cartLength);
+    sessionStorage.setItem('total_cart_length',cartLength)
   }, [cartLength]);
 
   return (
