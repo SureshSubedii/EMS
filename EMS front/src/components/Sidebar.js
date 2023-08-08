@@ -29,6 +29,7 @@ function Sidebar() {
     document.querySelectorAll('.sidebar_items')[i]?.classList.add('selected')
     navigate(`/${cpath}`)
   }
+  
   const findCartLength = async () => {
     setTimeout(async () => {
       setUsername(sessionStorage.getItem('uploader'))
@@ -59,7 +60,7 @@ function Sidebar() {
 
     }
 
-    const element = document.querySelector('.sidebar .sidebar_items:nth-child(5)');
+    const element = document.querySelector('.sidebar .sidebar_items:nth-child(4)');
     element.style.setProperty('--noOfCartProducts', `'${cartLength}'`);
     console.log(cartLength);
   }, [cartLength]);
@@ -73,7 +74,7 @@ function Sidebar() {
         <Avatar className='avtr'/>
 
           {username}
-          {admin && <p>(Admin)  </p>}
+          {admin && (' (Admin)')}
 
         </h1>
 
@@ -87,24 +88,25 @@ function Sidebar() {
         Products
       </p>
 
-      <p className='sidebar_items' onClick={() => toggle('addProduct', 1)}>
-        <AddToPhotos />
-        Add Products
-      </p>
+     
 
-      <p className='sidebar_items' onClick={() => toggle('category', 2)}>
+      <p className='sidebar_items' onClick={() => toggle('category', 1)}>
         <CategoryOutlinedIcon />
         Category &gt;
       </p>
 
 
-      <p className='sidebar_items' onClick={() => toggle('cart', 3)}>
+      <p className='sidebar_items' onClick={() => toggle('cart', 2)}>
         <ShoppingCartOutlinedIcon />
         Cart
       </p>
 
       {admin &&
         <>
+         <p className='sidebar_items' onClick={() => toggle('addProduct', 3)}>
+        <AddToPhotos />
+        Add Products
+      </p>
           <p className='sidebar_items' onClick={() => toggle('manageProducts', 4)}>
             <AlignHorizontalCenterOutlinedIcon />
             Manage Products

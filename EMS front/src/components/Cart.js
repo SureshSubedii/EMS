@@ -68,15 +68,18 @@ function Cart() {
           return (
             <div className="cart_items" key={product.pid}>
               <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product.pid}`} alt={product.name} />
-                <h2>{product.name.slice(0, 15)} {product.name[15] ? "..." : ""}</h2>
-              <div className="product_details">
-
-                <h3>Rs.{product.price}</h3>
+                <h2 className='cart_name'>{product.name}</h2>
                 <div className="count">
                   <button onClick={() => decreaseCount(index)}>-</button>
                   {counts[index]}
                   <button onClick={() => increaseCount(index)}>+</button>
                 </div>
+
+              <div className="product_details">
+              <h3>Rs.{product.price}</h3>
+
+
+                
                {counts[index]!=0 && <button className="buy">Buy</button>}
               </div>
             </div>

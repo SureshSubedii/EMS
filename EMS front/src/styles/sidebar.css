@@ -61,7 +61,7 @@
     margin-right: 5px;
 }
 
-.sidebar .sidebar_items:nth-child(5)::after {
+.sidebar .sidebar_items:nth-child(4)::after {
     content: var(--noOfCartProducts);
     color: white;
     background-color: red;
