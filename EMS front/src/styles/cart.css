@@ -1,11 +1,30 @@
+.cart_container{
+    display: flex;
+    width:99%;
+    background-color: rgb(188, 190, 190);
+    position: relative;
+    height: 85vh;
+    overflow: scroll;
+
+
+}
 .cart{
     display: flex;
     flex-direction: column;
+    /* width: 50%; */
+    flex:1;
+    
     /* flex-wrap: wrap; */
-    width:99%;
-    background-color: rgb(188, 190, 190);
 
 
+
+}
+.cart_right{
+    /* background-color: aqua; */
+    position: sticky;
+    top: 10%;
+    right: 10%;
+    
 }
 .cart_product_details{
     /* width:5%; */

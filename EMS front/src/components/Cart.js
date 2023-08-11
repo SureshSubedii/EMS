@@ -23,7 +23,7 @@ function Cart() {
     setCounts((prevCounts) => {
       const newCounts = [...prevCounts];
       newCounts[index] = newCounts[index] + 1;
-      setTotalCartLength(prev => prev+1)
+      setTotalCartLength(totalCartLength+1)
       return newCounts;
     });
   };
@@ -35,6 +35,7 @@ function Cart() {
       const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(1));
+      setTotalCartLength(response.data.length)
 
       setLoading(false)
     } catch (error) {
@@ -48,9 +49,9 @@ function Cart() {
   };
 
   useEffect(() => {
-    const noOfCartProducts = sessionStorage.getItem('total_cart_length');
+    // const noOfCartProducts = sessionStorage.getItem('total_cart_length');
 
-      setTotalCartLength(parseInt(noOfCartProducts));
+      // setTotalCartLength(parseInt(noOfCartProducts));
     getCart();
   }, []);
   
@@ -72,11 +73,11 @@ function Cart() {
       </div>}
 
 
-
-      <div className='cart'>
+<div className="cart_container">
+<div className='cart'>
         {products?.map((product, index) => {
           return (
-            <div className="cart_items" key={product.pid}>
+            <div className="cart_items" key={product.pid} >
               <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product.pid}`} alt={product.name} />
               <h2 className='cart_name'>{product.name}</h2>
               <div className="count">
@@ -86,7 +87,7 @@ function Cart() {
               </div>
 
               <div className="cart_product_details">
-                <h3>Rs.{product.price} {totalCartLength}</h3>
+                <h3>Rs.{product.price}</h3>
 
 
 
@@ -97,8 +98,16 @@ function Cart() {
             </div>
           );
         })}
+      
 
       </div>
+      <div className="cart_right">
+        Total Items =  {totalCartLength}
+
+        </div>
+
+</div>
+     
     </>
   );
 }
