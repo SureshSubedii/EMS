@@ -8,24 +8,32 @@ function Cart() {
   const [counts, setCounts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalCartLength, setTotalCartLength] = useState(0);
+  const[totalPrice,setTotalPrice]=useState(0);
 
 
 
-  const decreaseCount = (index) => {
+  const decreaseCount = (index,price) => {
     setCounts((prevCounts) => {
       const newCounts = [...prevCounts];
       newCounts[index] = newCounts[index] === 0 ? 0 : newCounts[index] - 1;
+     
+
       return newCounts;
-    });
+    })
+    setTotalCartLength(()=>counts[index]===0?totalCartLength:totalCartLength-1)
+
+    setTotalPrice(()=>counts[index]===0?totalPrice:totalPrice-price)
   };
 
   const increaseCount = (index, price) => {
     setCounts((prevCounts) => {
       const newCounts = [...prevCounts];
       newCounts[index] = newCounts[index] + 1;
-      setTotalCartLength(totalCartLength+1)
+      
       return newCounts;
     });
+    setTotalCartLength((prev)=>prev+1)
+      setTotalPrice((prev)=>prev+price)
   };
 
   const getCart = async () => {
@@ -36,6 +44,7 @@ function Cart() {
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(1));
       setTotalCartLength(response.data.length)
+      setTotalPrice(response.data.reduce((acc,current)=>acc+current.price,0))
 
       setLoading(false)
     } catch (error) {
@@ -49,15 +58,11 @@ function Cart() {
   };
 
   useEffect(() => {
-    // const noOfCartProducts = sessionStorage.getItem('total_cart_length');
 
-      // setTotalCartLength(parseInt(noOfCartProducts));
     getCart();
   }, []);
   
-  // useEffect(() => {
-  //   console.log(totalCartLength);
-  // }, [totalCartLength]);
+
 
   return (
     <>
@@ -88,12 +93,7 @@ function Cart() {
 
               <div className="cart_product_details">
                 <h3>Rs.{product.price}</h3>
-
-
-
-
-                {counts[index] != 0
-                }
+              
               </div>
             </div>
           );
@@ -102,7 +102,13 @@ function Cart() {
 
       </div>
       <div className="cart_right">
-        Total Items =  {totalCartLength}
+        Total Items =  {totalCartLength} <br/>
+        Total  =RS {totalPrice}  <br/>
+        Discount = RS {2/100 *totalPrice} <br/>
+        <hr/>   
+        Amount =RS {totalPrice -2/100 *totalPrice} <br/>
+
+        <button className="buy">Buy</button>
 
         </div>
 
