@@ -40,7 +40,7 @@ function Cart() {
     try {
       setLoading(true)
 
-      const response = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
+      const response = await axios.get(`http://localhost:5000/api/v1/product/showCart/${sessionStorage.getItem("userId")}`);
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(1));
       setTotalCartLength(response.data.length)
@@ -83,7 +83,7 @@ function Cart() {
         {products?.map((product, index) => {
           return (
             <div className="cart_items" key={product.pid} >
-              <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product.pid}`} alt={product.name} />
+              <img src={`http://localhost:5000/api/v1/product/getProductPhoto/${product.pid}`} alt={product.name} />
               <h2 className='cart_name'>{product.name}</h2>
               <div className="count">
                 <button onClick={() => decreaseCount(index, product.price)}>-</button>
@@ -104,9 +104,9 @@ function Cart() {
       <div className="cart_right">
         Total Items =  {totalCartLength} <br/>
         Total  =RS {totalPrice}  <br/>
-        Discount = RS {2/100 *totalPrice} <br/>
+        Discount = RS {1/100 *totalPrice} <br/>
         <hr/>   
-        Amount =RS {totalPrice -2/100 *totalPrice} <br/>
+        Amount =RS {totalPrice -1/100 *totalPrice} <br/>
 
         <button className="buy">Buy</button>
 

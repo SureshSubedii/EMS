@@ -9,7 +9,7 @@ function UsersManagement() {
   const deleteUSer=(uid)=>{
     const ans=window.confirm("Are you sure?")
     if(ans){
-      axios.delete(`http://192.168.18.177:5000/api/v1/user/manageUser/deleteUSer/${uid}`)
+      axios.delete(`http://localhost:5000/api/v1/user/manageUser/deleteUSer/${uid}`)
       .then(response=>{
         alert(response.data.success)
          window.location.reload()
@@ -29,7 +29,7 @@ function UsersManagement() {
    
 
   useEffect(()=>{
-  axios.get("http://192.168.18.177:5000/api/v1/user/manageUser").then(response=>{
+  axios.get("http://localhost:5000/api/v1/user/manageUser").then(response=>{
     setUsers(response.data)
   } )
   .catch(()=>alert("Error in fetching users"))

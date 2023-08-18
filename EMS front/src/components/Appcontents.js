@@ -24,7 +24,7 @@ function Appcontents() {
   const getProducts = async () => {
     try {
       setLoading(true)
-      const response = await axios.get('http://192.168.18.177:5000/api/v1/product/getAllProducts');
+      const response = await axios.get('http://localhost:5000/api/v1/product/getAllProducts');
       setProducts(response.data)
       setLoading(false)
 

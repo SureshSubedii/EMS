@@ -121,7 +121,6 @@
 }
 @media  (max-height:565px)  {
     .addProducts{
-        /* position: static; */
         margin: 10%;
     }
 }

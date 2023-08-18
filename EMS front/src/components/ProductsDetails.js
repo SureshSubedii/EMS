@@ -24,7 +24,7 @@ function ProductsDetails() {
             
             <p className='back' onClick={() => navigate(-1)}>&larr;</p>
 
-            <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${productDetails._id}`} alt={productDetails.name} />
+            <img src={`http://localhost:5000/api/v1/product/getProductPhoto/${productDetails._id}`} alt={productDetails.name} />
 
             <p className="title">
                 {productDetails.name}

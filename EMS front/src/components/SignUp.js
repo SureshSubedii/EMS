@@ -23,7 +23,7 @@ function SignUp() {
     setLoading(true)
 
     try {
-      const response = await axios.post('http://192.168.18.177:5000/api/v1/user/userSignup', data, {
+      const response = await axios.post('http://localhost:5000/api/v1/user/userSignup', data, {
         headers: {
           'Content-Type': 'application/json',
          'Cache-Control': 'no-cache'

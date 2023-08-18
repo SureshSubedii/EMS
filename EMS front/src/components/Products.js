@@ -32,7 +32,7 @@ function Products({products,loading}) {
       formData.append('userId', userId)
       formData.append('pid', pid)
       formData.append('category', category)
-      const response = await axios.post('http://192.168.18.177:5000/api/v1/product/addToCart', formData,
+      const response = await axios.post('http://localhost:5000/api/v1/product/addToCart', formData,
         {
           headers: {
             'Content-Type': 'application/json',
@@ -87,7 +87,7 @@ function Products({products,loading}) {
         {filteredProducts?.map((product) => {
           return (
             <div className="items" key={product._id} onClick={()=>handleClick(product)}>
-              <img src={`http://192.168.18.177:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
+              <img src={`http://localhost:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
               <div className="product_details">
                 <h2>{product.name.slice(0, 15)} {product.name[15] ? "..." : ""}</h2>
                 <h3>Rs.{product.price}</h3>

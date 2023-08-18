@@ -33,7 +33,7 @@ function Sidebar() {
   const findCartLength = async () => {
     setTimeout(async () => {
       setUsername(sessionStorage.getItem('uploader'))
-      const res = await axios.get(`http://192.168.18.177:5000/api/v1/product/showCart/${sessionStorage.getItem('userId')}`)
+      const res = await axios.get(`http://localhost:5000/api/v1/product/showCart/${sessionStorage.getItem('userId')}`)
       setCartLength(res.data.length)
     }, 0)
   }
