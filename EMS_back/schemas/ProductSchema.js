@@ -12,10 +12,10 @@ const productSchema=new Schema({
         contentType:String
     },
     uploader:String,
-    userId: {
-        type: Schema.Types.ObjectId,
-        required: true,
-      },
+    // userId: {
+    //     type: Schema.Types.ObjectId,
+    //     required: true,
+    //   },
 
 })
 export default mongoose.model('product',productSchema);

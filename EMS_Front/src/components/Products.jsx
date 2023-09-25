@@ -89,7 +89,7 @@ function Products({products,loading}) {
             <div className="items" key={product._id} onClick={()=>handleClick(product)}>
               <img src={`http://localhost:5000/api/v1/product/getProductPhoto/${product._id}`} alt={product.name} />
               <div className="product_details">
-                <h2>{product.name.slice(0, 15)} {product.name[15] ? "..." : ""}</h2>
+                <h2>{product?.name.slice(0, 15)} {product.name[15] ? "..." : ""}</h2>
                 <h3>Rs.{product.price}</h3>
                 <button onClick={(e) => handleAddToCart(e,product.name, product.price, product.description, product._id, product.category)}>Add to cart</button>
               </div>

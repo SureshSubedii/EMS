@@ -3,29 +3,27 @@ import Cart from '../schemas/CartSchema.js';
 import Product from '../schemas/ProductSchema.js';
 
 const addProduct = async (req, res) => {
-  console.log(req.fields.productName);
-
   const productData = req.fields;
+  const { image} = req.files
   try {
     const product = new Product({
       name: productData.productName,
       description: productData.description,
       price: productData.price,
       category: productData.categorySelect,
-      uploader: productData.uploader,
-      photo: {
-        data: fs.readFileSync(req.files.image.path),
-        contentType: req.files.image.type,
-      },
-      userId:productData.userId
+      uploader: productData.uploader
+  
     });
-
+    if(image){
+      console.log(image.type)
+      product.photo.data =  fs.readFileSync(image.path)
+      product.photo.contentType = image.type
+    }
     await product.save();
-
     res.status(201).json({ message: 'Product added successfully' });
   }
    catch (error) {
-    res.status(500).json({ error: 'Failed to add product' });
+    res.status(500).json({ error: error.message });
   }
 };
 
@@ -54,7 +52,6 @@ const getProductPhoto = async (req, res) => {
 
 const addToCart=async (req,res)=>{
   const check= await Cart.findOne({pid:req.body.pid,userId:req.body.userId})
-  console.log(check)
   if(check){
     res.json({"success":"Product is already in the cart"})
   }
@@ -75,10 +72,10 @@ const addToCart=async (req,res)=>{
   const showCart=async (req,res)=>{
     try{
       const check= await Cart.find({userId:req.params.userId})
-      console.log(req.params.userId)
+      // console.log(req.params.userId)
       if(check){
         res.send(check)
-        console.log("Here")
+        // console.log("Here")
 
       }
       else{

@@ -43,7 +43,7 @@ function App() {
             dispatch(logout());
             dispatch(AdminLogOut());
             sessionStorage.clear()
-            navigate('/')
+            navigate('*')
             
          
 
