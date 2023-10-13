@@ -8,7 +8,7 @@ import "../styles/appcontents.css";
 import AddProducts from "./AddProducts";
 import Cart from "./Cart";
 import Category from "./Category";
-import ManageProducts from "./ManageProducts";
+// import ManageProducts from "./ManageProducts";
 import Products from "./Products";
 import ProductsDetails from "./ProductsDetails";
 import UserManagement from "./UsersManagement";
@@ -47,7 +47,7 @@ function Appcontents() {
       <div className="appcontents">
         <Routes>
           <Route
-            path="/"
+            path="*"
             element={<Products loading={loading} products={products} />}
           />
           <Route path="/addProduct" element={<AddProducts />} />
@@ -60,10 +60,6 @@ function Appcontents() {
             element={<Category loading={loading} products={products} />}
           />
           <Route path="productDetails" element={<ProductsDetails />} />
-          <Route
-            path="manageProducts"
-            element={<ManageProducts loading={loading} products={products} />}
-          />
         </Routes>
       </div>
     </>

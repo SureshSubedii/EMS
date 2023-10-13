@@ -4,9 +4,12 @@ import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import "../styles/addProducts.css";
 import "../styles/photoUpload.css";
+import { toast } from "react-toastify";
+import Spinner from "./Spinner";
 
 function AddProducts() {
   const [uploadedImage, setUploadedImage] = useState(null);
+  const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
   const {
@@ -21,10 +24,14 @@ function AddProducts() {
     if (selectedElement) {
       selectedElement.classList.remove("selected");
     }
-    document.querySelectorAll(".sidebar_items")[i]?.classList.add("selected") 
+    document.querySelectorAll(".sidebar_items")[i]?.classList.add("selected");
     navigate(`/${cpath}`);
+    setTimeout(() => {
+      window.location.reload();
+    }, 1000);
   };
   const onAdd = async (data) => {
+    setLoading(true);
     try {
       const formData = new FormData();
       formData.append("productName", data.productName);
@@ -46,19 +53,18 @@ function AddProducts() {
 
       const fetchedResults = response.data;
       if (fetchedResults?.message) {
-        alert(fetchedResults.message);
+        toast.success(fetchedResults.message);
       }
     } catch (err) {
       console.log(err);
       if (err.response && err.response.data && err.response.data.error) {
-        alert(err.response.data.error);
+        toast.error(err.response.data.error);
       } else {
-        alert(err.message);
+        toast.error(err.message);
       }
     }
-   toggle("", 0)
-    // window.location.reload()
-
+    toggle("", 0);
+    setLoading(false);
   };
 
   const onFileChange = (e) => {
@@ -138,6 +144,12 @@ function AddProducts() {
           <input type="submit" value="Add Product" />
         </div>
       </form>
+      {loading && (
+        <div className="loader">
+          <Spinner />
+          please wait...
+        </div>
+      )}
     </div>
   );
 }

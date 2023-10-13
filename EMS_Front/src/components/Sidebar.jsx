@@ -104,15 +104,7 @@ function Sidebar() {
           </p>
           <p
             className="sidebar_items"
-            onClick={() => toggle("manageProducts", 4)}
-          >
-            <AlignHorizontalCenterOutlinedIcon />
-            Manage Products
-          </p>
-
-          <p
-            className="sidebar_items"
-            onClick={() => toggle("userManagement", 5)}
+            onClick={() => toggle("userManagement", 4)}
           >
             <ManageAccountsIcon />
             User Management
