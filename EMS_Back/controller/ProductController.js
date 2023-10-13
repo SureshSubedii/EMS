@@ -4,7 +4,7 @@ import Product from '../schemas/ProductSchema.js';
 
 const addProduct = async (req, res) => {
   const productData = req.fields;
-  const { image} = req.files
+  const { image } = req.files
   try {
     const product = new Product({
       name: productData.productName,
@@ -12,17 +12,16 @@ const addProduct = async (req, res) => {
       price: productData.price,
       category: productData.categorySelect,
       uploader: productData.uploader
-  
+
     });
-    if(image){
-      console.log(image.type)
-      product.photo.data =  fs.readFileSync(image.path)
+    if (image) {
+      product.photo.data = fs.readFileSync(image.path)
       product.photo.contentType = image.type
     }
     await product.save();
     res.status(201).json({ message: 'Product added successfully' });
   }
-   catch (error) {
+  catch (error) {
     res.status(500).json({ error: error.message });
   }
 };
@@ -43,54 +42,61 @@ const getProductPhoto = async (req, res) => {
       return res.status(200).send(product.photo.data);
     }
   } catch (error) {
-    console.error(error);
     res.status(500).send({
       error: 'Failed to fetch product photo',
     });
   }
 };
 
-const addToCart=async (req,res)=>{
-  const check= await Cart.findOne({pid:req.body.pid,userId:req.body.userId})
-  if(check){
-    res.json({"success":"Product is already in the cart"})
+const addToCart = async (req, res) => {
+  const check = await Cart.findOne({ pid: req.body.pid, userId: req.body.userId })
+  if (check) {
+    res.json({ "success": "Product is already in the cart" })
   }
-  else{
-    const cart =new Cart({
+  else {
+    const cart = new Cart({
       ...req.body
-  
     })
-    cart.save().then(()=>{
-      res.json({"success":"Added to cart"})
+    cart.save().then(() => {
+      res.json({ "success": "Added to cart" })
     })
-    .catch(err=>res.status(500).json({"error":"Internal Server Error"}))
+      .catch(err => res.status(500).json({ "error": "Internal Server Error" }))
 
   }
-  
+
+}
+
+const showCart = async (req, res) => {
+  try {
+    const check = await Cart.find({ userId: req.params.userId })
+    if (check) {
+      res.send(check)
+
+    }
+    else {
+      res.status(404).json({ "error": "Nothing on the cart" })
+    }
+  }
+  catch (err) {
+    res.status(500).json({ "error": "Internal Server Error" })
   }
 
-  const showCart=async (req,res)=>{
-    try{
-      const check= await Cart.find({userId:req.params.userId})
-      // console.log(req.params.userId)
-      if(check){
-        res.send(check)
-        // console.log("Here")
+}
 
-      }
-      else{
-        res.status(404).send("Nothing on the cart")
-      }
-    }
-      catch(err){
-        console.log(err)
-        res.status(500).json({"error":"Internal Server Error"})
-      }
+const deleteProduct = async (req, res) =>{
+  try {
+    const product = await Product.deleteOne({_id: req.params.pid})
+    res.status(200).json({"success": "Product deleted successfully"})
+    
+  } catch (error) {
+    res.status(500).json({"error": "Internal Server Error"})
 
-    }
-   
+    
+  }
+}
 
 
 
-export { addProduct, addToCart, getAllProducts, getProductPhoto, showCart };
+
+export { addProduct, addToCart, getAllProducts, getProductPhoto, showCart, deleteProduct };
 
