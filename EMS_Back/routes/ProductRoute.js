@@ -1,15 +1,16 @@
 import express from 'express';
 import formidable from 'express-formidable';
-import { addProduct, addToCart, getAllProducts, getProductPhoto, showCart, deleteProduct } from '../controller/ProductController.js';
-const router=express.Router();
+import { addProduct, addToCart, getAllProducts, getProductPhoto, showCart, deleteProduct } from '../controller/productController.js';
+import verifyJWT from '../middlewares/authMiddleware.js';
+const route = express.Router();
 
-router.post('/addProduct', formidable(), addProduct);
-router.get('/getAllProducts', getAllProducts);
-router.get('/getProductPhoto/:pid', getProductPhoto);
-router.post('/addTocart', addToCart)
-router.get('/showCart/:userId', showCart)
-router.delete('/deleteProduct/:pid', deleteProduct)
+route.post('/addProduct', formidable(), verifyJWT, addProduct);
+route.get('/getAllProducts', verifyJWT, getAllProducts);
+route.get('/getProductPhoto/:pid', getProductPhoto);
+route.post('/addTocart', verifyJWT, addToCart)
+route.get('/showCart/:userId', showCart)
+route.delete('/deleteProduct/:pid',verifyJWT, deleteProduct)
 
 
 
-export default router
+export default route

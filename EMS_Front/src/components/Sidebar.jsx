@@ -1,5 +1,4 @@
 import { AddToPhotos, Menu } from "@mui/icons-material";
-import AlignHorizontalCenterOutlinedIcon from "@mui/icons-material/AlignHorizontalCenterOutlined";
 import CategoryOutlinedIcon from "@mui/icons-material/CategoryOutlined";
 import DeckOutlinedIcon from "@mui/icons-material/DeckOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
@@ -26,7 +25,7 @@ function Sidebar() {
     if (selectedElement) {
       selectedElement.classList.remove("selected");
     }
-    document.querySelectorAll(".sidebar_items")[i]?.classList.add("selected") 
+    document.querySelectorAll(".sidebar_items")[i]?.classList.add("selected");
     navigate(`/${cpath}`);
   };
 
@@ -48,7 +47,6 @@ function Sidebar() {
 
   useEffect(() => {
     findCartLength();
-    
   }, [cart]);
 
   useEffect(() => {
@@ -63,7 +61,6 @@ function Sidebar() {
       ".sidebar .sidebar_items:nth-child(4)"
     );
     element.style.setProperty("--noOfCartProducts", `'${cartLength}'`);
-    console.log(cartLength);
   }, [cartLength]);
 
   return (

@@ -1,6 +1,6 @@
 import fs from 'fs';
-import Cart from '../schemas/CartSchema.js';
-import Product from '../schemas/ProductSchema.js';
+import Cart from '../schemas/cartSchema.js';
+import Product from '../schemas/productSchema.js';
 
 const addProduct = async (req, res) => {
   const productData = req.fields;

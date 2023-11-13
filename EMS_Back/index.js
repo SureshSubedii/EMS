@@ -4,9 +4,9 @@ import cors from 'cors'
 import { config } from 'dotenv'
 import express from 'express'
 import { dbConnect } from './db.js'
-import ProductRoute from './routes/ProductRoute.js'
-import UserRoute from './routes/UserRoutes.js'
-import UserSchema from './schemas/UserSchema.js'
+import productRoute from './routes/productRoute.js'
+import userRoute from './routes/userRoutes.js'
+import UserSchema from './schemas/userSchema.js'
 config({path:'./.env'}); 
 
 
@@ -42,8 +42,8 @@ app.post('/createAdmin', async(req,res)=>{
 
 
 //Routes
-app.use('/api/v1/product',ProductRoute);
-app.use('/api/v1/user',UserRoute);
+app.use('/api/v1/product', productRoute);
+app.use('/api/v1/user',userRoute);
 
   
 

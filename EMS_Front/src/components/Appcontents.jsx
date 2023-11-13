@@ -3,43 +3,45 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { adminCheck } from "../stateManagement/userSlice";
+import { adminCheck, checkUser } from "../stateManagement/userSlice";
 import "../styles/appcontents.css";
 import AddProducts from "./AddProducts";
 import Cart from "./Cart";
 import Category from "./Category";
-// import ManageProducts from "./ManageProducts";
 import Products from "./Products";
 import ProductsDetails from "./ProductsDetails";
 import UserManagement from "./UsersManagement";
+import { useCallback } from "react";
 
 function Appcontents() {
   const admin = useSelector(adminCheck);
-  const location = useLocation();
+  const user = useSelector(checkUser)
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
 
-  const getProducts = async () => {
+  const debouncedGetProducts = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get(
-        "http://localhost:5000/api/v1/product/getAllProducts"
-      );
+      const response = await axios.get("http://localhost:5000/api/v1/product/getAllProducts", {
+        headers: {
+          Authorization: user,
+        },
+      });
       setProducts(response.data);
       setLoading(false);
     } catch (err) {
       setLoading(false);
-
+  
       if (err.response && err.response.data && err.response.data.error) {
         toast.error(err.response.data.error);
       } else {
         toast.error(err.message);
       }
     }
-  };
-
+  }, []);
+  
   useEffect(() => {
-    getProducts();
+    debouncedGetProducts();
   }, []);
 
   return (

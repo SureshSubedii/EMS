@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
-import User from '../schemas/UserSchema.js';
+import User from '../schemas/userSchema.js';
+import { generateJWT } from '../helpers/authHelper.js';
 
 
 
@@ -20,7 +21,7 @@ const userLogin = async (req, res) => {
            return  res.status(401).json({ "error": "Invalid credentials. Please try again." });
         }
 
-        const token = jwt.sign({ id: checkUser._id }, process.env.JWT_SECRET);
+        const token = await generateJWT(checkUser)
         let responseData={
             token,
             "uploader": checkUser.name,
@@ -39,7 +40,7 @@ const userLogin = async (req, res) => {
        return  res.status(200).json(responseData);
     }
     catch (error) {
-         res.status(500).json({ "error": "Server Error" });
+         res.status(500).json({ "error": error.message });
     }
 }
 
@@ -63,7 +64,7 @@ const userSignUp = async (req, res) => {
                 contact: userCredentials.contact,
                 address: userCredentials.address
             })
-            const token = jwt.sign({ id: createUser._id }, process.env.JWT_SECRET);
+            const token = generateJWT(createUser)
 
             res.status(201).json({ token, "uploader": createUser.name, "success": "Sucessfully Registered" })
         }

@@ -45,7 +45,6 @@ function LogIn() {
       if (fetchedResults.admin) {
         sessionStorage.setItem("admin", true);
         dispatch(AdminLog());
-        console.log("Admin");
       }
       sessionStorage.setItem("uploader", fetchedResults.uploader);
       sessionStorage.setItem("userId", fetchedResults.userId);
