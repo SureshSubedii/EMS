@@ -3,7 +3,8 @@ import { verify } from "jsonwebtoken"
 const verifyJWT = (req, res, next)=> {
     try {
         const decode = verify(req.headers?.authorization, process.env.JWT_SECRET)
-        console.log(decode)
+        const { password, ...user} = decode
+        req.user = user
         next()
 
     } catch (error) {

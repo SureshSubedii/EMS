@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
@@ -22,9 +22,9 @@ function Appcontents() {
   const debouncedGetProducts = useCallback(async () => {
     try {
       setLoading(true);
-      const response = await axios.get("http://localhost:5000/api/v1/product/getAllProducts", {
+      const response = await axios.get("product/getAllProducts", {
         headers: {
-          Authorization: user,
+          "Authorization": user
         },
       });
       setProducts(response.data);

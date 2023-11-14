@@ -1,9 +1,9 @@
 import SearchIcon from "@mui/icons-material/Search";
-import axios from "axios";
+import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
-import { AddCart, adminCheck } from "../stateManagement/userSlice";
+import { AddCart, adminCheck, checkUser } from "../stateManagement/userSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { useNavigate } from "react-router-dom";
@@ -16,9 +16,11 @@ function Products({ products, loading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const admin = useSelector(adminCheck);
+  const user = useSelector(checkUser)
 
   const handleClick = (productDetails) => {
-    let productDetailsStringified = JSON.stringify(productDetails);
+    const {photo, ...details} = productDetails
+    let productDetailsStringified = JSON.stringify(details);
     sessionStorage.setItem("productDetails", productDetailsStringified);
     navigate("/productDetails");
   };
@@ -42,11 +44,12 @@ function Products({ products, loading }) {
       formData.append("pid", pid);
       formData.append("category", category);
       const response = await axios.post(
-        "http://localhost:5000/api/v1/product/addToCart",
+        "product/addToCart",
         formData,
         {
           headers: {
             "Content-Type": "application/json",
+            "Authorization": user
           },
         }
       );
@@ -73,7 +76,12 @@ function Products({ products, loading }) {
     const confirm = window.confirm("Are you sure?");
     if (confirm) {
       axios
-        .delete(`http://localhost:5000/api/v1/product/deleteProduct/${id}`)
+        .delete(`product/deleteProduct/${id}`,
+        {
+          headers: {
+            "Authorization": user
+          }
+        })
         .then((data) => {
           toast.success(data.data.success);
           setTimeout(() => {

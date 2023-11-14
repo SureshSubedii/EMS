@@ -1,17 +1,25 @@
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
-import axios from "axios";
+import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import "../styles/userManagement.css";
+import { useSelector } from "react-redux";
+import { checkUser } from "../stateManagement/userSlice";
 
 function UsersManagement() {
   const [users, setUsers] = useState([]);
+  const user = useSelector(checkUser)
 
   const deleteUSer = (uid) => {
     const ans = window.confirm("Are you sure?");
     if (ans) {
       axios
         .delete(
-          `http://localhost:5000/api/v1/user/manageUser/deleteUSer/${uid}`
+          `user/manageUser/deleteUSer/${uid}`,
+          {
+            headers: {
+              "Authorization": user
+            }
+          }
         )
         .then((response) => {
           alert(response.data.success);
@@ -29,7 +37,13 @@ function UsersManagement() {
 
   useEffect(() => {
     axios
-      .get("http://localhost:5000/api/v1/user/manageUser")
+      .get("user/manageUser",
+      {
+        headers: {
+          "Authorization": user
+        }
+      }
+      )
       .then((response) => {
         setUsers(response.data);
       })

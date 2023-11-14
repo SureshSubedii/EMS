@@ -8,7 +8,7 @@ route.post('/addProduct', formidable(), verifyJWT, addProduct);
 route.get('/getAllProducts', verifyJWT, getAllProducts);
 route.get('/getProductPhoto/:pid', getProductPhoto);
 route.post('/addTocart', verifyJWT, addToCart)
-route.get('/showCart/:userId', showCart)
+route.get('/showCart/:userId', verifyJWT, showCart)
 route.delete('/deleteProduct/:pid',verifyJWT, deleteProduct)
 
 

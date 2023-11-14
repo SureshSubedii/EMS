@@ -4,11 +4,11 @@ import DeckOutlinedIcon from "@mui/icons-material/DeckOutlined";
 import ManageAccountsIcon from "@mui/icons-material/ManageAccounts";
 import ShoppingCartOutlinedIcon from "@mui/icons-material/ShoppingCartOutlined";
 import { Avatar, IconButton } from "@mui/material";
-import axios from "axios";
+import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { adminCheck, cartCheck } from "../stateManagement/userSlice";
+import { adminCheck, cartCheck, checkUser } from "../stateManagement/userSlice";
 import "../styles/sidebar.css";
 
 function Sidebar() {
@@ -16,6 +16,7 @@ function Sidebar() {
   const navigate = useNavigate();
   const [username, setUsername] = useState("");
   const [cartLength, setCartLength] = useState(0);
+  const user = useSelector(checkUser)
 
   const cart = useSelector(cartCheck);
 
@@ -33,9 +34,16 @@ function Sidebar() {
     setTimeout(async () => {
       setUsername(sessionStorage.getItem("uploader"));
       const res = await axios.get(
-        `http://localhost:5000/api/v1/product/showCart/${sessionStorage.getItem(
+        `product/showCart/${sessionStorage.getItem(
           "userId"
-        )}`
+        )}`,
+        {
+          headers: {
+            "Authorization": user
+          }
+        }
+
+
       );
       setCartLength(res.data.length);
     }, 0);

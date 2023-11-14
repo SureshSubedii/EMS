@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from "../axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
@@ -6,11 +6,15 @@ import "../styles/addProducts.css";
 import "../styles/photoUpload.css";
 import { toast } from "react-toastify";
 import Spinner from "./Spinner";
+import { checkUser } from "../stateManagement/userSlice";
+import { useSelector } from "react-redux";
 
 function AddProducts() {
   const [uploadedImage, setUploadedImage] = useState(null);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
+  const user = useSelector(checkUser)
+
 
   const {
     register,
@@ -42,11 +46,12 @@ function AddProducts() {
       formData.append("uploader", sessionStorage.getItem("uploader"));
 
       const response = await axios.post(
-        "http://localhost:5000/api/v1/product/addProduct",
+        "product/addProduct",
         formData,
         {
           headers: {
             "Content-Type": "multipart/form-data",
+            "Authorization": user
           },
         }
       );

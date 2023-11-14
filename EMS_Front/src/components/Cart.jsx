@@ -1,8 +1,9 @@
-import axios from "axios";
+import axios from "../axios";
 import React, { useEffect, useState } from "react";
 import "../styles/cart.css";
 import Spinner from "./Spinner";
-import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import { checkUser } from "../stateManagement/userSlice";
 
 function Cart() {
   const [products, setProducts] = useState([]);
@@ -10,6 +11,7 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [totalCartLength, setTotalCartLength] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const user = useSelector(checkUser)
 
   const decreaseCount = (index, price) => {
     setCounts((prevCounts) => {
@@ -41,9 +43,14 @@ function Cart() {
       setLoading(true);
 
       const response = await axios.get(
-        `http://localhost:5000/api/v1/product/showCart/${sessionStorage.getItem(
+        `product/showCart/${sessionStorage.getItem(
           "userId"
-        )}`
+        )}`,
+        {
+          headers: {
+            "Authorization": user
+          }
+        }
       );
       setProducts(response.data);
       setCounts(new Array(response.data.length).fill(1));
