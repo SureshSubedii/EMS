@@ -1,27 +1,48 @@
 
 .usersManagement{
-    width:100%
-}
-.tableList{
+    width:100%;
+    height: 100vh;
+    margin-top:3%;
+    text-align: center;
 
-    border-collapse: collapse;
-    width: 85%;
-    margin:20px;
+}
+.tableList > thead > tr > th {
+    text-align: center !important;
+}
+.usersManagement > h1 {
+    color: rgb(35, 34, 34);
+}
+.tableList, td {
+    border: 1px solid #aca5a5;
+  }
+  
+.dataTables_filter  input {
+    background-color: rgba(255, 255, 255, 0.877) !important;
+    outline: none;
+    margin-bottom: 2%;
+    width:80%;
+
+
+}
+.dataTables_filter {
+    width:30%;
+
+    margin-right: 5%;
 
 
 }
 .tableList td{
     padding: 4px;
 }
-.tableList>tbody>tr>td:first-child,td:nth-child(3){
+.tableList > tbody > tr > td:first-child, td:nth-child(3) {
     text-align: center;
     }
-.tableList>tbody>tr>td:nth-child(3):hover{
+.tableList > tbody > tr > td:nth-child(3):hover {
     background-color: aliceblue;
     cursor: pointer;
         }   
 
-@media   screen and (max-width:1460px){
+@media   screen and (max-width:1460px) {
     .tableList{
         margin:10px;
     
@@ -29,11 +50,9 @@
         }
 
 }
-@media   screen and (max-width:390px){
+@media   screen and (max-width:390px) {
     .tableList{
     margin:3px;
-
-
     }
 
     .tableList td{

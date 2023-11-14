@@ -30,9 +30,12 @@ function Category({ products, loading }) {
           Choose a category:
           <select onChange={(e) => setCategoryOption(e.target.value)}>
             <option value="clothing">Clothing</option>
-            <option value="others">Others</option>
             <option value="electronics">Electronics</option>
             <option value="furniture">Furniture</option>
+            <option value="utensils">Utensils</option>
+
+            <option value="others">Others</option>
+
           </select>
         </h2>
       )}

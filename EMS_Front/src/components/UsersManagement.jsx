@@ -4,10 +4,17 @@ import React, { useEffect, useState } from "react";
 import "../styles/userManagement.css";
 import { useSelector } from "react-redux";
 import { checkUser } from "../stateManagement/userSlice";
+import 'datatables.net-dt/css/jquery.dataTables.css';
+import $ from 'jquery';
+import 'datatables.net-dt';
+import { useRef } from "react";
+
 
 function UsersManagement() {
   const [users, setUsers] = useState([]);
   const user = useSelector(checkUser)
+  const userTableRef = useRef(null);
+
 
   const deleteUSer = (uid) => {
     const ans = window.confirm("Are you sure?");
@@ -36,7 +43,8 @@ function UsersManagement() {
   };
 
   useEffect(() => {
-    axios
+ 
+      axios
       .get("user/manageUser",
       {
         headers: {
@@ -46,18 +54,24 @@ function UsersManagement() {
       )
       .then((response) => {
         setUsers(response.data);
+        if (userTableRef.current) {
+          $(userTableRef.current).DataTable();
+        }
       })
       .catch(() => alert("Error in fetching users"));
   }, []);
   return (
     <div className="usersManagement">
-      <table border={1} className="tableList">
-        <tbody>
-          <tr>
+      <h1> List of registered users</h1>
+      <table  className="tableList"  ref = {userTableRef}>
+        <thead>
+        <tr>
             <th>S.N</th>
-            <th>List Of registered users</th>
+            <th> Users</th>
             <th>Action</th>
           </tr>
+        </thead>
+        <tbody>
           {users?.map((user, index) => (
             <tr key={user._id}>
               <td>{index + 1}.</td>
