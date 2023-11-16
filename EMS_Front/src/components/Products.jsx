@@ -150,7 +150,7 @@ function Products({ products, loading }) {
               )}
               {isMenuActive && (
                 <div id={`menu${product._id}`} className="menu">
-                  <p onClick={(e) => handleDelete(product._id, e)}>Edit</p>
+                  <p onClick={(e) => e }>Edit</p>
                   <p onClick={(e) => handleDelete(product._id, e)}>Delete</p>
                 </div>
               )}

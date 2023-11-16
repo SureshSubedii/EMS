@@ -1,69 +1,82 @@
-import fs from 'fs';
-import Cart from '../schemas/cartSchema.js';
-import Product from '../schemas/productSchema.js';
+import fs from 'fs'
+import Cart from '../schemas/cartSchema.js'
+import Product from '../schemas/productSchema.js'
 
 const addProduct = async (req, res) => {
-  const productData = req.fields;
+  const productData = req.fields
   const { image } = req.files
   try {
+    if (req.user.role !== 1) {
+      const unauthorizedError = new Error('Unauthorized Access')
+      unauthorizedError.statusCode = 401
+      throw unauthorizedError
+    }
     const product = new Product({
       name: productData.productName,
       description: productData.description,
       price: productData.price,
       category: productData.categorySelect,
       uploader: productData.uploader
-
-    });
+    })
     if (image) {
       product.photo.data = fs.readFileSync(image.path)
       product.photo.contentType = image.type
     }
-    await product.save();
-    res.status(201).json({ message: 'Product added successfully' });
+    await product.save()
+    res.status(201).json({ message: 'Product added successfully' })
+  } catch (err) {
+    if (err.statusCode) {
+      res.status(err.statusCode).json({ error: err.message })
+    } else {
+      res.status(500).json({ error: err.message })
+    }
   }
-  catch (error) {
-    res.status(500).json({ error: error.message });
-  }
-};
-
+}
 
 const getAllProducts = (req, res) => {
   Product.find()
-    .then((data) => res.status(200).send(data))
-    .catch((err) => res.status(500).send(err));
-};
+    .select('-photo')
+    .then(products => {
+      res.status(200).send(products)
+    })
+    .catch(err => {
+      res.status(500).json({ error: err.message })
+    })
+}
 
 const getProductPhoto = async (req, res) => {
   try {
-    const product = await Product.findById(req.params.pid).select('photo');
+    const product = await Product.findById(req.params.pid).select('photo')
 
     if (product.photo && product.photo.data) {
-      res.set('Content-Type', product.photo.contentType);
-      return res.status(200).send(product.photo.data);
+      res.set('Content-Type', product.photo.contentType)
+      return res.status(200).send(product.photo.data)
     }
   } catch (error) {
     res.status(500).send({
-      error: 'Failed to fetch product photo',
-    });
+      error: 'Failed to fetch product photo'
+    })
   }
-};
+}
 
 const addToCart = async (req, res) => {
-  const check = await Cart.findOne({ pid: req.body.pid, userId: req.body.userId })
+  const check = await Cart.findOne({
+    pid: req.body.pid,
+    userId: req.body.userId
+  })
   if (check) {
-    res.json({ "success": "Product is already in the cart" })
-  }
-  else {
+    res.json({ success: 'Product is already in the cart' })
+  } else {
     const cart = new Cart({
       ...req.body
     })
-    cart.save().then(() => {
-      res.json({ "success": "Added to cart" })
-    })
-      .catch(err => res.status(500).json({ "error": "Internal Server Error" }))
-
+    cart
+      .save()
+      .then(() => {
+        res.json({ success: 'Added to cart' })
+      })
+      .catch(err => res.status(500).json({ error: 'Internal Server Error' }))
   }
-
 }
 
 const showCart = async (req, res) => {
@@ -71,32 +84,29 @@ const showCart = async (req, res) => {
     const check = await Cart.find({ userId: req.params.userId })
     if (check) {
       res.send(check)
-
+    } else {
+      res.status(404).json({ error: 'Nothing on the cart' })
     }
-    else {
-      res.status(404).json({ "error": "Nothing on the cart" })
-    }
-  }
-  catch (err) {
-    res.status(500).json({ "error": "Internal Server Error" })
-  }
-
-}
-
-const deleteProduct = async (req, res) =>{
-  try {
-    const product = await Product.deleteOne({_id: req.params.pid})
-    res.status(200).json({"success": "Product deleted successfully"})
-    
-  } catch (error) {
-    res.status(500).json({"error": "Internal Server Error"})
-
-    
+  } catch (err) {
+    res.status(500).json({ error: 'Internal Server Error' })
   }
 }
 
+const deleteProduct = async (req, res) => {
+  Product.deleteOne({ _id: req.params.pid })
+    .then(() =>
+      res.status(200).json({ success: 'Product deleted successfully' })
+    )
+    .catch(error => {
+      res.status(500).json({ error: error.message })
+    })
+}
 
-
-
-export { addProduct, addToCart, getAllProducts, getProductPhoto, showCart, deleteProduct };
-
+export {
+  addProduct,
+  addToCart,
+  getAllProducts,
+  getProductPhoto,
+  showCart,
+  deleteProduct
+}
