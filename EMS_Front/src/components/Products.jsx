@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddCart, adminCheck, checkUser } from "../stateManagement/userSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Edit from './Edit'
 
 import { useNavigate } from "react-router-dom";
 import "../styles/products.css";
@@ -13,6 +14,8 @@ import Spinner from "./Spinner";
 function Products({ products, loading }) {
   const [searchData, setSearchData] = useState("");
   const [menu, setMenu] = useState(null);
+  const [edit, setEdit] = useState(false);
+
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const admin = useSelector(adminCheck);
@@ -24,6 +27,11 @@ function Products({ products, loading }) {
     sessionStorage.setItem("productDetails", productDetailsStringified);
     navigate("/productDetails");
   };
+
+  const handleEdit = (id, e) => {
+    e.stopPropagation()
+     setEdit(true)
+  }
 
   const handleAddToCart = async (
     e,
@@ -150,7 +158,7 @@ function Products({ products, loading }) {
               )}
               {isMenuActive && (
                 <div id={`menu${product._id}`} className="menu">
-                  <p onClick={(e) => e }>Edit</p>
+                  <p onClick={(e) => handleEdit(product._id, e) }>Edit</p>
                   <p onClick={(e) => handleDelete(product._id, e)}>Delete</p>
                 </div>
               )}
@@ -174,9 +182,11 @@ function Products({ products, loading }) {
                   Add to cart
                 </button>
               </div>
+             
             </div>
           );
         })}
+         {edit && <Edit/>}
       </div>
     </>
   );

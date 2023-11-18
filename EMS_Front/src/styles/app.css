@@ -1,5 +1,5 @@
 .app_header{
-    background:linear-gradient(to right,rgb(148, 11, 29),rgb(46, 165, 155)); 
+    background-color: rgb(107, 0, 113);
     color:white;
     display: flex;
     position: sticky;
@@ -7,6 +7,10 @@
 
     
 }
+/* .app {
+    height: 100%;
+    width: 100%;
+} */
 
 .app_header>h2{
     display: block;
@@ -21,7 +25,8 @@
 }
 .app_body{
     position: relative;
-    height:80vh;
+    height:80vh;    
+
 
     
 }

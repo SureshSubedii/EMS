@@ -1,14 +1,16 @@
 
 .usersManagement{
-    width:100%;
+    /* width:100%; */
     height: 100vh;
     margin-top:3%;
-    text-align: center;
 
 }
-.tableList > thead > tr > th {
-    text-align: center !important;
+.usersManagement > h1 {
+    text-align: center;
 }
+/* .tableList > thead > tr > th {
+    text-align: center !important;
+} */
 .usersManagement > h1 {
     color: rgb(35, 34, 34);
 }
@@ -26,7 +28,6 @@
 }
 .dataTables_filter {
     width:30%;
-
     margin-right: 5%;
 
 
@@ -34,18 +35,16 @@
 .tableList td{
     padding: 4px;
 }
-.tableList > tbody > tr > td:first-child, td:nth-child(3) {
-    text-align: center;
-    }
-.tableList > tbody > tr > td:nth-child(3):hover {
+
+.tableList > tbody > tr > td:nth-child(6):hover {
     background-color: aliceblue;
+
     cursor: pointer;
         }   
 
 @media   screen and (max-width:1460px) {
     .tableList{
         margin:10px;
-    
     
         }
 

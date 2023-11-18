@@ -1,7 +1,6 @@
 import bcrypt from 'bcrypt'
-import jwt from 'jsonwebtoken'
 import User from '../schemas/userSchema.js'
-import { generateJWT } from '../helpers/authHelper.js'
+import { generateJWT, hashPassword } from '../helpers/authHelper.js'
 
 const userLogin = async (req, res) => {
   try {
@@ -48,13 +47,11 @@ const userSignUp = async (req, res) => {
     if (checkUser) {
       return res.status(409).json({ error: 'User Already Exists' })
     } else {
-      const salt = await bcrypt.genSalt(10)
-      const protectedPass = await bcrypt.hash(userCredentials.password, salt)
 
       const createUser = await User.create({
         email: userCredentials.email,
         name: userCredentials.name,
-        password: protectedPass,
+        password: await hashPassword(userCredentials.password),
         contact: userCredentials.contact,
         address: userCredentials.address
       })
@@ -67,7 +64,7 @@ const userSignUp = async (req, res) => {
       })
     }
   } catch (err) {
-    res.status(500).send({ error: 'Internal Server Error' })
+    res.status(500).send({ error:err.message })
   }
 }
 
@@ -85,7 +82,7 @@ const manageUSer = (req, res) => {
     res.status(401).json({ error: 'Unauthorized!' })
   }
 }
-const deleteUSer = (req, res) => {
+const deleteUser = (req, res) => {
   if (req.user.role === 1) {
     const userId = req.params.uid
     User.deleteOne({ _id: userId })
@@ -98,4 +95,4 @@ const deleteUSer = (req, res) => {
   }
 }
 
-export { deleteUSer, manageUSer, userLogin, userSignUp }
+export { deleteUser, manageUSer, userLogin, userSignUp }

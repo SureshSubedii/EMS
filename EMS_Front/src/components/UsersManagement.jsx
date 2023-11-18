@@ -67,7 +67,10 @@ function UsersManagement() {
         <thead>
         <tr>
             <th>S.N</th>
-            <th> Users</th>
+            <th> Username</th>
+            <th> Email</th>
+            <th> contact</th>
+            <th> Address</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -75,7 +78,10 @@ function UsersManagement() {
           {users?.map((user, index) => (
             <tr key={user._id}>
               <td>{index + 1}.</td>
+              <td>{user.name} </td>
               <td>{user.email} </td>
+              <td>{user.contact} </td>
+              <td>{user.address} </td>
               <td onClick={() => deleteUSer(user._id)}>
                 <DeleteForeverIcon />
               </td>
