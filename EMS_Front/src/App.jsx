@@ -38,6 +38,7 @@ function App() {
       <div title="E-commerce Management System" className="app_header">
         <h1>EMS</h1>
         <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
+        <h1> {(new Date()).toDateString()}</h1>
         {user && (
           <button  title="Click to logout"className="header_button" onClick={() => {
             dispatch(logout());

@@ -22,6 +22,8 @@
 }
 .app_header>h1{
     margin-left: 10px;
+    margin-right: 10px;
+
 }
 .app_body{
     position: relative;
@@ -31,7 +33,7 @@
     
 }
 body{
-    background:rgba(0, 0, 0, 0.2) url("./back.jpg");
+    background:rgba(0, 0, 0, 0.2) url("../assets/mount.jpg");
     background-size:cover;
     background-blend-mode:darken ;
  
