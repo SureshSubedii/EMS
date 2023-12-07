@@ -5,7 +5,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import { AddCart, adminCheck, checkUser } from "../stateManagement/userSlice";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
-import Edit from './Edit'
 
 import { useNavigate } from "react-router-dom";
 import "../styles/products.css";
@@ -186,7 +185,6 @@ function Products({ products, loading }) {
             </div>
           );
         })}
-         {edit && <Edit/>}
       </div>
     </>
   );
