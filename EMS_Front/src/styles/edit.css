@@ -33,10 +33,10 @@
     color: rgb(232, 232, 232);
     border-radius: 10px 10px 0 0;
     text-align: center;
-    background-color: rgb(177, 40, 193);
+    background-color: rgb(157, 36, 171);
   }
   
-  select {
+  .edit-form >select {
     margin: 2%;
     border-radius: 16px;
     height: 50px !important;
@@ -56,9 +56,8 @@
 
   }
   #submit {
-    background-color: rgb(177, 40, 193);
+    background-color: rgb(157, 36, 171);
     color: rgb(232, 232, 232);
-    cursor: pointer;
     width: max-content;
     padding: 2%;
     margin: 1%;
@@ -66,6 +65,12 @@
 
 
     
+
+  }
+  #submit:hover {
+    background-color: rgb(187, 48, 202);
+    cursor: pointer;
+
 
   }
 
