@@ -1,14 +1,15 @@
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import axios from "../axios";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
+import axios from "../axios";
 import { AddCart, adminCheck, checkUser } from "../stateManagement/userSlice";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 import { useNavigate } from "react-router-dom";
 import "../styles/products.css";
 import Spinner from "./Spinner";
+import Edit from "./Edit";
 
 function Products({ products, loading }) {
   const [searchData, setSearchData] = useState("");
@@ -18,19 +19,21 @@ function Products({ products, loading }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const admin = useSelector(adminCheck);
-  const user = useSelector(checkUser)
+  const user = useSelector(checkUser);
 
   const handleClick = (productDetails) => {
-    const {photo, ...details} = productDetails
+    const { photo, ...details } = productDetails;
     let productDetailsStringified = JSON.stringify(details);
     sessionStorage.setItem("productDetails", productDetailsStringified);
     navigate("/productDetails");
   };
 
   const handleEdit = (id, e) => {
-    e.stopPropagation()
-     setEdit(true)
-  }
+    e.stopPropagation();
+    setEdit(id);
+    // document.getElementById("edit").style.display = "block"
+    setMenu(null);
+  };
 
   const handleAddToCart = async (
     e,
@@ -50,16 +53,12 @@ function Products({ products, loading }) {
       formData.append("userId", userId);
       formData.append("pid", pid);
       formData.append("category", category);
-      const response = await axios.post(
-        "product/addToCart",
-        formData,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            "Authorization": user
-          },
-        }
-      );
+      const response = await axios.post("product/addToCart", formData, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: user,
+        },
+      });
       const fetchedResults = response.data;
       toast.success(fetchedResults.success);
       dispatch(AddCart());
@@ -83,11 +82,10 @@ function Products({ products, loading }) {
     const confirm = window.confirm("Are you sure?");
     if (confirm) {
       axios
-        .delete(`product/deleteProduct/${id}`,
-        {
+        .delete(`product/deleteProduct/${id}`, {
           headers: {
-            "Authorization": user
-          }
+            Authorization: user,
+          },
         })
         .then((data) => {
           toast.success(data.data.success);
@@ -139,6 +137,7 @@ function Products({ products, loading }) {
       <div className="products">
         {filteredProducts?.map((product) => {
           const isMenuActive = menu === product._id;
+          const isEditActive = edit === product._id;
 
           return (
             <div
@@ -157,7 +156,7 @@ function Products({ products, loading }) {
               )}
               {isMenuActive && (
                 <div id={`menu${product._id}`} className="menu">
-                  <p onClick={(e) => handleEdit(product._id, e) }>Edit</p>
+                  <p onClick={(e) => handleEdit(product._id, e)}>Edit</p>
                   <p onClick={(e) => handleDelete(product._id, e)}>Delete</p>
                 </div>
               )}
@@ -181,7 +180,7 @@ function Products({ products, loading }) {
                   Add to cart
                 </button>
               </div>
-             
+              {isEditActive && <Edit setEdit={setEdit} product={product} />}
             </div>
           );
         })}

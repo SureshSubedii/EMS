@@ -1,0 +1,72 @@
+#edit {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    z-index:1000;
+    justify-content: center;
+    align-items: center;
+    place-content: center;
+  }
+  
+
+  .edit-form  {
+    width:40%;
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(106, 106, 106, 0.982);
+    border-radius: 10px;
+  }
+  .edit-form > input {
+    color: rgb(232, 232, 232);
+    margin: 2%;
+    border-radius: 20px;
+    padding:3%;
+    background: rgb(87, 84, 84);
+    outline: none;
+
+  }
+  .edit-form > h1 {
+    color: rgb(232, 232, 232);
+    border-radius: 10px 10px 0 0;
+    text-align: center;
+    background-color: rgb(177, 40, 193);
+  }
+  
+  select {
+    margin: 2%;
+    border-radius: 16px;
+    height: 50px !important;
+    padding-left: 13px;
+    background: rgb(87, 84, 84);
+    color: rgb(232, 232, 232);
+    outline: none;
+
+
+
+  }
+  .action {
+    display: flex;
+    place-content: center;
+
+
+
+  }
+  #submit {
+    background-color: rgb(177, 40, 193);
+    color: rgb(232, 232, 232);
+    cursor: pointer;
+    width: max-content;
+    padding: 2%;
+    margin: 1%;
+    border-radius: 6px;
+
+
+    
+
+  }
+
+  
