@@ -35,7 +35,8 @@ function LogIn() {
       );
 
       const fetchedResults = response.data;
-
+      sessionStorage.setItem("uploader", fetchedResults.uploader);
+      sessionStorage.setItem("userId", fetchedResults.userId);
       if (fetchedResults.error) {
         toast.error(fetchedResults.error);
       } else if (fetchedResults.token) {
@@ -46,9 +47,7 @@ function LogIn() {
         sessionStorage.setItem("admin", true);
         dispatch(AdminLog());
       }
-      sessionStorage.setItem("uploader", fetchedResults.uploader);
-      sessionStorage.setItem("userId", fetchedResults.userId);
-      console.log(sessionStorage.getItem("userId"));
+     
       setLoading(false);
       // window.location.reload()
     } catch (error) {
