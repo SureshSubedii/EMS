@@ -1,34 +1,69 @@
-import React, { useEffect } from 'react'
-import '../styles/edit.css'
-import axios from "../axios";
+import React, { useState, useEffect } from 'react';
+import '../styles/edit.css';
+import axios from '../axios';
+import { toast } from 'react-toastify';
 
-function Edit({setEdit, product}) {
-  const handleClose =(e)=> {
-    e.stopPropagation()
-    setEdit(0)
+function Edit({ setEdit, product }) {
+  const [name, setName] = useState(product.name);
+  const [description, setDescription] = useState(product.description);
+  const [price, setPrice] = useState(product.price);
+  const [category, setCategory] = useState(product.category);
 
-  }
-  const handleClick =(e)=> {
-    e.stopPropagation()
+  const handleClose = (e) => {
+    e.stopPropagation();
+    setEdit(0);
+  };
 
-  }
-  
-  useEffect(() => {
-    console.log(product)
-  
-   
-  }, [])
-  
-  return (
+  const handleClick = (e) => {
+    e.stopPropagation();
+  };
+
+  const handleUpdate = async (id) => {
+    console.log(name, description, price, category)
+    const {data} =  await axios.put("product/update", {
+      id, name, description, price, category
+
+    })
+    setEdit(0);
+    const success = data.success ? 'success' : 'error';
+
+    toast[success](data.message, {
+      onClose: () => {
+        success === "success"? window.location.reload() : "";
+      },
+    });
     
-    <div id="edit" onClick={(e)=> handleClose(e)}>
+  };
 
-      <form className="edit-form" onClick={(e)=> handleClick(e)}>
+  useEffect(() => {}, []); 
+
+  return (
+    <div id="edit" onClick={(e) => handleClose(e)}>
+      <form className="edit-form" onClick={(e) => handleClick(e)}>
         <h1>Edit Form</h1>
-        <input type="text"  value ={product.name}  placeholder='Enter Name'/>
-        <input type="text"  value ={product.description}  placeholder='Enter Description'/>
-        <input type="number"  value ={product.price}  placeholder='Enter Price'/>
-        <select name="category" defaultValue= {product.category} id="">
+        <input
+          type="text"
+          value={name}
+          placeholder="Enter Name"
+          onChange={(e) => setName(e.target.value)}
+        />
+        <input
+          type="text"
+          value={description}
+          placeholder="Enter Description"
+          onChange={(e) => setDescription(e.target.value)}
+        />
+        <input
+          type="number"
+          value={price}
+          placeholder="Enter Price"
+          onChange={(e) => setPrice(e.target.value)}
+        />
+        <select
+          name="category"
+          value={category}
+          onChange={(e) => setCategory(e.target.value)}
+        >
           <option value="furniture">Furniture</option>
           <option value="others">Others</option>
           <option value="utensils">Utensils</option>
@@ -36,16 +71,13 @@ function Edit({setEdit, product}) {
           <option value="electronics">electronics</option>
         </select>
         <div className="action">
-        <input type="submit" id="submit" value = "Update"/>
-
+          <div id="submit" onClick={() => handleUpdate(product._id)}>
+            Update
+          </div>
         </div>
-
-
-
       </form>
-      
-      </div>
-  )
+    </div>
+  );
 }
 
-export default Edit
+export default Edit;

@@ -102,11 +102,35 @@ const deleteProduct = async (req, res) => {
     })
 }
 
+const updateProduct = async (req, res) => {
+  const { id, name, description, price, category } = req.body;
+  try {
+    const product =  await Product.findById(id)
+
+    product.name = name;
+    product.description = description;
+    product.price = price;
+    product.category = category;
+    await product.save();
+
+    res.status(200).json({success:true, message: 'Product updated successfully' });
+    
+  } catch (error) {
+    res.status(200).json({success: false, message: error.message });
+
+    
+  }
+
+
+
+}
+
 export {
   addProduct,
   addToCart,
   getAllProducts,
   getProductPhoto,
   showCart,
-  deleteProduct
+  deleteProduct,
+  updateProduct
 }
