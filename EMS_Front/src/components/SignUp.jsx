@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { login } from "../stateManagement/userSlice";
+import { SignUpNot, login } from "../stateManagement/userSlice";
 import "../styles/signUp.css";
 import Spinner from "./Spinner";
 
@@ -60,16 +60,11 @@ function SignUp() {
   return (
     <div className="signUp">
       <h2>
-        <p onClick={() => window.location.reload()}> &larr;</p>
+        <p id="back" onClick={()=> dispatch(SignUpNot())}> &larr;</p>
 
         <span> Register to EMS</span>
       </h2>
-      {loading && (
-        <div className="loader">
-          <Spinner />
-          please wait...
-        </div>
-      )}
+     
       <form onSubmit={handleSubmit(onSignUp)}>
         <input
           name="email"
@@ -125,6 +120,12 @@ function SignUp() {
           <input type="submit" value="SignUp" />
         </div>
       </form>
+      {loading && (
+        <div className="loader">
+          <Spinner />
+          please wait...
+        </div>
+      )}
     </div>
   );
 }

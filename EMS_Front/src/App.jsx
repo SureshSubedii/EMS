@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import { AdminLog, AdminLogOut, checkSignUpButton, checkUser, login, logout } from "./stateManagement/userSlice";
+import { AdminLog, AdminLogOut, SignUpNot, checkSignUpButton, checkUser, login, logout } from "./stateManagement/userSlice";
 import './styles/app.css';
 
 function App() {
@@ -12,7 +12,6 @@ function App() {
   const [timeRealMinutes, settimeRealMinutes] = useState([]);
   const user = useSelector(checkUser);
   const checkButton = useSelector(checkSignUpButton);
-  const navigate=useNavigate();
 
   const dispatch = useDispatch();
 
@@ -44,10 +43,7 @@ function App() {
             dispatch(logout());
             dispatch(AdminLogOut());
             sessionStorage.clear()
-            navigate('*')
-            
-         
-
+            dispatch(SignUpNot())
           }}>LogOut</button>
         )}
       </div>
