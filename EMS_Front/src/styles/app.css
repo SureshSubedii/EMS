@@ -1,16 +1,23 @@
+
+:root{
+    --button-color: #0b72b8;
+    --button-hover: #3b84b5;
+    --form:  rgba(27, 25, 25, 0.391);
+    --text:  rgb(220, 217, 217);
+    --input-text: rgb(30, 29, 29);
+
+
+}
 .app_header{
-    background-color: rgb(107, 0, 113);
-    color:white;
+    background-color: rgb(48, 143, 190);
+    color:rgb(255, 255, 255);
     display: flex;
     position: sticky;
     height:100%
 
     
 }
-/* .app {
-    height: 100%;
-    width: 100%;
-} */
+
 
 .app_header>h2{
     display: block;
@@ -28,30 +35,25 @@
 .app_body{
     position: relative;
     height:80vh;    
-
-
     
 }
 body{
-    background:rgba(0, 0, 0, 0.2) url("../assets/mount.jpg");
+    background:rgba(15, 15, 15, 0.762) url("../assets/bg.jpg");
     background-size:cover;
     background-blend-mode:darken ;
  
 }
 .header_button{
-    background-color: rgb(36, 36, 179);
+    background-color: rgb(198, 47, 47);
     color:white;
     font-weight: bold;
     margin:5px;
     cursor: pointer;
     border: none;
     padding: 1px 5px;
-
-
-
 }
 .header_button:hover{
-    background-color: rgb(69, 69, 232);
+    background-color: rgb(220, 78, 78);
 
 }
 

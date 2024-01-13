@@ -1,4 +1,5 @@
 import bcrypt from 'bcrypt'
+import http from 'http'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { config } from 'dotenv'
@@ -7,6 +8,7 @@ import { dbConnect } from './db.js'
 import productRoute from './routes/productRoute.js'
 import userRoute from './routes/userRoutes.js'
 import UserSchema from './schemas/userSchema.js'
+import { initializeSocket } from './sockets/socketHandler.js'
 config({path:'./.env'}); 
 
 
@@ -40,19 +42,15 @@ app.post('/createAdmin', async(req,res)=>{
 })
 
 
-
 //Routes
 app.use('/api/v1/product', productRoute);
 app.use('/api/v1/user',userRoute);
 
-  
-
-
-
-
-
+//socket
+const server = http.createServer(app)
+initializeSocket(server)
 //listening
-app.listen(port,()=>{
+server.listen(port,()=>{
     console.log(`Listening on port ${port}`)
     dbConnect();
 })

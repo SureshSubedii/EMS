@@ -78,7 +78,6 @@ function SignUp() {
           type="email"
           {...register("email", { required: "Email is required!" })}
         />
-        {errors.email && <p> {errors.email.message}</p>}
         <input
           name="name"
           className="credential"
@@ -86,7 +85,6 @@ function SignUp() {
           type="text"
           {...register("name", { required: "Name is required!" })}
         />
-        {errors.name && <p> {errors.name.message}</p>}
 
         <input
           name="password"
@@ -94,6 +92,7 @@ function SignUp() {
           placeholder="Enter Password"
           type={clicked ? "text" : "password"}
           {...register("password", { required: "Password is required!" })}
+
         />
         {!clicked ? (
           <VisibilityOff
@@ -106,7 +105,6 @@ function SignUp() {
             onClick={() => setClicked(!clicked)}
           />
         )}
-        {errors.password && <p> {errors.password.message}</p>}
         <input
           name="contact"
           className="credential"
@@ -114,7 +112,6 @@ function SignUp() {
           type="number"
           {...register("contact", { required: "Contact is required!" })}
         />
-        {errors.contact && <p> {errors.contact.message}</p>}
 
         <input
           name="address"
@@ -123,7 +120,6 @@ function SignUp() {
           type="text"
           {...register("address", { required: "Address is required!" })}
         />
-        {errors.address && <p> {errors.address.message}</p>}
 
         <div className="form_buttons">
           <input type="submit" value="SignUp" />

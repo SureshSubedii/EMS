@@ -6,7 +6,6 @@ const userLogin = async (req, res) => {
   try {
     const { email, password } = req.body
     const checkUser = await User.findOne({ email })
-
     if (!checkUser) {
       return res
         .status(404)

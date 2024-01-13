@@ -18,10 +18,10 @@ function LogIn() {
   const {
     register,
     handleSubmit,
-    formState: { errors },
   } = useForm();
 
   const onLogin = async (data) => {
+    console.log(data)
     try {
       setLoading(true);
       const response = await axios.post(
@@ -49,7 +49,6 @@ function LogIn() {
       }
      
       setLoading(false);
-      // window.location.reload()
     } catch (error) {
       setLoading(false);
       if (error.response && error.response.data && error.response.data.error) {
@@ -66,14 +65,17 @@ function LogIn() {
     <div className="login">
       <h2>Login</h2>
       <form onSubmit={handleSubmit(onLogin)}>
+      <div className="email">
         <input
           name="email"
           className="credential"
           placeholder="Enter Email"
           type="email"
           {...register("email", { required: "Email is required!" })}
+
         />
-        {errors.email && <p>{errors.email.message}</p>}
+      </div>
+        <div className="password" style={{"position":"relative"}}>
         <input
           name="password"
           className="credential"
@@ -93,16 +95,11 @@ function LogIn() {
           />
         )}
 
-        {errors.password && <p>{errors.password.message}</p>}
+        </div>
+
         <div className="form_buttons">
           <input type="submit" value="Login" />
-          <h2 htmlFor="signUp">Not a member? Click on SignUp</h2>
-          <input
-            id="signUp"
-            onClick={() => dispatch(SignUpButton())}
-            type="button"
-            value="SignUp"
-          />
+          <h2  >Not a member? Click on <u onClick={() => dispatch(SignUpButton())}>   SignUp</u></h2>
         </div>
       </form>
       {loading && (

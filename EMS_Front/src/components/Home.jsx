@@ -4,11 +4,18 @@ import React, { useEffect } from "react";
 import "../styles/home.css";
 import Appcontents from "./Appcontents";
 import Sidebar from "./Sidebar";
-import Edit from "./Edit";
+import io from 'socket.io-client'
 
 function Home() {
   useEffect(() => {
     document.querySelector(".home_menu")?.classList.add("hide");
+    const socket = io('http://localhost:5000', {
+      auth: {
+        user: sessionStorage.getItem("userId")
+      }
+    });
+    socket.emit('chat', 'Hello, server!');
+
   }, []);
   const handleShow = () => {
     document.querySelector(".sidebar").classList.remove("hide");
