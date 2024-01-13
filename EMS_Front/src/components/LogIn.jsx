@@ -71,7 +71,8 @@ function LogIn() {
           className="credential"
           placeholder="Enter Email"
           type="email"
-          {...register("email", { required: "Email is required!" })}
+          {...register("email")}
+          required
 
         />
       </div>
@@ -81,7 +82,8 @@ function LogIn() {
           className="credential"
           placeholder="Enter Password"
           type={clicked ? "text" : "password"}
-          {...register("password", { required: "Password is required!" })}
+          {...register("password")}
+          required
         />
         {!clicked ? (
           <VisibilityOff

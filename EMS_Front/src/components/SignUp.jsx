@@ -71,14 +71,16 @@ function SignUp() {
           className="credential"
           placeholder="Enter Email"
           type="email"
-          {...register("email", { required: "Email is required!" })}
+          {...register("email")}
+          required
         />
         <input
           name="name"
           className="credential"
           placeholder="Enter full name"
           type="text"
-          {...register("name", { required: "Name is required!" })}
+          {...register("name")}
+          required
         />
 
         <input
@@ -86,7 +88,8 @@ function SignUp() {
           className="credential"
           placeholder="Enter Password"
           type={clicked ? "text" : "password"}
-          {...register("password", { required: "Password is required!" })}
+          {...register("password")}
+          required
 
         />
         {!clicked ? (
@@ -105,7 +108,8 @@ function SignUp() {
           className="credential"
           placeholder="Enter contact number"
           type="number"
-          {...register("contact", { required: "Contact is required!" })}
+          {...register("contact")}
+          required
         />
 
         <input
@@ -113,7 +117,8 @@ function SignUp() {
           className="credential"
           placeholder="Enter Address"
           type="text"
-          {...register("address", { required: "Address is required!" })}
+          {...register("address")}
+          required
         />
 
         <div className="form_buttons">
