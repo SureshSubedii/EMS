@@ -5,8 +5,11 @@ import "../styles/home.css";
 import Appcontents from "./Appcontents";
 import Sidebar from "./Sidebar";
 import io from 'socket.io-client'
+import { disconnectSocket, setSocket } from "../stateManagement/userSlice";
+import { useDispatch } from "react-redux";
 
 function Home() {
+  const dispatch = useDispatch()
   useEffect(() => {
     document.querySelector(".home_menu")?.classList.add("hide");
     const socket = io('http://localhost:5000', {
@@ -14,9 +17,23 @@ function Home() {
         user: sessionStorage.getItem("userId")
       }
     });
-    socket.emit('chat', 'Hello, server!');
+    dispatch(setSocket(socket));
 
-  }, []);
+    socket.emit('chat', 'Hello, server!');
+    socket.emit('check-admin');
+    socket.on('admin-online', (data)=>{
+      console.log(data.message)
+    })
+
+    return () => {
+      socket.disconnect();
+      dispatch(disconnectSocket());
+    };
+
+
+
+
+  }, [dispatch]);
   const handleShow = () => {
     document.querySelector(".sidebar").classList.remove("hide");
     document.querySelector(".home_menu").classList.add("hide");

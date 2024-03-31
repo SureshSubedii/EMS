@@ -1,5 +1,4 @@
 .home{
-    /* margin-left: 1%; */
     height: 94vh;
     width:99vw;
     background-color:rgb(201, 214, 240);
@@ -11,7 +10,7 @@
 }
 @media  (max-width:1800px)  {
     .home{
-        margin:3px;
+        margin:0px 3px;
     }
 
 }

@@ -10,24 +10,25 @@ export const initializeSocket = (httpServer) => {
       methods: ["GET", "POST"]
     }
   });
-
+let userSockets
   io.on('connection', (socket) => {
     // Access the user information from the handshake object
     const userId = socket.handshake.auth.user.id;
 
     console.log(`User connected with ID: ${socket.id}, User ID: ${userId}`);
+    console.log(userSocketMap.has(userId), userSockets, userId)
 
     // Add the socket ID to the array for the user ID
     if (!userSocketMap.has(userId)) {
       userSocketMap.set(userId, [socket.id]);
     } else {
-      const userSockets = userSocketMap.get(userId);
+       userSockets = userSocketMap.get(userId);
       userSockets.push(socket.id);
       userSocketMap.set(userId, userSockets);
     }
 
     socket.on('chat', (msg) => {
-      console.log(`Message ${msg} from ${socket.id}`);
+      console.log(`Message ${msg}  ${socket.id} ++++++++++`,userSockets );
     });
 
     socket.on('disconnect', () => {
@@ -63,7 +64,3 @@ export const initializeSocket = (httpServer) => {
   // Make the function available for external use
   io.emitMessageToUser = emitMessageToUser;
 };
-
-// Usage example from another part of your server code
-// To emit a private message to a user with ID '123'
-// io.emitMessageToUser('123', 'Hello, this is a private message!');

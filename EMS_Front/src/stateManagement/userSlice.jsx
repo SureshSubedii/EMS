@@ -8,7 +8,8 @@ export const userSlice = createSlice({
   value:null,
   signUpClicked: Boolean(false),
   admin:Boolean(false),
-  cart:1
+  cart:1,
+  socket: null
 
   },
   reducers: {
@@ -37,6 +38,15 @@ export const userSlice = createSlice({
     },
     AddCart:(state)=>{
       state.cart+=1
+    },
+    setSocket: (state, action) => {
+      state.socket = action.payload;
+    },
+    disconnectSocket: (state) => {
+      if (state.socket) {
+        state.socket.disconnect();
+        state.socket = null;
+      }
     }
 
 
@@ -44,10 +54,13 @@ export const userSlice = createSlice({
 
 
 
-export  const {login,logout,SignUpNot,SignUpButton,AdminLog,AdminLogOut,AddCart}=userSlice.actions
+export  const {login,logout,SignUpNot,SignUpButton,AdminLog,AdminLogOut,AddCart,setSocket,
+  disconnectSocket}=userSlice.actions
 export const checkUser=(state) => state.user.value;
 export const checkSignUpButton=(state)=>state.user.signUpClicked;
 export const adminCheck=(state)=>state.user.admin;
 export const cartCheck=(state)=>state.user.cart;
+export const checkSocket = (state) => state.user.socket; // Add selector for socket state
+
 
 export default userSlice.reducer
