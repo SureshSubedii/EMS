@@ -13,18 +13,13 @@ export  const  initializeSocket = (httpServer) =>{
       io.on('connection',  (socket)=> {
        const userId = socket.handshake.auth.user
 
-       const user =   User.findOne({ _id: userId }).then((user)=>{
+         User.findOne({ _id: userId }).then((user)=>{
        if (user?.role === 1){
         admin = userId
       }
-      socket.on('check-admin', ()=> {
-console.log("check ADMIN  +++++++++++++")
-        socket.emit('admin-online', { message: admin? true : false });
+      socket.emit('admin-online', { message: admin? true : false });
 
-        
-    }
-    )
-    console.log( user?.email,user.role, admin, userSocketMap)
+    // console.log( user?.email,user.role, admin, userSocketMap, "admin", admin)
 
 
 
