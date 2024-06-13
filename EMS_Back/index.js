@@ -47,38 +47,12 @@ app.post('/createAdmin', async(req,res)=>{
 app.use('/api/v1/product', productRoute);
 app.use('/api/v1/user',userRoute);
 
-app.get('/eg', async(req, res)=>{
-    const data = await Product.aggregate([
-        {
-            $lookup: {
-                from : "carts",
-                localField: "_id",
-                foreignField: "pid",
-                as: 'cartData'
 
-            }
-        },
-        {
-
-            $unwind: '$cartData'
-        },
-        {
-            $project: {
-                name: 1,
-                description:1,
-                cartData:{name:1,userId:1}
-
-            }
-        }
-    ])
-    res.json(data);
-
-})
 //socket
-const server = http.createServer(app)
-initializeSocket(server)
+// const server = http.createServer(app)
+// initializeSocket(server)
 //listening
-server.listen(port,()=>{
+app.listen(port,()=>{
     console.log(`Listening on port ${port}`)
     dbConnect();
 })

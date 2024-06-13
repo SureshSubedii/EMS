@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "../axios";
-import { AddCart, adminCheck, checkUser } from "../stateManagement/userSlice";
+import { AddCart, adminCheck, setMenu,checkUser, menu } from "../stateManagement/userSlice";
 
 import { useNavigate } from "react-router-dom";
 import "../styles/products.css";
@@ -13,13 +13,13 @@ import Edit from "./Edit";
 
 function Products({ products, loading }) {
   const [searchData, setSearchData] = useState("");
-  const [menu, setMenu] = useState(null);
   const [edit, setEdit] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const admin = useSelector(adminCheck);
   const user = useSelector(checkUser);
+  const menuOptions = useSelector(menu)
 
   const handleClick = (productDetails) => {
     const { photo, ...details } = productDetails;
@@ -32,7 +32,7 @@ function Products({ products, loading }) {
     e.stopPropagation();
     setEdit(id);
     // document.getElementById("edit").style.display = "block"
-    setMenu(null);
+    dispatch(setMenu(id))
   };
 
   const handleAddToCart = async (
@@ -74,7 +74,7 @@ function Products({ products, loading }) {
 
   const manageProduct = (id, e) => {
     e.stopPropagation();
-    setMenu(id);
+    dispatch(setMenu(id));
   };
 
   const handleDelete = (id, e) => {
@@ -94,7 +94,7 @@ function Products({ products, loading }) {
           }, 1000);
         })
         .catch((e) => console.log(e));
-    } else setMenu(null);
+    } else dispatch(setMenu(null));
   };
 
   let filteredProducts = products;
@@ -134,9 +134,9 @@ function Products({ products, loading }) {
         </p>
       )}
 
-      <div className="products">
+      <div className="products" >
         {filteredProducts?.map((product) => {
-          const isMenuActive = menu === product._id;
+          const isMenuActive = menuOptions === product._id;
           const isEditActive = edit === product._id;
 
           return (

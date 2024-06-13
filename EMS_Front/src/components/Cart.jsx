@@ -34,7 +34,7 @@ function Cart() {
 
       const newCounts = [...prevCounts];
       newCounts[index] = newCounts[index] + 1;
-      if (newCounts[index] <=  20){
+      if (newCounts[index] <=  products[index].stock){
         setTotalCartLength((prev) => prev + 1);
         setTotalPrice((prev) => prev + price);
       return newCounts;
@@ -68,7 +68,7 @@ function Cart() {
       setCounts(new Array(response.data.length).fill(1));
       setTotalCartLength(response.data.length);
       setTotalPrice(
-        response.data.reduce((acc, current) => acc + current.price, 0)
+        response.data.reduce((acc, current) => acc + current.cart.price, 0)
       );
 
       setLoading(false);

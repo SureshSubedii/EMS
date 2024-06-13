@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import { AdminLog, AdminLogOut, SignUpNot, checkSignUpButton, checkUser, login, logout, disconnectSocket } from "./stateManagement/userSlice";
+import { AdminLog, AdminLogOut, SignUpNot, checkSignUpButton, checkUser, login, logout, setMenu } from "./stateManagement/userSlice";
 import './styles/app.css';
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
   }, []);
 
   return (
-    <div className="app">
+    <div className="app" onClick={()=> dispatch(setMenu(null))}>
       <div title="E-commerce Management System" className="app_header">
         <h1>EMS</h1>
         <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
@@ -44,7 +44,6 @@ function App() {
             dispatch(AdminLogOut());
             sessionStorage.clear()
             dispatch(SignUpNot())
-            dispatch(disconnectSocket())
           }}>LogOut</button>
         )}
       </div>

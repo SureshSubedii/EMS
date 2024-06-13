@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import '../styles/edit.css';
 import axios from '../axios';
 import { toast } from 'react-toastify';
+import { useDispatch } from 'react-redux';
+import { setMenu } from '../stateManagement/userSlice';
 
 function Edit({ setEdit, product }) {
   const [name, setName] = useState(product.name);
@@ -9,11 +11,13 @@ function Edit({ setEdit, product }) {
   const [price, setPrice] = useState(product.price);
   const [category, setCategory] = useState(product.category);
   const [stock, setStock] = useState(product.stock);
-
+const dispatch = useDispatch()
 
   const handleClose = (e) => {
     e.stopPropagation();
     setEdit(0);
+    dispatch(setMenu(null))
+
   };
 
   const handleClick = (e) => {

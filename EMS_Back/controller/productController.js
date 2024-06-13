@@ -1,6 +1,7 @@
 import fs from 'fs'
 import Cart from '../schemas/cartSchema.js'
 import Product from '../schemas/productSchema.js'
+import mongoose from "mongoose";
 
 const addProduct = async (req, res) => {
   const productData = req.fields
@@ -85,13 +86,46 @@ const showCart = async (req, res) => {
 
 
   try {
-    const check = await Cart.find({ userId: req.params.userId })
+    
+      const check = await Cart.aggregate([
+   
+        {
+          $lookup:{
+            from: 'products',
+            localField: "pid",
+            foreignField: "_id",
+            as: "productData"
+          }
+        },
+          {
+
+            $unwind: '$productData'
+        },
+        {
+          $project:{
+            name: 1,
+            price:1,
+            pid:1,
+            userId:1,
+            stock: '$productData.stock'
+          }
+        },
+        {
+          $match: { 
+
+          userId: { $eq: new mongoose.Types.ObjectId(req.params.userId) }
+
+        }},
+      ])
+      console.log(check,"data")
     if (check) {
+      console.log(check, req.params)
       res.send(check)
     } else {
       res.status(404).json({ error: 'Nothing on the cart' })
     }
   } catch (err) {
+    console.log(err)
     res.status(500).json({ error: 'Internal Server Error' })
   }
 }
