@@ -4,6 +4,7 @@ import "../styles/cart.css";
 import Spinner from "./Spinner";
 import { useSelector } from "react-redux";
 import { checkUser } from "../stateManagement/userSlice";
+import { toast } from "react-toastify";
 
 function Cart() {
   const [products, setProducts] = useState([]);
@@ -30,12 +31,23 @@ function Cart() {
 
   const increaseCount = (index, price) => {
     setCounts((prevCounts) => {
+
       const newCounts = [...prevCounts];
       newCounts[index] = newCounts[index] + 1;
+      if (newCounts[index] <=  20){
+        setTotalCartLength((prev) => prev + 1);
+        setTotalPrice((prev) => prev + price);
       return newCounts;
+      }
+
+      toast.error("Stock Quantity Exceeded")
+      return [...prevCounts]
+
+
+
+
     });
-    setTotalCartLength((prev) => prev + 1);
-    setTotalPrice((prev) => prev + price);
+    
   };
 
   const getCart = async () => {
@@ -112,10 +124,8 @@ function Cart() {
         <div className="cart_right">
           Total Items = {totalCartLength} <br />
           Total =RS {totalPrice} <br />
-          Discount = RS {((1 / 100) * totalPrice).toFixed(2)} <br />
-          <hr />
-          Amount =RS {totalPrice - (1 / 100) * totalPrice} <br />
-          <button className="buy">Buy</button>
+
+          <button className="buy">Order</button>
         </div>
       </div>
     </>

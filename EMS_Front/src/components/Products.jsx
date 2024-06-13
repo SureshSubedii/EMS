@@ -165,7 +165,7 @@ function Products({ products, loading }) {
                   {product?.name.slice(0, 15)} {product.name[15] ? "..." : ""}
                 </h2>
                 <h3>Rs.{product.price}</h3>
-                <button
+                {!admin && <button
                   onClick={(e) =>
                     handleAddToCart(
                       e,
@@ -178,7 +178,8 @@ function Products({ products, loading }) {
                   }
                 >
                   Add to cart
-                </button>
+                </button>}
+                
               </div>
               {isEditActive && <Edit setEdit={setEdit} product={product} />}
             </div>

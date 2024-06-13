@@ -5,10 +5,11 @@
     box-shadow: 1px 1px 10px 5px rgb(3, 3, 3);
     background-color: rgb(34, 34, 34);
     
-    padding-bottom: 15px;
     border-radius: 20px;
-    height:fit-content;
-    margin: 7% 15%;
+    height: fit-content; /* Fits content */
+    /* max-height: calc(100vh - 4% );  */
+
+    margin: 1% 15%;
 
 
 

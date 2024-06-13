@@ -48,7 +48,7 @@
 
 
 }
-.show_product_details>.categories,.rating{
+.show_product_details>.categories,.rating,.stock{
     margin: 1% 1%  1% 1%;
     font-weight: 700;
     font-size: 1.5em;

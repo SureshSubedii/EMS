@@ -10,7 +10,6 @@ import { store } from './stateManagement/store';
 
 
 ReactDOM.render(
-  <React.StrictMode>
     <BrowserRouter>
 
       <Provider store={store}>
@@ -29,7 +28,6 @@ ReactDOM.render(
         />
       </Provider>
 
-    </BrowserRouter>
-  </React.StrictMode>,
+    </BrowserRouter>,
   document.getElementById('root')
 );

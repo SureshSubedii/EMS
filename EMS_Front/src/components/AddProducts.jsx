@@ -41,6 +41,7 @@ function AddProducts() {
       formData.append("productName", data.productName);
       formData.append("price", data.price);
       formData.append("description", data.description);
+      formData.append("stock", data.stock);
       formData.append("categorySelect", data.categorySelect);
       formData.append("image", data.product_image[0]);
       formData.append("uploader", sessionStorage.getItem("uploader"));
@@ -110,6 +111,15 @@ function AddProducts() {
           {...register("description", { required: "Description is required!" })}
         />
         {errors.description && <p>{errors.description.message}</p>}
+
+        <input
+          name="stock"
+          className="credential"
+          placeholder="Enter the stock quantity"
+          type="number"
+          {...register("stock", { required: "Stock is required!" })}
+        />
+        {errors.stock && <p>{errors.stock.message}</p>}
 
         <select
           name="categorySelect"

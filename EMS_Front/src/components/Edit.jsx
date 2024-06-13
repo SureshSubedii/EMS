@@ -8,6 +8,8 @@ function Edit({ setEdit, product }) {
   const [description, setDescription] = useState(product.description);
   const [price, setPrice] = useState(product.price);
   const [category, setCategory] = useState(product.category);
+  const [stock, setStock] = useState(product.stock);
+
 
   const handleClose = (e) => {
     e.stopPropagation();
@@ -21,7 +23,7 @@ function Edit({ setEdit, product }) {
   const handleUpdate = async (id) => {
     console.log(name, description, price, category)
     const {data} =  await axios.put("product/update", {
-      id, name, description, price, category
+      id, name, description, price, category, stock
 
     })
     setEdit(0);
@@ -35,7 +37,6 @@ function Edit({ setEdit, product }) {
     
   };
 
-  useEffect(() => {}, []); 
 
   return (
     <div id="edit" onClick={(e) => handleClose(e)}>
@@ -59,6 +60,14 @@ function Edit({ setEdit, product }) {
           placeholder="Enter Price"
           onChange={(e) => setPrice(e.target.value)}
         />
+            <input
+          type="number"
+          value={stock}
+          placeholder="Enter Stock"
+          onChange={(e) => setStock(e.target.value)}
+        />
+
+
         <select
           name="category"
           value={category}

@@ -20,7 +20,7 @@ function Home() {
     dispatch(setSocket(socket));
 
     socket.emit('chat', 'Hello, server!');
-    socket.emit('check-admin');
+    // socket.emit('check-admin');
     socket.on('admin-online', (data)=>{
       console.log(data.message)
     })

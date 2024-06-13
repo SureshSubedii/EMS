@@ -63,12 +63,18 @@ function Sidebar () {
       document.getElementById('products').classList.add('selected')
     } else document.getElementById(path || item).classList.add('selected')
   }, [path])
-
+if (!admin){
+  
+}
   useEffect(() => {
-    const element = document.querySelector(
-      '.sidebar .sidebar_items:nth-child(4)'
-    )
-    element.style.setProperty('--noOfCartProducts', `'${cartLength}'`)
+    if (!admin){
+      const element = document.querySelector(
+        '.sidebar .sidebar_items:nth-child(4)'
+      )
+      element.style.setProperty('--noOfCartProducts', `'${cartLength}'`)
+  
+    }
+   
   }, [cartLength])
 
   return (
@@ -100,10 +106,10 @@ function Sidebar () {
         Category &gt;
       </p>
 
-      <p className='sidebar_items' id='cart' onClick={() => toggle('cart')}>
+  {  !admin && (  <p className='sidebar_items' id='cart' onClick={() => toggle('cart')}>
         <ShoppingCartOutlinedIcon />
         Cart
-      </p>
+      </p>)}
 
       {admin && (
         <>

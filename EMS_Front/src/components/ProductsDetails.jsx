@@ -38,6 +38,8 @@ function ProductsDetails() {
         {randomValue.toFixed(1)}
         {")"}
       </p>
+      <p className="stock">Stock: {productDetails.stock}</p>
+
     </div>
   );
 }
