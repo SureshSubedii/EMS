@@ -4,14 +4,14 @@ import React, { useEffect } from "react";
 import "../styles/home.css";
 import Appcontents from "./Appcontents";
 import Sidebar from "./Sidebar";
-import io from 'socket.io-client'
+// import io from 'socket.io-client'
 // import { disconnectSocket, setSocket } from "../stateManagement/userSlice";
 import { useDispatch } from "react-redux";
 
 function Home() {
-  const dispatch = useDispatch()
-  // useEffect(() => {
-  //   document.querySelector(".home_menu")?.classList.add("hide");
+  // const dispatch = useDispatch()
+  useEffect(() => {
+    document.querySelector(".home_menu")?.classList.add("hide");
   //   const socket = io('http://localhost:5000', {
   //     auth: {
   //       user: sessionStorage.getItem("userId")
@@ -28,12 +28,12 @@ function Home() {
   //   return () => {
   //     socket.disconnect();
   //     dispatch(disconnectSocket());
-  //   };
+    // };
 
 
 
 
-  // }, [dispatch]);
+  }, []);
   const handleShow = () => {
     document.querySelector(".sidebar").classList.remove("hide");
     document.querySelector(".home_menu").classList.add("hide");

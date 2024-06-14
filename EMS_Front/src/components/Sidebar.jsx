@@ -9,6 +9,7 @@ import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { adminCheck, cartCheck, checkUser } from '../stateManagement/userSlice'
+import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
 import '../styles/sidebar.css'
 
 function Sidebar () {
@@ -110,6 +111,10 @@ if (!admin){
         <ShoppingCartOutlinedIcon />
         Cart
       </p>)}
+      <p className="sidebar_items" id = "order" onClick={() => toggle('order')}>
+      <ChecklistOutlinedIcon/>
+        Orders
+      </p>
 
       {admin && (
         <>

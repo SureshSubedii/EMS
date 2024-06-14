@@ -1,15 +1,14 @@
 import bcrypt from 'bcrypt'
-import http from 'http'
 import bodyParser from 'body-parser'
 import cors from 'cors'
 import { config } from 'dotenv'
 import express from 'express'
 import { dbConnect } from './db.js'
-import productRoute from './routes/productRoute.js'
-import userRoute from './routes/userRoutes.js'
+import productRoutes from './routes/productRoutes.js'
+import userRoutes from './routes/userRoutes.js'
+import orderRoutes from './routes/orderRoutes.js'
+
 import UserSchema from './schemas/userSchema.js'
-import { initializeSocket } from './sockets/socketHandler.js'
-import Product from './schemas/productSchema.js'
 config({path:'./.env'}); 
 
 
@@ -44,8 +43,10 @@ app.post('/createAdmin', async(req,res)=>{
 
 
 //Routes
-app.use('/api/v1/product', productRoute);
-app.use('/api/v1/user',userRoute);
+app.use('/api/v1/product', productRoutes);
+app.use('/api/v1/user',userRoutes);
+app.use('/api/v1/order', orderRoutes);
+
 
 
 //socket

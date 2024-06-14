@@ -83,12 +83,8 @@ const addToCart = async (req, res) => {
 }
 
 const showCart = async (req, res) => {
-
-
   try {
-    
       const check = await Cart.aggregate([
-   
         {
           $lookup:{
             from: 'products',
@@ -117,9 +113,7 @@ const showCart = async (req, res) => {
 
         }},
       ])
-      console.log(check,"data")
     if (check) {
-      console.log(check, req.params)
       res.send(check)
     } else {
       res.status(404).json({ error: 'Nothing on the cart' })
@@ -166,9 +160,6 @@ const updateProduct = async (req, res) => {
 
 }
 
-const stock = ()=>{
-
-}
 
 export {
   addProduct,

@@ -18,6 +18,11 @@ function Cart() {
     setCounts((prevCounts) => {
       const newCounts = [...prevCounts];
       newCounts[index] = newCounts[index] === 0 ? 0 : newCounts[index] - 1;
+      if (newCounts[index] === 0 ){
+        products.splice(index, 1)
+        newCounts.splice(index, 1)
+
+      }
       return newCounts;
     });
     setTotalCartLength(() =>
@@ -37,23 +42,45 @@ function Cart() {
       if (newCounts[index] <=  products[index].stock){
         setTotalCartLength((prev) => prev + 1);
         setTotalPrice((prev) => prev + price);
-      return newCounts;
+        return newCounts;
       }
 
       toast.error("Stock Quantity Exceeded")
       return [...prevCounts]
-
-
-
-
     });
     
   };
 
+  const order = async()=>{
+    const verify = confirm("Are you sure?")
+    if (!verify){
+      return
+    }
+    try {
+      const {data} = await axios.post('order/add', {
+        orders: products,
+        counts: counts
+  
+      },{
+        headers: {
+          "Authorization": user,
+          "Content-Type": "application/json",
+
+        }
+      })
+      toast.success(data.message)
+    } catch (error) {
+    toast.error(error.message)
+
+      
+    }
+ 
+  
+  }
+
   const getCart = async () => {
     try {
       setLoading(true);
-
       const response = await axios.get(
         `product/showCart/${sessionStorage.getItem(
           "userId"
@@ -68,7 +95,7 @@ function Cart() {
       setCounts(new Array(response.data.length).fill(1));
       setTotalCartLength(response.data.length);
       setTotalPrice(
-        response.data.reduce((acc, current) => acc + current.cart.price, 0)
+        response.data.reduce((acc, current) => acc + current.price, 0)
       );
 
       setLoading(false);
@@ -125,7 +152,7 @@ function Cart() {
           Total Items = {totalCartLength} <br />
           Total =RS {totalPrice} <br />
 
-          <button className="buy">Order</button>
+          <button onClick={()=> order()} className="buy">Order</button>
         </div>
       </div>
     </>
