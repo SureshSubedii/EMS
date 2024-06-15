@@ -23,15 +23,11 @@ const userLogin = async (req, res) => {
     let responseData = {
       token,
       user: checkUser.name,
-      userId: checkUser._id
+      userId: checkUser._id,
+      admin: checkUser.role == 1,
+      superAdmin: checkUser.role == 2
     }
 
-    if (checkUser.role == 1) {
-      responseData = {
-        ...responseData,
-        admin: true
-      }
-    }
     return res.status(200).json(responseData)
   } catch (error) {
     res.status(500).json({ error: error.message })

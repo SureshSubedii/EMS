@@ -149,12 +149,12 @@ function Products({ products, loading }) {
                 src={`http://localhost:5000/api/v1/product/getProductPhoto/${product._id}`}
                 alt={product.name}
               />{" "}
-              {admin && (
+              {admin &&  sessionStorage.getItem("userId") == product.uploader && (
                 <p onClick={(e) => manageProduct(product._id, e)}>
                   <MoreVertIcon />
                 </p>
               )}
-              {isMenuActive &&  sessionStorage.getItem("userId") == product.uploader && (
+              {isMenuActive && (
                 <div id={`menu${product._id}`} className="menu">
                   <p onClick={(e) => handleEdit(product._id, e)}>Edit</p>
                   <p onClick={(e) => handleDelete(product._id, e)}>Delete</p>

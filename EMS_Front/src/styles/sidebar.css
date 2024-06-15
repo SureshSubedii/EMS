@@ -42,7 +42,7 @@
     margin-right: 4px;
 }
 
-.sidebar_items {
+.sidebar_items, #role {
     margin: 5px;
     white-space: nowrap;
     font-weight: 800;
@@ -61,7 +61,7 @@
     margin-right: 5px;
 }
 
-.sidebar .sidebar_items:nth-child(4)::after {
+.sidebar .sidebar_items:nth-child(5)::after {
     content: var(--noOfCartProducts);
     color: white;
     background-color: red;

@@ -70,7 +70,7 @@ if (!admin){
   useEffect(() => {
     if (!admin){
       const element = document.querySelector(
-        '.sidebar .sidebar_items:nth-child(4)'
+        '.sidebar .sidebar_items:nth-child(5)'
       )
       element.style.setProperty('--noOfCartProducts', `'${cartLength}'`)
   
@@ -85,13 +85,16 @@ if (!admin){
           <Avatar className='avtr' />
 
           {username}
-          {admin && ' (Admin)'}
         </h1>
+     
+
 
         <IconButton className='menu' onClick={() => handleHide()}>
           <Menu />
         </IconButton>
+
       </div>
+      <h3 id="role" >Role  | { admin? 'Vendor': 'User'} </h3>
 
       <p className='sidebar_items ' id='products' onClick={() => toggle('')}>
         <DeckOutlinedIcon />
