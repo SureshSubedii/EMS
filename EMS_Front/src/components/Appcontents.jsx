@@ -24,7 +24,7 @@ function Appcontents() {
       setLoading(true);
       const response = await axios.get("product/getAllProducts", {
         headers: {
-          "Authorization": user
+          "Authorization":`Bearer ${user}`
         },
       });
       setProducts(response.data);

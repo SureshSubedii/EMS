@@ -10,7 +10,7 @@ route.get('/getProductPhoto/:pid', getProductPhoto);
 route.post('/addTocart', verifyJWT, addToCart)
 route.get('/showCart/:userId', verifyJWT, showCart)
 route.delete('/deleteProduct/:pid',verifyJWT, deleteProduct)
-route.put('/update', updateProduct);
+route.put('/update', verifyJWT,updateProduct);
 
 
 

@@ -22,7 +22,7 @@ const userLogin = async (req, res) => {
     const token = await generateJWT(checkUser)
     let responseData = {
       token,
-      uploader: checkUser.name,
+      user: checkUser.name,
       userId: checkUser._id
     }
 
@@ -88,7 +88,7 @@ const deleteUser = (req, res) => {
       .then(() => {
         res.status(200).json({ success: 'Deleted Sucessfully' })
       })
-      .catch(() => res.status(500).json({ error: 'Eror in deleting user!' }))
+      .catch((e) => res.status(500).json({ error: e.message }))
   } else {
     res.status(401).json({ error: 'Unauthorized!' })
   }

@@ -7,11 +7,7 @@ const addProduct = async (req, res) => {
   const productData = req.fields
   const { image } = req.files
   try {
-    if (req.user.role !== 1) {
-      const unauthorizedError = new Error('Unauthorized Access')
-      unauthorizedError.statusCode = 401
-      throw unauthorizedError
-    }
+
     const product = new Product({
       name: productData.productName,
       description: productData.description,
@@ -28,11 +24,7 @@ const addProduct = async (req, res) => {
     await product.save()
     res.status(201).json({ message: 'Product added successfully' })
   } catch (err) {
-    if (err.statusCode) {
-      res.status(err.statusCode).json({ error: err.message })
-    } else {
       res.status(500).json({ error: err.message })
-    }
   }
 }
 

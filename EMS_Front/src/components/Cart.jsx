@@ -63,7 +63,7 @@ function Cart() {
   
       },{
         headers: {
-          "Authorization": user,
+          "Authorization":`Bearer ${user}`,
           "Content-Type": "application/json",
 
         }
@@ -87,7 +87,7 @@ function Cart() {
         )}`,
         {
           headers: {
-            "Authorization": user
+            "Authorization":`Bearer ${user}`
           }
         }
       );

@@ -11,7 +11,10 @@ const productSchema=new Schema({
         data:Buffer,
         contentType:String
     },
-    uploader:String,
+    uploader:{
+        type: Schema.Types.ObjectId,
+        required: true
+    },
     stock:Number
   
 

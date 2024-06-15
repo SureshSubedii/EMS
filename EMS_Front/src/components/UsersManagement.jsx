@@ -24,7 +24,7 @@ function UsersManagement() {
           `user/manageUser/deleteUSer/${uid}`,
           {
             headers: {
-              "Authorization": user
+              "Authorization":`Bearer ${user}`
             }
           }
         )
@@ -48,7 +48,7 @@ function UsersManagement() {
       .get("user/manageUser",
       {
         headers: {
-          "Authorization": user
+          "Authorization":`Bearer ${user}`
         }
       }
       )

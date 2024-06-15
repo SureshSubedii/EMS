@@ -35,7 +35,7 @@ function LogIn() {
       );
 
       const fetchedResults = response.data;
-      sessionStorage.setItem("uploader", fetchedResults.uploader);
+      sessionStorage.setItem("username", fetchedResults.user);
       sessionStorage.setItem("userId", fetchedResults.userId);
       if (fetchedResults.error) {
         toast.error(fetchedResults.error);

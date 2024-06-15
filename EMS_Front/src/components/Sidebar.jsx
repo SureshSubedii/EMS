@@ -29,12 +29,12 @@ function Sidebar () {
   }
 
   const findCartLength = async () => {
-    setUsername(sessionStorage.getItem('uploader'))
+    setUsername(sessionStorage.getItem('username'))
 
     axios
       .get(`product/showCart/${sessionStorage.getItem('userId')}`, {
         headers: {
-          Authorization: user
+          "Authorization":`Bearer ${user}`
         }
       })
       .then(res => {

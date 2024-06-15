@@ -56,7 +56,7 @@ function Products({ products, loading }) {
       const response = await axios.post("product/addToCart", formData, {
         headers: {
           "Content-Type": "application/json",
-          Authorization: user,
+          "Authorization":`Bearer ${user}`
         },
       });
       const fetchedResults = response.data;
@@ -154,7 +154,7 @@ function Products({ products, loading }) {
                   <MoreVertIcon />
                 </p>
               )}
-              {isMenuActive && (
+              {isMenuActive &&  sessionStorage.getItem("userId") == product.uploader && (
                 <div id={`menu${product._id}`} className="menu">
                   <p onClick={(e) => handleEdit(product._id, e)}>Edit</p>
                   <p onClick={(e) => handleDelete(product._id, e)}>Delete</p>

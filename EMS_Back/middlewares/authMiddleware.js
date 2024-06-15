@@ -2,16 +2,27 @@ import { verify } from "jsonwebtoken"
 
 const verifyJWT = (req, res, next)=> {
     try {
-        const decode = verify(req.headers.authorization, process.env.JWT_SECRET)
+        const token = req.headers.authorization.split(" ")[1]
+        const decode = verify(token, process.env.JWT_SECRET)
         const { password, ...user} = decode
-        req.user = user
-        next()
+        const adminRoutes = [/^\/manageUser\/deleteUser\/[a-fA-F0-9]{24}$/,/\/manageUser/, /\/addProduct/, /\/deleteProduct\/[a-fA-F0-9]{24}$/, /\/update/]; 
+        const isRouteAdmin = adminRoutes.some(pattern => pattern.test(req.path));
+        console.log(user)
 
-    } catch (error) {
-        return  res.status(401).json({ "error": "Login with the correct credentials." });
+
+        if(isRouteAdmin && user.role != 1){
+            throw new Error()
+         }
+        req.user = decode
+        next()
+    }
+     catch (error) {
+        return  res.status(401).json({ "error": " You are not authorized for this action " });
         
     }
 
 }
 
- export default verifyJWT
+
+
+ export  default verifyJWT

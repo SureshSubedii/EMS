@@ -44,7 +44,7 @@ function AddProducts() {
       formData.append("stock", data.stock);
       formData.append("categorySelect", data.categorySelect);
       formData.append("image", data.product_image[0]);
-      formData.append("uploader", sessionStorage.getItem("uploader"));
+      formData.append("uploader", sessionStorage.getItem("userId"));
 
       const response = await axios.post(
         "product/addProduct",
@@ -52,7 +52,7 @@ function AddProducts() {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            "Authorization": user
+            "Authorization":`Bearer ${user}`
           },
         }
       );
