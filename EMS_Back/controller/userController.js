@@ -46,7 +46,6 @@ const userSignUp = async (req, res) => {
     if (checkUser) {
       return res.status(409).json({ error: 'User Already Exists' })
     } else {
-
       const createUser = await User.create({
         email: userCredentials.email,
         name: userCredentials.name,
@@ -58,7 +57,8 @@ const userSignUp = async (req, res) => {
 
       res.status(201).json({
         token,
-        uploader: createUser.name,
+        userId: createUser._id,
+        user: createUser.name,
         success: 'Sucessfully Registered'
       })
     }

@@ -7,8 +7,6 @@ const verifyJWT = (req, res, next)=> {
         const { password, ...user} = decode
         const adminRoutes = [/^\/manageUser\/deleteUser\/[a-fA-F0-9]{24}$/,/\/manageUser/, /\/addProduct/, /\/deleteProduct\/[a-fA-F0-9]{24}$/, /\/update/]; 
         const isRouteAdmin = adminRoutes.some(pattern => pattern.test(req.path));
-        console.log(user)
-
 
         if(isRouteAdmin && user.role != 1){
             throw new Error()
@@ -21,7 +19,7 @@ const verifyJWT = (req, res, next)=> {
         
     }
 
-}
+} 
 
 
 

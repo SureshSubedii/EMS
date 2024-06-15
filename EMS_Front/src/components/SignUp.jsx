@@ -43,7 +43,9 @@ function SignUp() {
       sessionStorage.setItem("authToken", fetchedResults.token);
       dispatch(login(sessionStorage.getItem("authToken")));
       // }
-      sessionStorage.setItem("uploader", fetchedResults.uploader);
+      sessionStorage.setItem("username", fetchedResults.user);
+      sessionStorage.setItem("userId", fetchedResults.userId);
+
       setLoading(false);
     } catch (err) {
       setLoading(false);
