@@ -13,6 +13,22 @@
 
 
 }
+.userType > p{
+    font-size: 25px;
+}
+.userType{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: whitesmoke;
+
+}
+label{
+color: whitesmoke;
+margin-left: 15%;    
+font-size: 20px;
+padding-right: 5px;
+}
 .signUp>form>.showHideIcon{
     margin-top: -15%;
     margin-left: 80%;

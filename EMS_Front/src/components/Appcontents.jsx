@@ -12,6 +12,7 @@ import Products from "./Products";
 import ProductsDetails from "./ProductsDetails";
 import UserManagement from "./UsersManagement";
 import { useCallback } from "react";
+import Order from "./Order";
 
 function Appcontents() {
   const admin = useSelector(adminCheck);
@@ -62,6 +63,8 @@ function Appcontents() {
             element={<Category loading={loading} products={products} />}
           />
           <Route path="productDetails" element={<ProductsDetails />} />
+          <Route path="orders" element={<Order />} />
+
         </Routes>
       </div>
     </>

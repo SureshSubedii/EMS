@@ -111,7 +111,7 @@ if (!admin){
         <ShoppingCartOutlinedIcon />
         Cart
       </p>)}
-      <p className="sidebar_items" id = "order" onClick={() => toggle('order')}>
+      <p className="sidebar_items" id = "orders" onClick={() => toggle('orders')}>
       <ChecklistOutlinedIcon/>
         Orders
       </p>

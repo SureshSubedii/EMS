@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { toast } from "react-toastify";
-import { SignUpNot, login } from "../stateManagement/userSlice";
+import { AdminLog, SignUpNot, login } from "../stateManagement/userSlice";
 import "../styles/signUp.css";
 import Spinner from "./Spinner";
 
@@ -45,6 +45,10 @@ function SignUp() {
       // }
       sessionStorage.setItem("username", fetchedResults.user);
       sessionStorage.setItem("userId", fetchedResults.userId);
+      if (fetchedResults.admin) {
+        sessionStorage.setItem("admin", true);
+        dispatch(AdminLog());
+      }
 
       setLoading(false);
     } catch (err) {
@@ -122,6 +126,28 @@ function SignUp() {
           {...register("address")}
           required
         />
+        <div className="userType">
+          <p>Select User Type</p>
+          <label htmlFor="seller">Seller </label> 
+           <input
+           type="radio"
+           value="1"
+           id="seller"
+          name="userType"
+          {...register("userType")}
+          required
+        />
+        <label htmlFor="seller">Buyer </label> 
+        <input
+           type="radio"
+           value="0"
+          name="userType"
+          id="buyer"
+          {...register("userType")}
+          required
+        />
+        </div>
+        
 
         <div className="form_buttons">
           <input type="submit" value="SignUp" />

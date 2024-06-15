@@ -40,6 +40,7 @@ const userLogin = async (req, res) => {
 
 const userSignUp = async (req, res) => {
   const userCredentials = req.body
+  console.log(req.body)
 
   try {
     let checkUser = await User.findOne({ email: userCredentials.email })
@@ -51,7 +52,8 @@ const userSignUp = async (req, res) => {
         name: userCredentials.name,
         password: await hashPassword(userCredentials.password),
         contact: userCredentials.contact,
-        address: userCredentials.address
+        address: userCredentials.address,
+        role: userCredentials.userType
       })
       const token = generateJWT(createUser)
 
@@ -59,6 +61,7 @@ const userSignUp = async (req, res) => {
         token,
         userId: createUser._id,
         user: createUser.name,
+        admin: createUser.role == 1,
         success: 'Sucessfully Registered'
       })
     }

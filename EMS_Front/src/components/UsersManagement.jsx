@@ -58,7 +58,7 @@ function UsersManagement() {
           $(userTableRef.current).DataTable();
         }
       })
-      .catch(() => alert("Error in fetching users"));
+      .catch(() => toast.error("Error in fetching users"));
   }, []);
   return (
     <div className="usersManagement">
