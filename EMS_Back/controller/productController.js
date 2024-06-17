@@ -27,12 +27,36 @@ const addProduct = async (req, res) => {
 }
 
 const getAllProducts = (req, res) => {
-  Product.find()
-    .select('-photo')
+  Product.aggregate([
+    {
+      $lookup: {
+        from:'users',
+        localField:'uploader',
+        foreignField: '_id',
+        as: 'userDetails'
+
+      }
+    },
+    {
+      $unwind: '$userDetails'
+    },
+    {
+      $addFields: {
+        username: '$userDetails.name'
+      }
+    },{
+      $project: {
+        userDetails: 0 ,
+        photo:0
+
+      }
+    }
+  ])
     .then(products => {
       res.status(200).send(products)
     })
     .catch(err => {
+      console.log(err)
       res.status(500).json({ error: err.message })
     })
 }
@@ -146,6 +170,14 @@ const updateProduct = async (req, res) => {
   }
 }
 
+const removeCart = async(req, res)=>{
+  const {cartId} =  req.body
+
+  await Cart.deleteOne({_id: cartId })
+  res.status(200).json({success: true})
+
+}
+
 export {
   addProduct,
   addToCart,
@@ -153,5 +185,6 @@ export {
   getProductPhoto,
   showCart,
   deleteProduct,
-  updateProduct
+  updateProduct,
+  removeCart
 }

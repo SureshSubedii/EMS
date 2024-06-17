@@ -8,7 +8,7 @@ const Order = ({ admin, superAdmn }) => {
   const [orders, setOrders] = useState([])
   const user = useSelector(checkUser)
   const userTableRef = useRef(null)
-  const [message, setMessage] = useState('MyTotal ')
+  const [message, setMessage] = useState(' Total ')
 
   useEffect(() => {
     setMessage(admin ? 'Received ' : message)
