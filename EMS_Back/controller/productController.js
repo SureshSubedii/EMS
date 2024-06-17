@@ -1,13 +1,12 @@
 import fs from 'fs'
 import Cart from '../schemas/cartSchema.js'
 import Product from '../schemas/productSchema.js'
-import mongoose from "mongoose";
+import mongoose from 'mongoose'
 
 const addProduct = async (req, res) => {
   const productData = req.fields
   const { image } = req.files
   try {
-
     const product = new Product({
       name: productData.productName,
       description: productData.description,
@@ -15,7 +14,6 @@ const addProduct = async (req, res) => {
       category: productData.categorySelect,
       uploader: productData.uploader,
       stock: productData.stock
-
     })
     if (image) {
       product.photo.data = fs.readFileSync(image.path)
@@ -24,7 +22,7 @@ const addProduct = async (req, res) => {
     await product.save()
     res.status(201).json({ message: 'Product added successfully' })
   } catch (err) {
-      res.status(500).json({ error: err.message })
+    res.status(500).json({ error: err.message })
   }
 }
 
@@ -76,35 +74,33 @@ const addToCart = async (req, res) => {
 
 const showCart = async (req, res) => {
   try {
-      const check = await Cart.aggregate([
-        {
-          $lookup:{
-            from: 'products',
-            localField: "pid",
-            foreignField: "_id",
-            as: "productData"
-          }
-        },
-          {
-
-            $unwind: '$productData'
-        },
-        {
-          $project:{
-            name: 1,
-            price:1,
-            pid:1,
-            userId:1,
-            stock: '$productData.stock'
-          }
-        },
-        {
-          $match: { 
-
+    const check = await Cart.aggregate([
+      {
+        $lookup: {
+          from: 'products',
+          localField: 'pid',
+          foreignField: '_id',
+          as: 'productData'
+        }
+      },
+      {
+        $unwind: '$productData'
+      },
+      {
+        $project: {
+          name: 1,
+          price: 1,
+          pid: 1,
+          userId: 1,
+          stock: '$productData.stock'
+        }
+      },
+      {
+        $match: {
           userId: { $eq: new mongoose.Types.ObjectId(req.params.userId) }
-
-        }},
-      ])
+        }
+      }
+    ])
     if (check) {
       res.send(check)
     } else {
@@ -127,35 +123,28 @@ const deleteProduct = async (req, res) => {
 }
 
 const updateProduct = async (req, res) => {
-  const { id, name, description, price, category, stock } = req.body;
+  const { id, name, description, price, category, stock } = req.body
   try {
-    const product =  await Product.findById(id)
-    if (req.user.role != 2 &&  product.uploader != req.user._id ){
-      throw new Error("Access Denied!")
-
+    const product = await Product.findById(id)
+    if (req.user.role != 2 && product.uploader != req.user._id) {
+      throw new Error('Access Denied!')
     }
 
+    product.name = name
+    product.description = description
+    product.price = price
+    product.category = category
+    product.stock = stock
 
-    product.name = name;
-    product.description = description;
-    product.price = price;
-    product.category = category;
-    product.stock = stock; 
+    await product.save()
 
-    await product.save();
-
-    res.status(200).json({success:true, message: 'Product updated successfully' });
-    
+    res
+      .status(200)
+      .json({ success: true, message: 'Product updated successfully' })
   } catch (error) {
-    res.status(401).json({success: false, message: error.message });
-
-    
+    res.status(401).json({ success: false, message: error.message })
   }
-
-
-
 }
-
 
 export {
   addProduct,

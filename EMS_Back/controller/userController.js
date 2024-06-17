@@ -62,26 +62,26 @@ const userSignUp = async (req, res) => {
       })
     }
   } catch (err) {
-    res.status(500).send({ error:err.message })
+    res.status(500).send({ error: err.message })
   }
 }
 
 const manageUSer = (req, res) => {
-    User.find({ role: { $ne: 2 } })
-      .then(data => {
-        res.status(200).send(data)
-      })
-      .catch(err => {
-        res.status(500).send('Internal Server Error')
-      })
+  User.find({ role: { $ne: 2 } })
+    .then(data => {
+      res.status(200).send(data)
+    })
+    .catch(err => {
+      res.status(500).send('Internal Server Error')
+    })
 }
 const deleteUser = (req, res) => {
-    const userId = req.params.uid
-    User.deleteOne({ _id: userId })
-      .then(() => {
-        res.status(200).json({ success: 'Deleted Sucessfully' })
-      })
-      .catch((e) => res.status(500).json({ error: e.message }))
+  const userId = req.params.uid
+  User.deleteOne({ _id: userId })
+    .then(() => {
+      res.status(200).json({ success: 'Deleted Sucessfully' })
+    })
+    .catch(e => res.status(500).json({ error: e.message }))
 }
 
 export { deleteUser, manageUSer, userLogin, userSignUp }

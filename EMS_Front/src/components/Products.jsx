@@ -4,23 +4,21 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "../axios";
-import { AddCart, adminCheck, setMenu,checkUser, menu, superAdmin } from "../stateManagement/userSlice";
+import { AddCart, setMenu,checkUser, menu } from "../stateManagement/userSlice";
 
 import { useNavigate } from "react-router-dom";
 import "../styles/products.css";
 import Spinner from "./Spinner";
 import Edit from "./Edit";
 
-function Products({ products, loading }) {
+function Products({ products, loading, admin, superAdmn }) {
   const [searchData, setSearchData] = useState("");
   const [edit, setEdit] = useState(false);
 
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const admin = useSelector(adminCheck);
   const user = useSelector(checkUser);
   const menuOptions = useSelector(menu)
-  const superAdmn = useSelector(superAdmin)
 
   const handleClick = (productDetails) => {
     const { photo, ...details } = productDetails;
