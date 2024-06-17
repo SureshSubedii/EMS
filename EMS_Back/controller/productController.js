@@ -128,9 +128,13 @@ const deleteProduct = async (req, res) => {
 
 const updateProduct = async (req, res) => {
   const { id, name, description, price, category, stock } = req.body;
-  console.log(req.body)
   try {
     const product =  await Product.findById(id)
+    if (req.user.role != 2 ||  product.uploader != req.user.userId ){
+      throw new Error({message: "Access Denied!", status:401})
+
+    }
+
 
     product.name = name;
     product.description = description;
@@ -143,7 +147,7 @@ const updateProduct = async (req, res) => {
     res.status(200).json({success:true, message: 'Product updated successfully' });
     
   } catch (error) {
-    res.status(200).json({success: false, message: error.message });
+    res.status(error.status || 500).json({success: false, message: error.message });
 
     
   }

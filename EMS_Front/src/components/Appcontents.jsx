@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { adminCheck, checkUser } from "../stateManagement/userSlice";
+import {  checkUser, superAdmin } from "../stateManagement/userSlice";
 import "../styles/appcontents.css";
 import AddProducts from "./AddProducts";
 import Cart from "./Cart";
@@ -15,7 +15,7 @@ import { useCallback } from "react";
 import Order from "./Order";
 
 function Appcontents() {
-  const admin = useSelector(adminCheck);
+  const superAdmn = useSelector(superAdmin);
   const user = useSelector(checkUser)
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -54,7 +54,7 @@ function Appcontents() {
             element={<Products loading={loading} products={products} />}
           />
           <Route path="/addProduct" element={<AddProducts />} />
-          {admin && (
+          {superAdmn && (
             <Route path="/userManagement" element={<UserManagement />} />
           )}
           <Route path="/cart" element={<Cart />} />

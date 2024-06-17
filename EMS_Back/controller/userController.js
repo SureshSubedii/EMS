@@ -67,30 +67,21 @@ const userSignUp = async (req, res) => {
 }
 
 const manageUSer = (req, res) => {
-  if (req.user.role === 1) {
-    User.find({ role: { $ne: 1 } })
+    User.find({ role: { $ne: 2 } })
       .then(data => {
         res.status(200).send(data)
       })
       .catch(err => {
-        console.log(err)
         res.status(500).send('Internal Server Error')
       })
-  } else {
-    res.status(401).json({ error: 'Unauthorized!' })
-  }
 }
 const deleteUser = (req, res) => {
-  if (req.user.role === 1) {
     const userId = req.params.uid
     User.deleteOne({ _id: userId })
       .then(() => {
         res.status(200).json({ success: 'Deleted Sucessfully' })
       })
       .catch((e) => res.status(500).json({ error: e.message }))
-  } else {
-    res.status(401).json({ error: 'Unauthorized!' })
-  }
 }
 
 export { deleteUser, manageUSer, userLogin, userSignUp }

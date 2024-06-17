@@ -5,7 +5,7 @@ import { toast } from 'react-toastify';
 import { useDispatch } from 'react-redux';
 import { setMenu } from '../stateManagement/userSlice';
 
-function Edit({ setEdit, product }) {
+function Edit({ setEdit, product, user}) {
   const [name, setName] = useState(product.name);
   const [description, setDescription] = useState(product.description);
   const [price, setPrice] = useState(product.price);
@@ -25,11 +25,15 @@ const dispatch = useDispatch()
   };
 
   const handleUpdate = async (id) => {
-    console.log(name, description, price, category)
     const {data} =  await axios.put("product/update", {
       id, name, description, price, category, stock
 
-    })
+    },{
+      headers: {
+        "Authorization":`Bearer ${user}`,
+        "Content-Type": "application/json",
+
+      }})
     setEdit(0);
     const success = data.success ? 'success' : 'error';
 
