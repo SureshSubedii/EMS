@@ -3,9 +3,11 @@
     flex-direction: column;
     width:  100%;
     height:100vh;
-    /* justify-content: center; */
-    /* align-items: center; */
+  
 }
 .tableList{
     border-collapse: collapse;
+}
+.orders>    h1{
+    margin: 2% 0 1% 0;
 }

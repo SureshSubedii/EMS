@@ -1,29 +1,27 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import axios from 'axios';
 import { adminCheck, checkUser } from '../stateManagement/userSlice';
 import '../styles/orders.css'
+import axios from '../axios';
 
-const Order = () => {
-    const [orders, setOrders] = useState([{"_id": "1", "details":[{"name": "New", "quantity":1,"price":100}, {"name": "Old", "quantity":2,"price":100}]},{"_id": "2", "details":[{"name": "New", "quantity":1,"price":100}, {"name": "Old", "quantity":2,"price":100}]}]);  
+const Order = ({admin, superAdmn}) => {
+    const [orders, setOrders] = useState([]);  
     const user = useSelector(checkUser);
-  const admin = useSelector(adminCheck);
   const userTableRef = useRef(null);
-  const [price, setPrice] = useState(0)
-  let total = 0
+  const [message, setMessage] = useState("Total ")
 
   useEffect(() => {
-    // axios.get("order/getOrders", {
-    //   headers: {
-    //     "Authorization": `Bearer ${user}`
-    //   }
-    // })
-    // .then((response) => {
-    //   setOrders(response.data);
-    // })
-    // .catch((error) => {
-    //   console.error("Error fetching orders:", error);
-    // });
+    axios.get("order/getOrders", {
+      headers: {
+        "Authorization": `Bearer ${user}`
+      }
+    })
+    .then((response) => {
+      setOrders(response.data.data);
+    })
+    .catch((error) => {
+      console.error("Error fetching orders:", error);
+    });
 
     // Initialize DataTable when component mounts
   
@@ -31,7 +29,7 @@ const Order = () => {
 
   return (
     <div className="orders">
-      <h1 align="center">List of Orders</h1>
+      <h1 align="center">List of {message}Orders</h1>
       <table className="tableList" ref={userTableRef}>
         <thead>
           <tr>
@@ -39,12 +37,14 @@ const Order = () => {
             <th>Products</th>
             <th>Quantity</th>
             <th>Price</th>
+            { (superAdmn || admin) &&  <th>Ordered By</th>}
+
             <th>Total</th>
           </tr>
         </thead>
         <tbody>
           {orders?.map((order, orderIndex) => (
-            order.details.map((detail, detailIndex) => (
+            order.details?.map((detail, detailIndex) => (
               <tr align="center" key={`${order._id}-${detailIndex}`}>
                 {detailIndex === 0 && ( // Render order ID only on the first product row
                   <td rowSpan={order.details.length}>{order._id}</td>
@@ -52,9 +52,14 @@ const Order = () => {
 
                 <td>{detail.name}</td>
                 <td>{detail.quantity}</td>
+
                 <td>{detail.price  *detail.quantity}</td>
+                   
+                { (superAdmn || admin) &&  detailIndex === 0  && <td rowSpan={order.details.length}> {order.userName}</td>}
                 {detailIndex === 0 && ( // Render total only on the first product row
+
                   <td rowSpan={order.details.length}>
+                    
                     {order.details.reduce((acc, curr) => acc + curr.price * curr.quantity, 0)}
                     </td>
                 )}

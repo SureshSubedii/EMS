@@ -37,7 +37,7 @@ app.post('/createAdmin', async(req,res)=>{
         name:adminCredentials.name,
         email:adminCredentials.email,
         password:securePass,
-        role:1
+        role:2
     })
 })
 

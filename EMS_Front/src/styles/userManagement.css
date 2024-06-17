@@ -9,7 +9,9 @@
 .usersManagement > h1 {
     text-align: center;
 }
-
+.dataTables_length label {
+    color: black !important;
+}
 .usersManagement > h1 {
     color: rgb(35, 34, 34);
 }

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Route, Routes, useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import {  checkUser, superAdmin } from "../stateManagement/userSlice";
+import {  adminCheck, checkUser, superAdmin } from "../stateManagement/userSlice";
 import "../styles/appcontents.css";
 import AddProducts from "./AddProducts";
 import Cart from "./Cart";
@@ -16,6 +16,7 @@ import Order from "./Order";
 
 function Appcontents() {
   const superAdmn = useSelector(superAdmin);
+  const admin = useSelector(adminCheck)
   const user = useSelector(checkUser)
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,7 @@ function Appcontents() {
             element={<Category loading={loading} products={products} />}
           />
           <Route path="productDetails" element={<ProductsDetails />} />
-          <Route path="orders" element={<Order />} />
+          <Route path="orders" element={<Order  admin={admin} superAdmn= {superAdmn}/>} />
 
         </Routes>
       </div>
