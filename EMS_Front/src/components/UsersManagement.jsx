@@ -8,6 +8,7 @@ import 'datatables.net-dt/css/jquery.dataTables.css';
 import $ from 'jquery';
 import 'datatables.net-dt';
 import { useRef } from "react";
+import { toast } from "react-toastify";
 
 
 function UsersManagement() {
@@ -58,7 +59,7 @@ function UsersManagement() {
           $(userTableRef.current).DataTable();
         }
       })
-      .catch(() => toast.error("Error in fetching users"));
+      .catch((e) => {toast.error(e.message)} );
   }, []);
   return (
     <div className="usersManagement">
@@ -71,6 +72,7 @@ function UsersManagement() {
             <th> Email</th>
             <th> contact</th>
             <th> Address</th>
+            <th> Role</th>
             <th>Action</th>
           </tr>
         </thead>
@@ -82,7 +84,9 @@ function UsersManagement() {
               <td>{user.email} </td>
               <td>{user.contact} </td>
               <td>{user.address} </td>
-              <td onClick={() => deleteUSer(user._id)}>
+              <td>{user.role == 1? "Vender": "User"} </td>
+
+              <td title="Delete" onClick={() => deleteUSer(user._id)}>
                 <DeleteForeverIcon />
               </td>
             </tr>

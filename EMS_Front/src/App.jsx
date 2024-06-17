@@ -4,7 +4,7 @@ import { Route, Routes, useNavigate } from "react-router-dom";
 import Home from "./components/Home";
 import LogIn from "./components/LogIn";
 import SignUp from "./components/SignUp";
-import { AdminLog, AdminLogOut, SignUpNot, checkSignUpButton, checkUser, login, logout, setMenu } from "./stateManagement/userSlice";
+import { AdminLog, checkSignUpButton, checkUser, login, logout, setMenu, setSuperAdmin, superAdmin } from "./stateManagement/userSlice";
 import './styles/app.css';
 
 function App() {
@@ -20,6 +20,12 @@ function App() {
     if (sessionStorage.getItem('admin')) {
       dispatch(AdminLog());
     }
+    if(sessionStorage.getItem('superAdmin')){
+      dispatch(setSuperAdmin())
+
+
+    }
+
 
     const interval = setInterval(() => {
       const time = new Date();
@@ -41,9 +47,8 @@ function App() {
         {user && (
           <button  title="Click to logout"className="header_button" onClick={() => {
             dispatch(logout());
-            dispatch(AdminLogOut());
             sessionStorage.clear()
-            dispatch(SignUpNot())
+            window.location.pathname = ''
           }}>LogOut</button>
         )}
       </div>

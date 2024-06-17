@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { toast } from "react-toastify";
 import axios from "../axios";
-import { AddCart, adminCheck, setMenu,checkUser, menu } from "../stateManagement/userSlice";
+import { AddCart, adminCheck, setMenu,checkUser, menu, superAdmin } from "../stateManagement/userSlice";
 
 import { useNavigate } from "react-router-dom";
 import "../styles/products.css";
@@ -20,6 +20,7 @@ function Products({ products, loading }) {
   const admin = useSelector(adminCheck);
   const user = useSelector(checkUser);
   const menuOptions = useSelector(menu)
+  const superAdmn = useSelector(superAdmin)
 
   const handleClick = (productDetails) => {
     const { photo, ...details } = productDetails;
@@ -31,7 +32,6 @@ function Products({ products, loading }) {
   const handleEdit = (id, e) => {
     e.stopPropagation();
     setEdit(id);
-    // document.getElementById("edit").style.display = "block"
     dispatch(setMenu(id))
   };
 
@@ -149,7 +149,7 @@ function Products({ products, loading }) {
                 src={`http://localhost:5000/api/v1/product/getProductPhoto/${product._id}`}
                 alt={product.name}
               />{" "}
-              {admin &&  sessionStorage.getItem("userId") == product.uploader && (
+              { (admin &&  sessionStorage.getItem("userId") == product.uploader || superAdmn)  && (
                 <p onClick={(e) => manageProduct(product._id, e)}>
                   <MoreVertIcon />
                 </p>
@@ -165,7 +165,7 @@ function Products({ products, loading }) {
                   {product?.name.slice(0, 15)} {product.name[15] ? "..." : ""}
                 </h2>
                 <h3>Rs.{product.price}</h3>
-                {!admin && <button
+                {(!admin && !superAdmn) &&  <button
                   onClick={(e) =>
                     handleAddToCart(
                       e,
@@ -181,7 +181,7 @@ function Products({ products, loading }) {
                 </button>}
                 
               </div>
-              {isEditActive && <Edit setEdit={setEdit} product={product} />}
+              {isEditActive && <Edit setEdit={setEdit} product={product} user={user} />}
             </div>
           );
         })}

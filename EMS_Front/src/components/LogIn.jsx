@@ -3,7 +3,7 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { AdminLog, SignUpButton, login } from "../stateManagement/userSlice";
+import { AdminLog, SignUpButton, login, setSuperAdmin } from "../stateManagement/userSlice";
 
 import { toast } from "react-toastify";
 import "../styles/login.css";
@@ -47,6 +47,12 @@ function LogIn() {
         sessionStorage.setItem("admin", true);
         dispatch(AdminLog());
       }
+      if (fetchedResults.superAdmin){
+        sessionStorage.setItem("superAdmin", true);
+        dispatch(setSuperAdmin())
+
+      }
+     
      
       setLoading(false);
     } catch (error) {

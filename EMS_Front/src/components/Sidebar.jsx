@@ -8,17 +8,21 @@ import axios from '../axios'
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { adminCheck, cartCheck, checkUser } from '../stateManagement/userSlice'
+import { adminCheck, cartCheck, checkUser, superAdmin } from '../stateManagement/userSlice'
 import ChecklistOutlinedIcon from '@mui/icons-material/ChecklistOutlined';
 import '../styles/sidebar.css'
+import CircleIcon from '@mui/icons-material/Circle';
 
 function Sidebar () {
   const admin = useSelector(adminCheck)
+  const superAdmn = useSelector(superAdmin)
   const navigate = useNavigate()
   const [username, setUsername] = useState('')
   const [cartLength, setCartLength] = useState(0)
   const [path, setPath] = useState('')
   const user = useSelector(checkUser)
+  const [role, setRole] = useState({"role": "User", color: "green"})
+
 
   const cart = useSelector(cartCheck)
 
@@ -49,11 +53,18 @@ function Sidebar () {
 
   useEffect(() => {
     findCartLength()
+
   }, [cart])
+
+  useEffect(()=>{
+    setRole(admin? {color: 'rgb(41 62 205)', role: "Vendor"}:(superAdmn? {color: 'red', role: "Super Admin"}: role ))
+
+  },[admin, superAdmn])
 
   useEffect(() => {
     const item = sessionStorage.getItem('item')
-    console.log(item)
+
+
 
     const selectedElement = document.querySelector('.selected')
     if (selectedElement) {
@@ -64,11 +75,9 @@ function Sidebar () {
       document.getElementById('products').classList.add('selected')
     } else document.getElementById(path || item).classList.add('selected')
   }, [path])
-if (!admin){
-  
-}
+
   useEffect(() => {
-    if (!admin){
+    if (!admin && !superAdmn){
       const element = document.querySelector(
         '.sidebar .sidebar_items:nth-child(5)'
       )
@@ -94,7 +103,7 @@ if (!admin){
         </IconButton>
 
       </div>
-      <h3 id="role" >Role  | { admin? 'Vendor': 'User'} </h3>
+      <h3 id="role" > <CircleIcon style={{color: role.color}}></CircleIcon> {role.role} </h3>
 
       <p className='sidebar_items ' id='products' onClick={() => toggle('')}>
         <DeckOutlinedIcon />
@@ -110,7 +119,7 @@ if (!admin){
         Category &gt;
       </p>
 
-  {  !admin && (  <p className='sidebar_items' id='cart' onClick={() => toggle('cart')}>
+  {  (!admin && !superAdmn) && (  <p className='sidebar_items' id='cart' onClick={() => toggle('cart')}>
         <ShoppingCartOutlinedIcon />
         Cart
       </p>)}
@@ -119,25 +128,25 @@ if (!admin){
         Orders
       </p>
 
-      {admin && (
-        <>
+      { (admin || superAdmn) && (
           <p
             className='sidebar_items'
             id='addProduct'
-            onClick={() => toggle('addProduct')}
-          >
+            onClick={() => toggle('addProduct')}>
             <AddToPhotos />
             Add Products
           </p>
-          <p
-            className='sidebar_items'
-            id='userManagement'
-            onClick={() => toggle('userManagement')}
-          >
-            <ManageAccountsIcon />
-            User Management
-          </p>
-        </>
+      )}
+      {superAdmn && 
+      (
+        <p
+        className='sidebar_items'
+        id='userManagement'
+        onClick={() => toggle('userManagement')}
+      >
+        <ManageAccountsIcon />
+        User Management
+      </p>
       )}
     </div>
   )
