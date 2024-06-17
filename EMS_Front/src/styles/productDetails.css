@@ -41,15 +41,15 @@
 
 }
 .show_product_details>.description{
-    margin: 0 1%  1% 1%;
+    margin: 0.5% 0.5%  0.5% 0.5%;
     font-weight: 500;
-    font-size: 2em;
+    font-size: 1.8em;
 
 
 
 }
-.show_product_details>.categories,.rating,.stock{
-    margin: 1% 1%  1% 1%;
+.show_product_details>.categories,.rating,.stock, .uploader{
+    margin: 0.5% 0.5%  0.5% 0.5%;
     font-weight: 700;
     font-size: 1.5em;
 

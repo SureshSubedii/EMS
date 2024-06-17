@@ -14,6 +14,30 @@ function Cart() {
   const [totalPrice, setTotalPrice] = useState(0);
   const user = useSelector(checkUser)
 
+  const removeCart = async(cartId, index)=>{
+    try {
+      
+      const { data } = await axios.delete('product/cart', {
+        data: {
+            cartId: cartId
+        },
+        headers: {
+            "Authorization": `Bearer ${user}`
+        }
+    });
+    
+    if(data.success){
+      getCart()
+      toast.success("Item removed from the Cart")
+    }
+    } catch (error) {
+      toast.error(error.message)
+      
+    }
+
+
+  }
+
   const decreaseCount = (index, price) => {
     setCounts((prevCounts) => {
       const newCounts = [...prevCounts];
@@ -101,7 +125,6 @@ function Cart() {
       setLoading(false);
     } catch (error) {
       setLoading(true);
-      // toast.error("Cart is empty")
       setLoading(false);
     }
   };
@@ -144,6 +167,7 @@ function Cart() {
                 <div className="cart_product_details">
                   <h3>Rs.{product.price}</h3>
                 </div>
+                <button class="remove_cart" onClick={ ()=>removeCart(product._id, index)}> Remove</button>
               </div>
             );
           })}

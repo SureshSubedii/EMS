@@ -11,6 +11,15 @@
   flex: 1;
 
 }
+.remove_cart{
+  background-color: rgb(212, 55, 55);
+  border: none;
+  color:whitesmoke;
+  padding: 1%;
+  border-radius: 10%;
+  margin:2%;
+  cursor: pointer;
+}
 .cart_right {
   position: sticky;
   top: 25%;

@@ -33,12 +33,16 @@ function ProductsDetails() {
 
       <p className="categories">Category: {productDetails.category}</p>
 
+
       <p className="rating">
         Ratings: <Rating value={randomValue} readOnly /> {"("}
         {randomValue.toFixed(1)}
         {")"}
       </p>
       <p className="stock">Stock: {productDetails.stock}</p>
+
+      <p className="uploader">Product By: {productDetails.username}</p>
+
 
     </div>
   );

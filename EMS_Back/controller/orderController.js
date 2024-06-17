@@ -1,5 +1,6 @@
 import mongoose from 'mongoose'
 import Order from '../schemas/orderSchema.js'
+import Product from '../schemas/productSchema.js'
 
 const addOrder = async (req, res) => {
   try {
@@ -14,6 +15,16 @@ const addOrder = async (req, res) => {
       userId: user,
       details: details
     })
+
+     details.map(async (item) => {
+      await Product.findByIdAndUpdate(
+        item.pid,
+        { $inc: { stock: -item.quantity } },
+        { new: true } 
+      );
+   
+    });
+
     res.status(201).json({ message: 'Order Successfull' })
   } catch (e) {
     console.log(e)
