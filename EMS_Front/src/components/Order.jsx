@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { adminCheck, checkUser } from '../stateManagement/userSlice';
+import { checkUser } from '../stateManagement/userSlice';
 import '../styles/orders.css'
 import axios from '../axios';
 
@@ -8,9 +8,14 @@ const Order = ({admin, superAdmn}) => {
     const [orders, setOrders] = useState([]);  
     const user = useSelector(checkUser);
   const userTableRef = useRef(null);
-  const [message, setMessage] = useState("Total ")
+  const [message, setMessage] = useState("MyTotal ")
+
+  
+
 
   useEffect(() => {
+    setMessage(admin? "Received ": message)
+
     axios.get("order/getOrders", {
       headers: {
         "Authorization": `Bearer ${user}`
@@ -45,8 +50,9 @@ const Order = ({admin, superAdmn}) => {
         <tbody>
           {orders?.map((order, orderIndex) => (
             order.details?.map((detail, detailIndex) => (
+              
               <tr align="center" key={`${order._id}-${detailIndex}`}>
-                {detailIndex === 0 && ( // Render order ID only on the first product row
+                {detailIndex === 0 && ( 
                   <td rowSpan={order.details.length}>{order._id}</td>
                 )}
 
