@@ -41,7 +41,7 @@ function App() {
   return (
     <div className="app" onClick={()=> dispatch(setMenu(null))}>
       <div title="E-commerce Management System" className="app_header">
-        <h1>EMS</h1>
+        <h1>Ebazzar</h1>
         <h2>{timeReal >= 12 ? timeReal - 12 : timeReal}:{timeRealMinutes < 10 ? "0" : ""}{timeRealMinutes} {timeReal >= 0 && timeReal < 12 ? "AM" : "PM"}</h2>
         <h1> {(new Date()).toDateString()}</h1>
         {user && (
