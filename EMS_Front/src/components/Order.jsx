@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux'
 import { checkUser } from '../stateManagement/userSlice'
 import '../styles/orders.css'
 import axios from '../axios'
+import { toast } from "react-toastify";
+
 
 const Order = ({ admin, superAdmn }) => {
   const [orders, setOrders] = useState([])
@@ -23,6 +25,7 @@ const Order = ({ admin, superAdmn }) => {
         setOrders(response.data.data)
       })
       .catch(error => {
+        toast.error(error.message)
         console.error('Error fetching orders:', error)
       })
   }, [user])
@@ -37,7 +40,7 @@ const Order = ({ admin, superAdmn }) => {
             <th>Products</th>
             <th>Quantity</th>
             <th>Price</th>
-            {(superAdmn || admin) && <th>Ordered By</th>}
+            {(superAdmn || admin) && ( <><th>Ordered By</th><th> Contact</th><th> Address</th></>)}
 
             <th>Total</th>
           </tr>
@@ -56,7 +59,8 @@ const Order = ({ admin, superAdmn }) => {
                 <td>{detail.price * detail.quantity}</td>
 
                 {(superAdmn || admin) && detailIndex === 0 && (
-                  <td rowSpan={order.details.length}> {order.userName}</td>
+                  <><td rowSpan={order.details.length}> {order.userName}</td><td rowSpan={order.details.length}> {order.contact}</td><td rowSpan={order.details.length}> {order.address}</td></>
+
                 )}
                 {detailIndex === 0 && (
                   <td rowSpan={order.details.length}>

@@ -36,7 +36,6 @@ const userLogin = async (req, res) => {
 
 const userSignUp = async (req, res) => {
   const userCredentials = req.body
-  console.log(req.body)
 
   try {
     let checkUser = await User.findOne({ email: userCredentials.email })
