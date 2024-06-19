@@ -1,6 +1,7 @@
 import mongoose from 'mongoose'
 import Order from '../schemas/orderSchema.js'
 import Product from '../schemas/productSchema.js'
+import { filterQuery } from '../helpers/orderHelper.js'
 
 const addOrder = async (req, res) => {
   try {
@@ -10,6 +11,7 @@ const addOrder = async (req, res) => {
       pid: order.pid,
       quantity: counts[index]
     }))
+    console.log(user)
 
     await Order.create({
       userId: user,
@@ -35,98 +37,16 @@ const addOrder = async (req, res) => {
 const getOrders = async (req, res) => {
   try {
     const user = req.user
-    let matchStage = { userId: { $eq: new mongoose.Types.ObjectId(user._id) } }
-    let filter1 = true
-    let filter2 = true
-
-    if (user.role == 2) {
-      matchStage = {}
-    } else if (user.role == 1) {
-      filter1 = '$$prod.uploader'
-      filter2 = new mongoose.Types.ObjectId(user._id)
-      matchStage = {}
-    }
-    const orders = await Order.aggregate([
-      {
-        $lookup: {
-          from: 'users',
-          localField: 'userId',
-          foreignField: '_id',
-          as: 'userDetails'
-        }
-      },
-      {
-        $unwind: '$userDetails'
-      },
-      {
-        $lookup: {
-          from: 'products',
-          localField: 'details.pid',
-          foreignField: '_id',
-          as: 'productDetails'
-        }
-      },
-      {
-        $addFields: {
-          details: {
-            $map: {
-              input: '$details',
-              as: 'detail',
-              in: {
-                pid: '$$detail.pid',
-                quantity: '$$detail.quantity',
-                productInfo: {
-                  $arrayElemAt: [
-                    {
-                      $filter: {
-                        input: '$productDetails',
-                        as: 'prod',
-                        cond: {
-                          $and: [
-                            { $eq: ['$$prod._id', '$$detail.pid'] },
-                            { $eq: [filter1, filter2] }
-                          ]
-                        }
-                      }
-                    },
-                    0
-                  ]
-                }
-              }
-            }
-          }
-        }
-      },
-      {
-        $project: {
-          userId: 1,
-          userName: '$userDetails.name',
-          contact: '$userDetails.contact',
-          address: '$userDetails.address',
-          details: {
-            $map: {
-              input: '$details',
-              as: 'detail',
-              in: {
-                quantity: '$$detail.quantity',
-                name: '$$detail.productInfo.name',
-                price: '$$detail.productInfo.price',
-                uploader: '$$detail.productInfo.uploader'
-              }
-            }
-          }
-        }
-      },
-      {
-        $match: matchStage
-      }
-    ])
-    let data = filterOrders(orders)
-    res.status(200).json({ data: filterOrders(data, true) })
+    const orders = await Order.aggregate(filterQuery(user.role, user._id))
+    res.status(200).json({data: orders})
   } catch (error) {
     console.log(error)
+    res.status(500).json({error:error.message})
+
   }
 }
+
+
 
 const filterOrders = (orders, remove = false) => {
   if (remove) {

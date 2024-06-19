@@ -35,7 +35,6 @@ function SignUp() {
       );
 
       const fetchedResults = response.data;
-      console.log(fetchedResults.success);
       if (fetchedResults.success) {
         toast.success(fetchedResults.success);
       }
@@ -53,8 +52,7 @@ function SignUp() {
       setLoading(false);
     } catch (err) {
       setLoading(false);
-
-      console.log(err);
+      console.error(err);
       if (err.response && err.response.data && err.response.data.error) {
         toast.error(err.response.data.error);
       } else {
