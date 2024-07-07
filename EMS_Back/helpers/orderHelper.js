@@ -82,6 +82,7 @@ const filterQuery = (role, userId) => {
             userName: '$userDetails.name',
             contact: '$userDetails.contact',
             address: '$userDetails.address',
+            transactionId:1,
             details: {
                 $map: {
                     input: '$details',

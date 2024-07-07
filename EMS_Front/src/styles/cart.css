@@ -28,7 +28,8 @@
   height: max-content;
   margin: 1%;
   font-size: 20px;
-  border: 2px solid rgb(95, 50, 50)
+  border: 2px solid rgb(95, 50, 50);
+  width:15%
 
 }
 .cart_right > .buy {

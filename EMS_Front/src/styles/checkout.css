@@ -1,0 +1,16 @@
+.pay-radio{
+    color:black;
+    display: inline-flex;
+    align-items: center;
+
+
+
+}
+.payment-methods {
+    margin-bottom: 20px;
+
+
+}
+.checkout {
+    width: 100%;
+}
