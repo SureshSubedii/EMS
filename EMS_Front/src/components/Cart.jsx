@@ -1,10 +1,12 @@
 import axios from "../axios";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "../styles/cart.css";
 import Spinner from "./Spinner";
 import { useSelector } from "react-redux";
 import { checkUser } from "../stateManagement/userSlice";
 import { toast } from "react-toastify";
+import { PayPalScriptProvider } from "@paypal/react-paypal-js";
+import Checkout from "./Checkout";
 
 function Cart() {
   const [products, setProducts] = useState([]);
@@ -12,7 +14,17 @@ function Cart() {
   const [loading, setLoading] = useState(true);
   const [totalCartLength, setTotalCartLength] = useState(0);
   const [totalPrice, setTotalPrice] = useState(0);
+  const [transaction, setTransaction] = useState(null);
+
   const user = useSelector(checkUser)
+  const orderButtonRef = useRef(null); // Create a ref for the order button
+
+  const initialOptions = {
+    "client-id": import.meta.env.VITE_REACT_APP_CLIENT_ID,
+    currency: "USD",
+    intent: "capture",
+  };
+
 
   const removeCart = async(cartId, index)=>{
     try {
@@ -76,14 +88,12 @@ function Cart() {
   };
 
   const order = async()=>{
-    const verify = confirm("Are you sure?")
-    if (!verify){
-      return
-    }
+  
     try {
       const {data} = await axios.post('order/add', {
         orders: products,
-        counts: counts
+        counts: counts,
+        transactionId: transaction
   
       },{
         headers: {
@@ -175,8 +185,12 @@ function Cart() {
         <div className="cart_right">
           Total Items = {totalCartLength} <br />
           Total =RS {totalPrice} <br />
+          <h4>Payment Method</h4>
+          <PayPalScriptProvider options={initialOptions}>
+              <Checkout total={totalPrice} orderButton={orderButtonRef} setTransaction={setTransaction}/>
+            </PayPalScriptProvider>
 
-          <button onClick={()=> order()} className="buy">Order</button>
+          <button id="order" ref={orderButtonRef} onClick={()=> order()} className="buy">Order</button>
         </div>
       </div>
     </>

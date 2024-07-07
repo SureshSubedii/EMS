@@ -9,6 +9,10 @@ const orderSchema = new Schema({
         type:Date,
         default: Date.now
     },
+    transactionId: {
+        type:String,
+        default: null
+    },
     details: [{
         pid: Schema.Types.ObjectId,
         quantity: Number

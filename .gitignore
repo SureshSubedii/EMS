@@ -6,6 +6,7 @@ EMS_Back/.env
 /.pnp
 .pnp.js
 
+**/.env
 # testing
 /coverage
 

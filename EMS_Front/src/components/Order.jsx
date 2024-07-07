@@ -41,6 +41,8 @@ const Order = ({ admin, superAdmn }) => {
             <th>Quantity</th>
             <th>Price</th>
             {(superAdmn || admin) && ( <><th>Ordered By</th><th> Contact</th><th> Address</th></>)}
+            <th>Transaction Id</th>
+
 
             <th>Total</th>
           </tr>
@@ -63,12 +65,18 @@ const Order = ({ admin, superAdmn }) => {
 
                 )}
                 {detailIndex === 0 && (
+                  <>
+                  <td rowSpan={order.details.length}>
+                    {order.transactionId}
+                    </td>
+
                   <td rowSpan={order.details.length}>
                     {order.details.reduce(
                       (acc, curr) => acc + curr.price * curr.quantity,
                       0
                     )}
                   </td>
+                  </>
                 )}
               </tr>
             ))

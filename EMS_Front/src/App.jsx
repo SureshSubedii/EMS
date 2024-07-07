@@ -7,6 +7,7 @@ import SignUp from "./components/SignUp";
 import { AdminLog, checkSignUpButton, checkUser, login, logout, setMenu, setSuperAdmin, superAdmin } from "./stateManagement/userSlice";
 import './styles/app.css';
 
+
 function App() {
   const [timeReal, settimeReal] = useState([]);
   const [timeRealMinutes, settimeRealMinutes] = useState([]);
@@ -14,6 +15,7 @@ function App() {
   const checkButton = useSelector(checkSignUpButton);
 
   const dispatch = useDispatch();
+
 
   useEffect(() => {
     dispatch(login(sessionStorage.getItem('authToken')));
@@ -36,7 +38,7 @@ function App() {
     return () => {
       clearInterval(interval);
     }
-  }, []);
+  }, []);  
 
   return (
     <div className="app" onClick={()=> dispatch(setMenu(null))}>
@@ -51,6 +53,9 @@ function App() {
             window.location.pathname = ''
           }}>LogOut</button>
         )}
+          
+
+
       </div>
 
       <div className="app_body">
