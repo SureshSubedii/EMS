@@ -1,5 +1,5 @@
 import { RemoveRedEyeRounded, VisibilityOff } from "@mui/icons-material";
-import axios from "axios";
+import axios from "../axios";
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
@@ -25,7 +25,7 @@ function LogIn() {
     try {
       setLoading(true);
       const response = await axios.post(
-        "http://localhost:5000/api/v1/user/userLogin",
+        "user/userLogin",
         data,
         {
           headers: {
