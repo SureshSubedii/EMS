@@ -9,28 +9,8 @@ import Sidebar from "./Sidebar";
 import { useDispatch } from "react-redux";
 
 function Home() {
-  // const dispatch = useDispatch()
   useEffect(() => {
     document.querySelector(".home_menu")?.classList.add("hide");
-  //   const socket = io('http://localhost:5000', {
-  //     auth: {
-  //       user: sessionStorage.getItem("userId")
-  //     }
-  //   });
-  //   dispatch(setSocket(socket));
-
-  //   socket.emit('chat', 'Hello, server!');
-  //   // socket.emit('check-admin');
-  //   socket.on('admin-online', (data)=>{
-  //     console.log(data.message)
-  //   })
-
-  //   return () => {
-  //     socket.disconnect();
-  //     dispatch(disconnectSocket());
-    // };
-
-
 
 
   }, []);
