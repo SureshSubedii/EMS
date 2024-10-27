@@ -21,8 +21,8 @@ function ProductsDetails() {
       </p>
 
       <img
-        src={`http://localhost:5000/api/v1/product/getProductPhoto/${productDetails._id}`}
-        alt={productDetails.name}
+                src={`${import.meta.env.VITE_REACT_APP_BASE_URL}product/getProductPhoto/${productDetails._id}`}
+                alt={productDetails.name}
       />
 
       <p className="title">{productDetails.name}</p>
