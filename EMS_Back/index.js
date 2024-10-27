@@ -73,7 +73,7 @@ app.get('/', (req, res) => {
       ])
         .then(products => {
           res.status(200).send(products)
-        })
+        }).catch(err => res.send(e.message))
 })
 app.use('/api/v1/product', productRoutes);
 app.use('/api/v1/user',userRoutes);

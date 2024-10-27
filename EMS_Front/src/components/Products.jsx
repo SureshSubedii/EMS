@@ -82,7 +82,7 @@ function Products({ products, loading, admin, superAdmn }) {
       axios
         .delete(`product/deleteProduct/${id}`, {
           headers: {
-            Authorization: user,
+            Authorization: `Bearer ${user}`
           },
         })
         .then((data) => {
