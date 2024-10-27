@@ -160,7 +160,7 @@ function Cart() {
             return (
               <div className="cart_items" key={product.pid}>
                 <img
-                src={`${import.meta.env.VITE_REACT_APP_BASE_URL}product/getProductPhoto/${product._id}`}
+                src={`${import.meta.env.VITE_REACT_APP_BASE_URL}product/getProductPhoto/${product.pid}`}
                 alt={product.name}
                 />
                 <h2 className="cart_name">{product.name}</h2>
