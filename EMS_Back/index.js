@@ -7,7 +7,8 @@ import { dbConnect } from './db.js'
 import productRoutes from './routes/productRoutes.js'
 import userRoutes from './routes/userRoutes.js'
 import orderRoutes from './routes/orderRoutes.js'
-import Product from './schemas/productSchema.js'
+import User from './schemas/userSchema.js'
+
 
 
 import UserSchema from './schemas/userSchema.js'
@@ -45,35 +46,10 @@ app.post('/createAdmin', async(req,res)=>{
 
 
 //Routes
-app.get('/', (req, res) => {
-    Product.aggregate([
-        {
-          $lookup: {
-            from:'users',
-            localField:'uploader',
-            foreignField: '_id',
-            as: 'userDetails'
-    
-          }
-        },
-        {
-          $unwind: '$userDetails'
-        },
-        {
-          $addFields: {
-            username: '$userDetails.name'
-          }
-        },{
-          $project: {
-            userDetails: 0 ,
-            photo:0
-    
-          }
-        }
-      ])
-        .then(products => {
-          res.status(200).send(products)
-        }).catch(err => res.send(e.message))
+app.get('/', async(req, res) => {
+    const checkUser = await User.findOne({ email:"sureshsubedi485@gmail.com" })
+    res.send(checkUser)
+
 })
 app.use('/api/v1/product', productRoutes);
 app.use('/api/v1/user',userRoutes);
