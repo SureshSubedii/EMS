@@ -50,7 +50,7 @@ function Category({ products, loading }) {
               onClick={() => handleClick(prod)}
             >
               <img
-                src={`http://localhost:5000/api/v1/product/getProductPhoto/${prod._id}`}
+                src={`${import.meta.env.VITE_REACT_APP_BASE_URL}product/getProductPhoto/${prod._id}`}
                 alt={prod.name}
               />
               <div>

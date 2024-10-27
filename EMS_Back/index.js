@@ -48,14 +48,7 @@ app.post('/createAdmin', async(req,res)=>{
 
 
 //Routes
-app.get('/', async(req, res) => {
-    const checkUser = await User.findOne({ email:"sureshsubedi485@gmail.com" })
-    res.send(checkUser)
 
-
-
-
-})
 app.use('/api/v1/product', productRoutes);
 app.use('/api/v1/user',userRoutes);
 app.use('/api/v1/order', orderRoutes);

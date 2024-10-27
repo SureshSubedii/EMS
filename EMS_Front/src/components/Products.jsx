@@ -144,7 +144,7 @@ function Products({ products, loading, admin, superAdmn }) {
               onClick={() => handleClick(product)}
             >
               <img
-                src={`http://localhost:5000/api/v1/product/getProductPhoto/${product._id}`}
+                src={`${import.meta.env.VITE_REACT_APP_BASE_URL}product/getProductPhoto/${product._id}`}
                 alt={product.name}
               />{" "}
               { (admin &&  sessionStorage.getItem("userId") == product.uploader || superAdmn)  && (
