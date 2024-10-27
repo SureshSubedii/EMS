@@ -6,7 +6,9 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "start": "node index.js"
+    "start": "node index.js",
+    "vercel-start": "node index.js"
+
   },
   "author": "Suresh Subedi",
   "license": "ISC",
